@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+       <!-- 提供方应用信息，用于计算依赖关系 -->
+       <dubbo:application name="police-union-app"/>
+
+       <!-- 设置默认的注册中心地址 -->
+       <dubbo:registry address="${dubbo.registry.addrss}"/>
+
+       <!-- 用dubbo协议在指定端口暴露服务,如果在同一个系统上部署多套服务,那么需要保证这个端口不重复,否则后面部署会报端口占用的错误 -->
+       <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+
+       <bean id="gxwj.graphService" class="cn.sinobest.policeunion.biz.gxwj.graph.search.adapter.impl.GraphAdapter" init-method="init">
+              <property name="searcher" ref="gxwj.DBBFSService"/>
+       </bean>
+
+       <!-- 暴露"联动上报"服务接口 -->
+       <dubbo:service interface="cn.sinobest.policeunion.share.gxwj.graph.search.adapter.IGraphService" version="1.1.0"
+                      ref="gxwj.graphService" actives="50">
+              <!-- dubbo的超时重发机制不太科学，暂时不考虑 -->
+              <dubbo:method name="breadthFirstSearch"/>
+       </dubbo:service>
+
+</beans>

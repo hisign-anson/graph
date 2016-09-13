@@ -1,0 +1,114 @@
+[2016-07-11 15:48:01] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 15:48:01] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 15:48:01] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 15:48:01] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 15:48:01] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 15:48:01] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and AJBH in ('A3500000000002011080001')
+[2016-07-11 16:25:46] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:25:46] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:25:46] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:25:58] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:25:58] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:25:58] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:25:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:25:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:25:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:26:30] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:26:30] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:26:30] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:27:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:27:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:27:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:27:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:27:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:27:59] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and AJBH in ('A3500000000002011080001')
+[2016-07-11 16:28:05] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:28:05] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:28:05] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:30:48] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:30:48] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:30:48] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:31:20] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:31:20] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:31:20] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:57:27] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:27] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:30] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:30] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:30] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:57:32] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and AJBH in ('A3500000000002011080001')
+[2016-07-11 16:57:35] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:35] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:35] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:35] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:35] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:57:35] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and AJBH in ('A3500000000002011080001')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and AJBH in ('A3500000000002011080001')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and FOID in ('620103197809141011')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and PHONE in ('18520117227')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and BSHID in ('620103197809141011')
+[2016-07-11 16:57:36] TRACE - NodeRelationService#search:59 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and AJBH in ('A3500000000002011080001')
