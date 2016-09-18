@@ -3,13 +3,14 @@ package cn.sinobest.policeunion.share.gxwj.graph.search.adapter.po;
 import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
 import cn.sinobest.policeunion.share.gxwj.graph.search.callback.po.RelationResult;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by zhouyi1 on 2016/9/13 0013.
  */
-public class GraphResult {
+public class GraphResult implements Serializable {
     private Set<GraphNode> nodes;
     private Map<Integer, RelationResult> relationResultMap;
 

@@ -110,6 +110,7 @@
               <property name="dataSource" ref="dataSource" />
        </bean>
 
+       <import resource="applicationContext-service.xml"/>
        <import resource="applicationContext-synonym.xml"/>
        <import resource="applicationContext-graph.xml"/>
 </beans>

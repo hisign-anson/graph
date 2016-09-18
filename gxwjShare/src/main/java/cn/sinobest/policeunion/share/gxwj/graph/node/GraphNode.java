@@ -1,6 +1,7 @@
 package cn.sinobest.policeunion.share.gxwj.graph.node;
 
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
 /**
  * Created by zhouyi1 on 2016/6/27 0027.
  */
-public class GraphNode {
+public class GraphNode implements Serializable {
     private String value;
 
     private String type;
