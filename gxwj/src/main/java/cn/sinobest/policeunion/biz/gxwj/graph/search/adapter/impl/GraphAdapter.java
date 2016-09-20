@@ -21,7 +21,7 @@ public class GraphAdapter implements IGraphService {
 
     private IGraphSearcher searcher;
 
-    private List<INodeCallBackHandler> callBackHandlers = new ArrayList<>();
+    private List<INodeCallBackHandler> callBackHandlers = new ArrayList();
 
     private RelationCallBackHandler relationCallBackHandler = new RelationCallBackHandler();
 

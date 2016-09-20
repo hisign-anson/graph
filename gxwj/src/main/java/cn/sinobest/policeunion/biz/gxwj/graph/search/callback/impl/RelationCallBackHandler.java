@@ -12,10 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by zhouyi1 on 2016/7/8 0008.
  */
 public class RelationCallBackHandler implements INodeCallBackHandler {
-    private Map<Integer,RelationResult> relationMap = new ConcurrentHashMap<>();
+    private Map<Integer,RelationResult> relationMap = new ConcurrentHashMap();
 
     @Override
     public void nodeCallBack(GraphNode nodeFrom, GraphNode nodeTo, Integer level,String relationName) {
+        if (nodeFrom==null || nodeTo==null){
+            return;
+        }
         GraphNode[] relation = new GraphNode[2];
         RelationResult relationResult = new RelationResult(relation,relationName);
         int fromValue = nodeFrom.hashCode();

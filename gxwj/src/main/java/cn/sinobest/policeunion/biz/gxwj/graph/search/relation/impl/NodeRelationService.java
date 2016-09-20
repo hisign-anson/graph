@@ -67,8 +67,12 @@ public class NodeRelationService implements IRelationService {
         return graphNodes[0].getNodes().isEmpty();
     }
 
-    @Override
-    public Set<GraphNode> search(Map<GraphNode,Object> noNeedSearchMap, final Integer level,final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
+//    @Override
+//    public Set<GraphNode> search(Map<GraphNode,Object> noNeedSearchMap, final Integer level,final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
+//        return this.search(false,noNeedSearchMap,level,detail,relation,callBackHandlers,fromNodes);
+//    }
+
+    public Set<GraphNode> search(final boolean first,Map<GraphNode,Object> noNeedSearchMap, final Integer level,final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
         final Set<GraphNode> nextNodes = Sets.newHashSet();
         if (fromNodes.length==0){
             logger.error("资源："+relation.getRelationName()+"的node为空！");
@@ -98,18 +102,22 @@ public class NodeRelationService implements IRelationService {
                 String fromNodeValue = maps.get(relation.getFromColumn())==null?null:maps.get(relation.getFromColumn()).toString();
                 GraphNode nodeFrom = fromNodeMaps.get(fromNodeValue);
                 GraphNode nodeTo = null;
-                if (fromSetAble(fromNodes)){
+                if (first){
                     String fromNodePkValue = maps.get(relation.getFromPKColumn())==null?null:maps.get(relation.getFromPKColumn()).toString();
-                    nodeFrom.addNode(detail?maps:null,fromNodePkValue);
-                }
-                if (toNodeValue!=null){
-                    nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
-                    nodeTo.addNode(detail?maps:null,toNodePkValue);
-                }
-                if (nodeTo!=null && !noNeedSearchNode.contains(nodeTo)){
-                    nextNodes.add(nodeTo);
-                    for (INodeCallBackHandler callBackHandler:callBackHandlers){
-                        callBackHandler.nodeCallBack(nodeFrom, nodeTo,level,relation.getRelationName());
+                    synchronized (nodeFrom){
+                        nodeFrom.addNode(relation.getRelationName(),detail?maps:null,fromNodePkValue);
+                        nextNodes.add(nodeFrom);
+                    }
+                }else {
+                    if (toNodeValue != null) {
+                        nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
+                        nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
+                    }
+                    if (nodeTo != null && !noNeedSearchNode.contains(nodeTo)) {
+                        nextNodes.add(nodeTo);
+                        for (INodeCallBackHandler callBackHandler : callBackHandlers) {
+                            callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
+                        }
                     }
                 }
                 return maps;

@@ -14,7 +14,9 @@ public class GraphNode implements Serializable {
 
     private String type;
 
-    private Map<Integer,Map<String,Object>> nodes = new HashMap<>();
+    private Map<String,Map<Integer,Map<String,Object>>> nodes = new HashMap<String, Map<Integer,Map<String,Object>>>();
+
+//    private Map<Integer,Map<String,Object>> nodes = new HashMap();
 
     public String getType() {
         return type;
@@ -25,15 +27,22 @@ public class GraphNode implements Serializable {
         this.type = type;
     }
 
-    public Map<Integer,Map<String,Object>> getNodes() {
+    public Map<String,Map<Integer,Map<String,Object>>> getNodes() {
         return nodes;
     }
 
-    public void addNode(Map<String,Object> nodeDetails,Object... primaryKeys) {
-        this.nodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
+    public void addNode(String relationName,Map<String,Object> nodeDetails,Object... primaryKeys) {
+        Map<Integer,Map<String,Object>> relationNodes = nodes.get(relationName);
+        if (relationNodes==null){
+            relationNodes = new HashMap<Integer,Map<String,Object>>();
+            relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
+            nodes.put(relationName,relationNodes);
+        }else {
+            relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
+        }
     }
 
-    public void addAllNodes(Map<Integer,Map<String,Object>> nodes) {
+    public void addAllNodes(Map<String,Map<Integer,Map<String,Object>>> nodes) {
         this.nodes.putAll(nodes);
     }
 

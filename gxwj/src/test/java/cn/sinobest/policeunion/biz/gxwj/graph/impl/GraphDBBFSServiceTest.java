@@ -60,7 +60,7 @@ public class GraphDBBFSServiceTest {
                 return new Object();
             }
         });
-        HashMap<String,Object> hms = new HashMap<>();
+        HashMap<String,Object> hms = new HashMap();
         hms.putAll(nextMap);
 
         String[] hmStrs = (String[]) hm.toArray(new String[hm.size()]);
