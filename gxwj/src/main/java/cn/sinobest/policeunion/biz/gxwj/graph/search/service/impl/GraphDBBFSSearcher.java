@@ -29,6 +29,8 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 
     private int defaultLevel = 10;
 
+    private int minLevel = 0;
+
     @Resource(name = "gxwj.context")
     private GraphContext context;
 
@@ -39,6 +41,13 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 
     @Override
     public Set<GraphNode> breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, List<INodeCallBackHandler> callBackHandlers, GraphNodeType type, GraphNode... startNodes) {
+        if (callBackHandlers == null) {
+            callBackHandlers = new ArrayList<INodeCallBackHandler>();
+        }
+        if (limitLevel == null && defaultLevel > 0) {
+            limitLevel = defaultLevel;
+        }
+
         Map<GraphNode, Object> finalResults = new ConcurrentHashMap<GraphNode, Object>();
 //        Map<GraphNode, Object> startMap = Maps.asMap(Sets.newHashSet(startNodes), new Function<GraphNode, Object>() {
 //            @Override
@@ -86,12 +95,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 
     private void breadthFirstSearch(Map<GraphNode, Object> finalResults, Integer limitLevel, long maxNode, Boolean detail, List<INodeCallBackHandler> callBackHandlers, GraphNodeType type, GraphNode... startNodes) {
         logger.info("job=" + this.toString() + " ; limitLevel=" + limitLevel);
-        if (callBackHandlers == null) {
-            callBackHandlers = new ArrayList<INodeCallBackHandler>();
-        }
-        if (limitLevel == null && defaultLevel > 0) {
-            limitLevel = defaultLevel;
-        } else if (limitLevel <= 0) {
+        if (limitLevel <= 0) {
             return;
         }
 
@@ -123,7 +127,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                         }
                     });
                     finalResults.putAll(nextMap);
-                    breadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, relation.getToType(), nextNodes.toArray(new GraphNode[nextNodes.size()]));
+                    breadthFirstSearch(finalResults, limitLevel-1, maxNode, detail, callBackHandlers, relation.getToType(), nextNodes.toArray(new GraphNode[nextNodes.size()]));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -132,7 +136,6 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                 continue;
             }
         }
-        limitLevel--;
     }
 
     class TempParam {
@@ -186,7 +189,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
         @Override
         public TempParam call() throws Exception {
             Set<GraphNode> loopNodes = Sets.newHashSet(startNodes);
-            Set<GraphNode> nextNodes = relationService.search(first,finalResults, limitLevel, detail, relation, callBackHandlers, loopNodes.toArray(new GraphNode[loopNodes.size()]));
+            Set<GraphNode> nextNodes = relationService.search(first, finalResults, limitLevel, detail, relation, callBackHandlers, loopNodes.toArray(new GraphNode[loopNodes.size()]));
             return new TempParam(nextNodes, relation);
         }
     }
