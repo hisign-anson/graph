@@ -123,7 +123,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                         }
                     });
                     finalResults.putAll(nextMap);
-                    breadthFirstSearch(finalResults, --limitLevel, maxNode, detail, callBackHandlers, relation.getToType(), nextNodes.toArray(new GraphNode[nextNodes.size()]));
+                    breadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, relation.getToType(), nextNodes.toArray(new GraphNode[nextNodes.size()]));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -132,6 +132,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                 continue;
             }
         }
+        limitLevel--;
     }
 
     class TempParam {

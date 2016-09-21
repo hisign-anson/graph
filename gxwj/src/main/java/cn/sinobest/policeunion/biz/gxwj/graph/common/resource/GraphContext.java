@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,6 +37,14 @@ public class GraphContext {
         for(GraphRelation relation:relationMap.values()){
             nodeStrConfig.put(relation.getFromType().toString(),relation);
         }
+//        List<String> nodeTypes = getNodeTypes();
+//        for (String nodeType:nodeTypes){
+//
+//        }
+    }
+
+    private List<String> getNodeTypes(){
+        return jdbcTemplate.queryForList("select sxbs from FW_SX_SJY_CONFIG",String.class);
     }
 
     public Set<GraphRelation> getRelation(GraphNodeType type){

@@ -59,7 +59,7 @@ public class GraphRelation implements BeanNameAware {
     }
 
     public String getFromColumn() {
-        return fromColumn;
+        return fromColumn==null?"":fromColumn;
     }
 
     public void setFromColumn(String fromColumn) {
@@ -67,7 +67,7 @@ public class GraphRelation implements BeanNameAware {
     }
 
     public String getToColumn() {
-        return toColumn;
+        return toColumn==null?"":toColumn;
     }
 
     public void setToColumn(String toColumn) {

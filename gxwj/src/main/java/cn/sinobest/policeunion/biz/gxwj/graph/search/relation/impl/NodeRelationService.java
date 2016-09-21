@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,38 +33,38 @@ public class NodeRelationService implements IRelationService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Map<String,GraphNode> getFromNodeMap(final StringBuilder condition,final GraphRelation relation,GraphNode... fromNodes){
+    public Map<String, GraphNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, GraphNode... fromNodes) {
         final String conditionPartStr = relation.getFromColumn() + " in (";
 
         condition.append(" and (");
         condition.append(conditionPartStr);
         final Integer[] count = {new Integer(maxSize)};
-        final Map<String,GraphNode> fromNodeMaps = Maps.uniqueIndex(Sets.newHashSet(fromNodes), new Function<GraphNode, String>() {
+        final Map<String, GraphNode> fromNodeMaps = Maps.uniqueIndex(Sets.newHashSet(fromNodes), new Function<GraphNode, String>() {
             @Override
             public String apply(GraphNode node) {
                 condition.append("'");
                 condition.append(node.getValue());
-                if (--count[0]==0){
+                if (--count[0] == 0) {
                     condition.append(") ");
-                    condition.append("or "+conditionPartStr);
+                    condition.append("or " + conditionPartStr);
                     count[0] = maxSize;
-                }else {
+                } else {
                     condition.append("',");
                 }
                 return node.getValue();
             }
         });
-        if (condition.lastIndexOf(",")==condition.length()-1){
+        if (condition.lastIndexOf(",") == condition.length() - 1) {
             condition.deleteCharAt(condition.length() - 1);
             condition.append("))");
-        }else {
+        } else {
             condition.delete(condition.length() - ("or " + conditionPartStr).length(), condition.length());
             condition.append(")");
         }
         return fromNodeMaps;
     }
 
-    private boolean fromSetAble(GraphNode... graphNodes){
+    private boolean fromSetAble(GraphNode... graphNodes) {
         return graphNodes[0].getNodes().isEmpty();
     }
 
@@ -72,15 +73,15 @@ public class NodeRelationService implements IRelationService {
 //        return this.search(false,noNeedSearchMap,level,detail,relation,callBackHandlers,fromNodes);
 //    }
 
-    public Set<GraphNode> search(final boolean first,Map<GraphNode,Object> noNeedSearchMap, final Integer level,final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
+    public Set<GraphNode> search(final boolean first, Map<GraphNode, Object> noNeedSearchMap, final Integer level, final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
         final Set<GraphNode> nextNodes = Sets.newHashSet();
-        if (fromNodes.length==0){
-            logger.error("资源："+relation.getRelationName()+"的node为空！");
+        if (fromNodes.length == 0) {
+            logger.error("资源：" + relation.getRelationName() + "的node为空！");
             return nextNodes;
         }
         final Set<GraphNode> noNeedSearchNode = noNeedSearchMap.keySet();
         final StringBuilder condition = new StringBuilder();
-        final Map<String,GraphNode> fromNodeMaps = getFromNodeMap(condition,relation,fromNodes);
+        final Map<String, GraphNode> fromNodeMaps = getFromNodeMap(condition, relation, fromNodes);
 
         StringBuilder conditionNoNeed = new StringBuilder();
 //        if (noNeedSearchNode.size()>0){
@@ -90,33 +91,44 @@ public class NodeRelationService implements IRelationService {
 //            conditionNoNeed.append("')");
 //        }
 
-        String sql = relation.getRelationSql()+condition.toString()+conditionNoNeed.toString();
-        logger.trace("dig sql:"+sql);
+        String sql = relation.getRelationSql() + condition.toString() + conditionNoNeed.toString();
+        logger.trace("dig sql:" + sql);
 
         jdbcTemplate.query(sql, new ColumnMapRowMapper() {
             @Override
             public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Map<String, Object> maps = super.mapRow(rs, rowNum);
-                String toNodePkValue = maps.get(relation.getToPKColumn())==null?null:maps.get(relation.getToPKColumn()).toString();
-                String toNodeValue = maps.get(relation.getToColumn())==null?null:maps.get(relation.getToColumn()).toString();
-                String fromNodeValue = maps.get(relation.getFromColumn())==null?null:maps.get(relation.getFromColumn()).toString();
+                String toNodePkValue = maps.get(relation.getToPKColumn()) == null ? "" : maps.get(relation.getToPKColumn()).toString();
+//                String toNodeValue = maps.get(relation.getToColumn())==null?null:maps.get(relation.getToColumn()).toString();
+                Set<String> toNodeValues = new HashSet<String>();
+                for (String columnName : relation.getToColumn().split(",")) {
+                    String columnValue = maps.get(columnName) == null ? null : maps.get(columnName).toString();
+                    if (columnValue!=null){
+                        toNodeValues.add(columnValue);
+                    }
+                }
+                String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
                 GraphNode nodeFrom = fromNodeMaps.get(fromNodeValue);
-                GraphNode nodeTo = null;
-                if (first){
-                    String fromNodePkValue = maps.get(relation.getFromPKColumn())==null?null:maps.get(relation.getFromPKColumn()).toString();
-                    synchronized (nodeFrom){
-                        nodeFrom.addNode(relation.getRelationName(),detail?maps:null,fromNodePkValue);
-                        nextNodes.add(nodeFrom);
+//                Set<GraphNode> nodeTos = Sets.newHashSet();
+                if (first) {
+                    String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
+                    if (fromNodeValue!=null){
+                        synchronized (nodeFrom) {
+                            nodeFrom.addNode(relation.getRelationName(), detail ? maps : null, fromNodePkValue);
+                            nextNodes.add(nodeFrom);
+                        }
                     }
-                }else {
-                    if (toNodeValue != null) {
-                        nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
-                        nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
-                    }
-                    if (nodeTo != null && !noNeedSearchNode.contains(nodeTo)) {
-                        nextNodes.add(nodeTo);
-                        for (INodeCallBackHandler callBackHandler : callBackHandlers) {
-                            callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
+                } else {
+                    if (!toNodeValues.isEmpty() && toNodeValues.size() > 0) {
+                        for (String toNodeValue : toNodeValues) {
+                            GraphNode nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
+                            nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
+                            if (!noNeedSearchNode.contains(nodeTo)) {
+                                nextNodes.add(nodeTo);
+                                for (INodeCallBackHandler callBackHandler : callBackHandlers) {
+                                    callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
+                                }
+                            }
                         }
                     }
                 }

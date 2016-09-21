@@ -18,9 +18,10 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
               <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
               <property name="pkColumn" value="SYSTEMID"/>
               <property name="fromType" ref="ajbh"/>
-              <property name="toType" ref="ajbh"/>
+              <property name="toType" ref="dhhm"/>
               <!--开始和结束节点对应那个字段-->
               <property name="fromColumn" value="AJBH"/>
+              <property name="toColumn" value="YSDWDH,YSDWDH_NEW"/>
               <!--关系语句-->
               <property name="relationSql">
                      <value>select * from B_ASJ_AJ t where 1=1 </value>
