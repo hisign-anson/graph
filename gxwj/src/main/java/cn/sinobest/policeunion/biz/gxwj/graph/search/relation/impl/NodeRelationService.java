@@ -17,10 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by zhouyi1 on 2016/6/27 0027.
@@ -94,47 +91,60 @@ public class NodeRelationService implements IRelationService {
         String sql = relation.getRelationSql() + condition.toString() + conditionNoNeed.toString();
         logger.trace("dig sql:" + sql);
 
-        jdbcTemplate.query(sql, new ColumnMapRowMapper() {
-            @Override
-            public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Map<String, Object> maps = super.mapRow(rs, rowNum);
-                String toNodePkValue = maps.get(relation.getToPKColumn()) == null ? "" : maps.get(relation.getToPKColumn()).toString();
+        try {
+
+            jdbcTemplate.query(sql, new ColumnMapRowMapper() {
+                @Override
+                public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    Map<String, Object> maps = super.mapRow(rs, rowNum);
+                    List<String> toNodePkValues = getNodeValues(maps, relation.getToPKColumn());
+                    Iterator<String> iteratorToNodePkValues = toNodePkValues.iterator();
+//                String toNodePkValue = maps.get(relation.getToPKColumn()) == null ? "" : maps.get(relation.getToPKColumn()).toString();
 //                String toNodeValue = maps.get(relation.getToColumn())==null?null:maps.get(relation.getToColumn()).toString();
-                Set<String> toNodeValues = new HashSet<String>();
-                for (String columnName : relation.getToColumn().split(",")) {
-                    String columnValue = maps.get(columnName) == null ? null : maps.get(columnName).toString();
-                    if (columnValue!=null){
-                        toNodeValues.add(columnValue);
-                    }
-                }
-                String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
-                GraphNode nodeFrom = fromNodeMaps.get(fromNodeValue);
+                    List<String> toNodeValues = getNodeValues(maps, relation.getToColumn());
+                    String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
+                    GraphNode nodeFrom = fromNodeMaps.get(fromNodeValue);
 //                Set<GraphNode> nodeTos = Sets.newHashSet();
-                if (first) {
-                    String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
-                    if (fromNodeValue!=null){
-                        synchronized (nodeFrom) {
-                            nodeFrom.addNode(relation.getRelationName(), detail ? maps : null, fromNodePkValue);
-                            nextNodes.add(nodeFrom);
+                    if (first) {
+                        String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
+                        if (fromNodeValue != null) {
+                            synchronized (nodeFrom) {
+                                nodeFrom.addNode(relation.getRelationName(), detail ? maps : null, fromNodePkValue);
+                                nextNodes.add(nodeFrom);
+                            }
                         }
-                    }
-                } else {
-                    if (!toNodeValues.isEmpty() && toNodeValues.size() > 0) {
-                        for (String toNodeValue : toNodeValues) {
-                            GraphNode nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
-                            nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
-                            if (!noNeedSearchNode.contains(nodeTo)) {
-                                nextNodes.add(nodeTo);
-                                for (INodeCallBackHandler callBackHandler : callBackHandlers) {
-                                    callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
+                    } else {
+                        if (!toNodeValues.isEmpty() && toNodeValues.size() > 0) {
+                            for (String toNodeValue : toNodeValues) {
+                                GraphNode nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
+                                String toNodePkValue = iteratorToNodePkValues.hasNext() ? iteratorToNodePkValues.next() : toNodePkValues.get(0);
+                                nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
+                                if (!noNeedSearchNode.contains(nodeTo)) {
+                                    nextNodes.add(nodeTo);
+                                    for (INodeCallBackHandler callBackHandler : callBackHandlers) {
+                                        callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
+                                    }
                                 }
                             }
                         }
                     }
+                    return maps;
                 }
-                return maps;
-            }
-        });
+            });
+        } catch (Exception e) {
+            logger.error(e);
+        }
         return nextNodes;
+    }
+
+    private List<String> getNodeValues(Map<String, Object> maps, String column) {
+        List<String> nodeValues = new ArrayList<String>();
+        for (String columnName : column.split(",")) {
+            String columnValue = maps.get(columnName) == null ? null : maps.get(columnName).toString();
+            if (columnValue != null) {
+                nodeValues.add(columnValue);
+            }
+        }
+        return nodeValues;
     }
 }

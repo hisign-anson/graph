@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by zhouyi1 on 2016/6/27 0027.
@@ -13,6 +14,8 @@ public class GraphNode implements Serializable {
     private String value;
 
     private String type;
+
+    private AtomicInteger totalSize = new AtomicInteger();
 
     private Map<String,Map<Integer,Map<String,Object>>> nodes = new HashMap<String, Map<Integer,Map<String,Object>>>();
 
@@ -27,6 +30,10 @@ public class GraphNode implements Serializable {
         this.type = type;
     }
 
+    public int getTotalSize() {
+        return totalSize.intValue();
+    }
+
     public Map<String,Map<Integer,Map<String,Object>>> getNodes() {
         return nodes;
     }
@@ -36,14 +43,25 @@ public class GraphNode implements Serializable {
         if (relationNodes==null){
             relationNodes = new HashMap<Integer,Map<String,Object>>();
             relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
-            nodes.put(relationName,relationNodes);
-        }else {
-            relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
+            doAddNode(relationName,relationNodes);
+//        }else {
+//            relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
         }
     }
 
+    private void doAddNode(String relationName,Map<Integer,Map<String,Object>> relationNodes){
+        nodes.put(relationName,relationNodes);
+        totalSize.addAndGet(relationNodes.size());
+    }
+
     public void addAllNodes(Map<String,Map<Integer,Map<String,Object>>> nodes) {
-        this.nodes.putAll(nodes);
+        for (Map.Entry<String,Map<Integer,Map<String,Object>>> node:nodes.entrySet()){
+            Map<Integer,Map<String,Object>> relationNodes = this.nodes.get(node.getKey());
+            if (relationNodes==null){
+                doAddNode(node.getKey(), node.getValue());
+            }
+        }
+//        this.nodes.putAll(nodes);
     }
 
     public String getValue() {
@@ -59,6 +77,7 @@ public class GraphNode implements Serializable {
         return "GraphNode{" +
                 "nodes=" + nodes +
                 ", value='" + value + '\'' +
+                ", totalSize=" + totalSize +
                 '}';
     }
 

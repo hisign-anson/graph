@@ -1,1346 +1,384 @@
-[2016-09-21 14:49:09] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@2dacd90a ; limitLevel=3
-[2016-09-21 14:49:45] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@240465cc ; limitLevel=3
-[2016-09-21 14:49:51] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1299d847 ; limitLevel=3
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:51:04] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4c1bd4f6 ; limitLevel=3
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:51:04] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4c1bd4f6 ; limitLevel=2
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 14:51:04] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4c1bd4f6 ; limitLevel=1
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:51:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:57:48] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@12bf506d ; limitLevel=3
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:57:48] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@12bf506d ; limitLevel=2
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:57:48] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@12bf506d ; limitLevel=1
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:57:48] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:24] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
+[2016-09-23 11:43:35] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
 job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@647f84c9 ; limitLevel=3
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:24] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@647f84c9 ; limitLevel=2
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:46:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5532d584 ; limitLevel=3
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:46:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5532d584 ; limitLevel=2
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 14:58:24] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@647f84c9 ; limitLevel=1
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:58:24] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:58:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:43] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:46:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5532d584 ; limitLevel=1
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:46:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5532d584 ; limitLevel=2
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 11:46:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5532d584 ; limitLevel=1
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 11:46:57] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 11:48:26] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@22b1513e ; limitLevel=3
-[2016-09-21 14:58:43] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:26] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:58:43] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d95b5ad ; limitLevel=3
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:05] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@22b1513e ; limitLevel=2
-[2016-09-21 14:59:05] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d95b5ad ; limitLevel=2
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:59:05] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:59:05] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 14:59:08] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@22b1513e ; limitLevel=1
-[2016-09-21 14:59:08] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:59:08] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d95b5ad ; limitLevel=1
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@34c40ed6 ; limitLevel=3
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@34c40ed6 ; limitLevel=2
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 14:59:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@34c40ed6 ; limitLevel=1
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:59:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 14:59:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@b0ae00b ; limitLevel=3
-[2016-09-21 14:59:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 14:59:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:00:08] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@b0ae00b ; limitLevel=2
-[2016-09-21 15:00:08] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:00:08] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:00:08] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:00:08] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@b0ae00b ; limitLevel=1
-[2016-09-21 15:00:08] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:00:08] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:01:52] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:01:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:01:58] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@30e4698 ; limitLevel=3
-[2016-09-21 15:01:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:02:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:02:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@30e4698 ; limitLevel=2
-[2016-09-21 15:02:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:02:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:02:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:02:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@30e4698 ; limitLevel=1
-[2016-09-21 15:02:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:02:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:02:09] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:02:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:02:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@373f9379 ; limitLevel=3
-[2016-09-21 15:02:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:02:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:02:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@373f9379 ; limitLevel=2
-[2016-09-21 15:02:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:02:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:02:29] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:02:29] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@373f9379 ; limitLevel=1
-[2016-09-21 15:02:29] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:02:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:03:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:03:49] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:03:49] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@126db04e ; limitLevel=3
-[2016-09-21 15:03:49] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:04:01] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:04:01] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@126db04e ; limitLevel=2
-[2016-09-21 15:04:02] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:04:02] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:04:02] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:04:02] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@126db04e ; limitLevel=1
-[2016-09-21 15:04:02] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:04:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:05:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1ed71887 ; limitLevel=3
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:05:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1ed71887 ; limitLevel=2
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:05:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1ed71887 ; limitLevel=1
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:05:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:07:21] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:07:21] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:07:26] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@23428b92 ; limitLevel=3
-[2016-09-21 15:07:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:07:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:07:26] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@23428b92 ; limitLevel=2
-[2016-09-21 15:07:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:07:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:07:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:07:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@23428b92 ; limitLevel=1
-[2016-09-21 15:07:38] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:07:38] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:12] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1ce18454 ; limitLevel=3
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:12] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1ce18454 ; limitLevel=2
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:10:12] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1ce18454 ; limitLevel=1
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:10:12] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:19] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@14c0f78f ; limitLevel=3
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:10:19] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@14c0f78f ; limitLevel=2
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:10:19] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@14c0f78f ; limitLevel=1
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:10:19] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:12:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@74ed73fd ; limitLevel=10
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@74ed73fd ; limitLevel=9
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:12:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@74ed73fd ; limitLevel=8
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:12:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:37] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7c4afb60 ; limitLevel=10
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:12:37] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7c4afb60 ; limitLevel=9
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:12:37] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7c4afb60 ; limitLevel=8
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:12:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:14:01] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:14:01] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:14:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7d1a9fbc ; limitLevel=10
-[2016-09-21 15:14:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:14:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:14:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7d1a9fbc ; limitLevel=9
-[2016-09-21 15:14:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:14:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:14:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:14:04] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7d1a9fbc ; limitLevel=8
-[2016-09-21 15:14:06] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:14:06] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:20:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@609ee86f ; limitLevel=10
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:20:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@609ee86f ; limitLevel=9
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:20:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@609ee86f ; limitLevel=8
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:20:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@609ee86f ; limitLevel=7
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d95b5ad ; limitLevel=1
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:20:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@609ee86f ; limitLevel=6
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:20:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:20:54] ERROR - GraphDBBFSSearcher#breadthFirstSearch:131 
-startNodes:[GraphNode{nodes={indhhmsfzgx={638230940=null}}, value='513031197602042777'}] error!
-java.util.concurrent.ExecutionException: java.lang.NullPointerException
-	at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:222)
-	at java.util.concurrent.FutureTask.get(FutureTask.java:83)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher.breadthFirstSearch(GraphDBBFSSearcher.java:112)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher.breadthFirstSearch(GraphDBBFSSearcher.java:126)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher.breadthFirstSearch(GraphDBBFSSearcher.java:126)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher.breadthFirstSearch(GraphDBBFSSearcher.java:126)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher.breadthFirstSearch(GraphDBBFSSearcher.java:83)
-	at cn.sinobest.policeunion.biz.gxwj.servlet.GXWJServlet.service(GXWJServlet.java:38)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
-	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
-	at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:255)
-	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
-	at org.eclipse.jetty.server.Server.handle(Server.java:365)
-	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
-	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
-	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
-	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
-	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
-	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
-	at java.lang.Thread.run(Thread.java:662)
-Caused by: java.lang.NullPointerException
-	at cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode.hashCode(GraphNode.java:80)
-	at java.util.concurrent.ConcurrentHashMap.containsKey(ConcurrentHashMap.java:782)
-	at java.util.concurrent.ConcurrentHashMap$KeySet.contains(ConcurrentHashMap.java:1175)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.relation.impl.NodeRelationService$2.mapRow(NodeRelationService.java:124)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.relation.impl.NodeRelationService$2.mapRow(NodeRelationService.java:97)
-	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:93)
-	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:60)
-	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:460)
-	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:405)
-	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:471)
-	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:481)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.relation.impl.NodeRelationService.search(NodeRelationService.java:97)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher$RelationTask.call(GraphDBBFSSearcher.java:188)
-	at cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher$RelationTask.call(GraphDBBFSSearcher.java:155)
-	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:439)
-	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:439)
-	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:98)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:206)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
-	... 1 more
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:28:30] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@15f3cd62 ; limitLevel=10
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:28:30] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@15f3cd62 ; limitLevel=9
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:28:30] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@15f3cd62 ; limitLevel=8
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:28:30] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@15f3cd62 ; limitLevel=7
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:28:30] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@15f3cd62 ; limitLevel=8
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d95b5ad ; limitLevel=2
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:28:30] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:32:01] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:32:01] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 11:48:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d95b5ad ; limitLevel=1
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 11:48:27] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:32:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d83004b ; limitLevel=10
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:50:18] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@44eedabc ; limitLevel=3
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:32:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d83004b ; limitLevel=9
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:50:18] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@44eedabc ; limitLevel=2
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:32:03] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d83004b ; limitLevel=8
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:32:03] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 11:50:18] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@44eedabc ; limitLevel=1
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:50:18] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@44eedabc ; limitLevel=2
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:50:18] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@44eedabc ; limitLevel=1
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 11:50:18] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:53:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@8ba6621 ; limitLevel=3
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:53:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@8ba6621 ; limitLevel=2
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 11:53:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@8ba6621 ; limitLevel=1
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:33:08] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d83004b ; limitLevel=8
-[2016-09-21 15:33:08] TRACE - NodeRelationService#search:95 
+[2016-09-23 11:53:32] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
+[2016-09-23 11:53:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@8ba6621 ; limitLevel=0
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:55:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5ffa6e43 ; limitLevel=3
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:55:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5ffa6e43 ; limitLevel=2
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 11:55:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5ffa6e43 ; limitLevel=1
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:55:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5ffa6e43 ; limitLevel=2
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 11:55:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5ffa6e43 ; limitLevel=1
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 11:55:16] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:58:07] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5263cbef ; limitLevel=3
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 11:58:07] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5263cbef ; limitLevel=2
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 11:58:07] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5263cbef ; limitLevel=1
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 11:58:07] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5263cbef ; limitLevel=1
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 11:58:07] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@5263cbef ; limitLevel=2
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 11:58:07] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:37:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@408057d3 ; limitLevel=3
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:37:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@408057d3 ; limitLevel=2
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 13:37:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@408057d3 ; limitLevel=1
+[2016-09-23 13:37:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@408057d3 ; limitLevel=0
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 13:37:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@408057d3 ; limitLevel=2
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 13:37:38] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@408057d3 ; limitLevel=1
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 13:37:38] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:40:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@2374b423 ; limitLevel=3
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:40:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@2374b423 ; limitLevel=2
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:40:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@2374b423 ; limitLevel=1
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
+[2016-09-23 13:40:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@2374b423 ; limitLevel=2
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
+[2016-09-23 13:40:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@2374b423 ; limitLevel=1
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in (''))
+[2016-09-23 13:40:42] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in (''))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:50:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4f7bb842 ; limitLevel=3
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 13:50:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4f7bb842 ; limitLevel=2
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
+[2016-09-23 13:50:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4f7bb842 ; limitLevel=1
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:50:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4f7bb842 ; limitLevel=2
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:33:08] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:33:08] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d83004b ; limitLevel=7
-[2016-09-21 15:33:08] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:50:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4f7bb842 ; limitLevel=1
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:33:08] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:33:08] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:50:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:38:38] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:38:38] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:38:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@db06b24 ; limitLevel=10
-[2016-09-21 15:38:42] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:38:42] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:38:42] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@db06b24 ; limitLevel=9
-[2016-09-21 15:38:42] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:38:42] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:50:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4f7bb842 ; limitLevel=0
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:38:42] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:38:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@db06b24 ; limitLevel=8
-[2016-09-21 15:38:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:38:43] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@586fb16d ; limitLevel=3
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
+[2016-09-23 13:53:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@586fb16d ; limitLevel=2
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:53:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@586fb16d ; limitLevel=1
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:39:26] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@db06b24 ; limitLevel=8
-[2016-09-21 15:39:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:39:26] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
+dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
+[2016-09-23 13:53:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@586fb16d ; limitLevel=2
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:39:26] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@db06b24 ; limitLevel=7
-[2016-09-21 15:39:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:39:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:39:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:39:29] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:39:29] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:39:31] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@18ca33a ; limitLevel=10
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:39:31] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@18ca33a ; limitLevel=9
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:39:31] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@18ca33a ; limitLevel=8
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:39:31] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:39:55] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@18ca33a ; limitLevel=8
-[2016-09-21 15:39:55] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:39:55] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:39:55] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@18ca33a ; limitLevel=7
-[2016-09-21 15:39:55] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:39:55] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:39:55] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
+job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@586fb16d ; limitLevel=1
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:44] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31690c95 ; limitLevel=10
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:44] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31690c95 ; limitLevel=9
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:40:44] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:40:45] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31690c95 ; limitLevel=8
-[2016-09-21 15:40:45] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:40:45] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:40:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31690c95 ; limitLevel=8
-[2016-09-21 15:40:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:40:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195'))
-[2016-09-21 15:40:54] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31690c95 ; limitLevel=7
-[2016-09-21 15:40:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:40:54] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:40:54] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@33cadfde ; limitLevel=10
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:40:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@33cadfde ; limitLevel=9
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:40:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@33cadfde ; limitLevel=8
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:40:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:43:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3ce8e8c1 ; limitLevel=10
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:43:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3ce8e8c1 ; limitLevel=9
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:43:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3ce8e8c1 ; limitLevel=8
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:43:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3ce8e8c1 ; limitLevel=7
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:43:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6242c657 ; limitLevel=10
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6242c657 ; limitLevel=9
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:50:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6242c657 ; limitLevel=8
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:50:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6242c657 ; limitLevel=8
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:50:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:23] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@61f5cf61 ; limitLevel=3
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:23] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@61f5cf61 ; limitLevel=2
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:50:23] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@61f5cf61 ; limitLevel=1
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:50:23] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:50:23] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@61f5cf61 ; limitLevel=0
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7556d1e2 ; limitLevel=3
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:50:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7556d1e2 ; limitLevel=2
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:50:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7556d1e2 ; limitLevel=1
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:50:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:50:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7556d1e2 ; limitLevel=0
-[2016-09-21 15:51:10] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:51:10] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:51:10] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3e2f3adb ; limitLevel=3
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:51:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3e2f3adb ; limitLevel=2
-[2016-09-21 15:51:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3e2f3adb ; limitLevel=1
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:51:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:51:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3e2f3adb ; limitLevel=0
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:52:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57390ad3 ; limitLevel=3
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:52:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57390ad3 ; limitLevel=2
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:52:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57390ad3 ; limitLevel=1
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:52:27] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57390ad3 ; limitLevel=1
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:52:27] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:55:39] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31e41769 ; limitLevel=3
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:55:39] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31e41769 ; limitLevel=2
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 15:55:39] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31e41769 ; limitLevel=1
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 15:55:39] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@31e41769 ; limitLevel=1
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 15:55:39] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 15:56:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:56:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 15:56:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@75b30cc7 ; limitLevel=3
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:18:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d74b5ee ; limitLevel=3
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:18:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d74b5ee ; limitLevel=2
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:18:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d74b5ee ; limitLevel=1
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:18:13] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1d74b5ee ; limitLevel=1
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 16:18:13] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:21:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3c41a9ce ; limitLevel=3
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:21:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3c41a9ce ; limitLevel=4
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:21:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3c41a9ce ; limitLevel=6
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:21:32] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@3c41a9ce ; limitLevel=5
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:21:32] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:22:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@38f52df8 ; limitLevel=3
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:22:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@38f52df8 ; limitLevel=4
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:22:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@38f52df8 ; limitLevel=5
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 16:22:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@38f52df8 ; limitLevel=6
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:22:57] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@38f52df8 ; limitLevel=5
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:22:57] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 16:25:40] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:25:40] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:25:40] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@716d9094 ; limitLevel=3
-[2016-09-21 16:25:40] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:25:40] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:25:50] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@716d9094 ; limitLevel=4
-[2016-09-21 16:25:50] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:25:50] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:25:50] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:26:10] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@716d9094 ; limitLevel=6
-[2016-09-21 16:26:10] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:26:10] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:26:22] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@716d9094 ; limitLevel=7
-[2016-09-21 16:26:22] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 16:26:22] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('18520117227'))
-[2016-09-21 16:26:34] INFO  - GraphDBBFSSearcher#breadthFirstSearch:88 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@716d9094 ; limitLevel=6
-[2016-09-21 16:26:34] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:26:34] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 16:26:34] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:33:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57ef8e7c ; limitLevel=3
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:33:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57ef8e7c ; limitLevel=4
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:33:43] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:33:43] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@57ef8e7c ; limitLevel=5
-[2016-09-21 16:34:18] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:18] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:18] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@68f8093f ; limitLevel=3
-[2016-09-21 16:34:18] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:18] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:21] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@68f8093f ; limitLevel=4
-[2016-09-21 16:34:21] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:34:21] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:34:21] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:34:26] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@68f8093f ; limitLevel=6
-[2016-09-21 16:34:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:34:26] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:34:33] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@68f8093f ; limitLevel=5
-[2016-09-21 16:34:33] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@68f8093f ; limitLevel=4
-[2016-09-21 16:34:33] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:34:33] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:34:33] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 16:34:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:37] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@714aa005 ; limitLevel=3
-[2016-09-21 16:34:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:37] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:34:56] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@714aa005 ; limitLevel=4
-[2016-09-21 16:34:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:34:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:34:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:35:40] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@714aa005 ; limitLevel=6
-[2016-09-21 16:35:40] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:35:40] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:04] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@714aa005 ; limitLevel=6
-[2016-09-21 16:36:04] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@714aa005 ; limitLevel=4
-[2016-09-21 16:36:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:36:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 16:36:04] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:15] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1e722083 ; limitLevel=3
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:15] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1e722083 ; limitLevel=4
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:36:15] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1e722083 ; limitLevel=6
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:15] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:15] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@1e722083 ; limitLevel=4
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7f5451cc ; limitLevel=3
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7f5451cc ; limitLevel=4
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7f5451cc ; limitLevel=6
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:16] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:16] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@7f5451cc ; limitLevel=5
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6bdd02c3 ; limitLevel=3
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6bdd02c3 ; limitLevel=4
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6bdd02c3 ; limitLevel=6
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:17] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:17] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6bdd02c3 ; limitLevel=4
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:58] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@76b8c4f5 ; limitLevel=3
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 16:36:58] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@76b8c4f5 ; limitLevel=4
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 16:36:58] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@76b8c4f5 ; limitLevel=6
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:58] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 16:36:58] INFO  - GraphDBBFSSearcher#breadthFirstSearch:90 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@76b8c4f5 ; limitLevel=5
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@67b9238a ; limitLevel=3
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@67b9238a ; limitLevel=2
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 17:09:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@67b9238a ; limitLevel=1
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 17:09:11] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@67b9238a ; limitLevel=1
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 17:09:11] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:56] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4fda9420 ; limitLevel=10
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:56] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4fda9420 ; limitLevel=9
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 17:09:56] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4fda9420 ; limitLevel=8
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 17:09:56] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@4fda9420 ; limitLevel=8
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 17:09:56] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:59] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6b8f9c72 ; limitLevel=3
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_ASJ_AJ t where 1=1  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (AJBH in ('A3500000000002011080001'))
-[2016-09-21 17:09:59] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6b8f9c72 ; limitLevel=2
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('620103197809141011'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('620103197809141011'))
-[2016-09-21 17:09:59] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6b8f9c72 ; limitLevel=1
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (PHONE in ('13416291195','18520117227'))
-[2016-09-21 17:09:59] INFO  - GraphDBBFSSearcher#breadthFirstSearch:97 
-job=cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl.GraphDBBFSSearcher@6b8f9c72 ; limitLevel=2
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_IN t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
-dig sql:select * from T_WBZY_HK_PASSENGER_OUT t where 1=1  and (FOID in ('513031197602042777'))
-[2016-09-21 17:09:59] TRACE - NodeRelationService#search:95 
+[2016-09-23 13:53:11] TRACE - NodeRelationService#search:92 
 dig sql:select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'  and (BSHID in ('513031197602042777'))

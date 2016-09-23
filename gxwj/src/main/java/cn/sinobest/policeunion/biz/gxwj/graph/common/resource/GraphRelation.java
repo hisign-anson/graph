@@ -28,7 +28,21 @@ public class GraphRelation implements BeanNameAware {
 
     String relationSql;
 
+    String tableId;
+
     Map<String,Object> relationDetail = new HashMap<String, Object>();
+
+    public GraphRelation(GraphNodeType fromType, String fromColumn, GraphNodeType toType, String toColumn, String relationSql,String tableId) {
+        this.fromType = fromType;
+        this.fromColumn = fromColumn;
+        this.toType = toType;
+        this.toColumn = toColumn;
+        this.relationSql = relationSql;
+        this.tableId = tableId;
+    }
+
+    public GraphRelation() {
+    }
 
     public String getPkColumn() {
         return pkColumn;
