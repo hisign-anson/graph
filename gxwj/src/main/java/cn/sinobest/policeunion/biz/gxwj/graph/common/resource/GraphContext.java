@@ -77,7 +77,7 @@ public class GraphContext {
     }
 
     private String getPkColumn(String tableName) {
-        return jdbcTemplate.queryForObject("select sjxmc from FW_SJZYSJXJ where tname = ? and PRIMARYKEY='1'", String.class, tableName);
+        return jdbcTemplate.queryForObject("select sjxmc from FW_SJZYSJXJ where tname = ? and PRIMARYKEY='1' and rownum=1", String.class, tableName);
     }
 
     private String getSql(String tableName) {
