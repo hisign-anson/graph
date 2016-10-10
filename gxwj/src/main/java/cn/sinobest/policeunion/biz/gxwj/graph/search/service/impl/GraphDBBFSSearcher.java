@@ -8,7 +8,9 @@ import cn.sinobest.policeunion.biz.gxwj.graph.search.relation.IRelationService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
 import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
 import com.google.common.base.Function;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,7 +79,9 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                             return new Object();
                         }
                     });
-                    finalResults.putAll(nextMap);
+//                    synchronized (finalResults) {
+                        finalResults.putAll(nextMap);
+//                    }
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -89,12 +93,13 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 
 //        finalResults.putAll(startMap);
 
-        breadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, type, startNodes);
+        SetMultimap<GraphNodeType,Set<GraphNode>> typeNodes = HashMultimap.create();
+        typeNodes.put(type,Sets.newHashSet(startNodes));
+        mergeBreadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, typeNodes);
         return finalResults.keySet();
     }
 
-    private void breadthFirstSearch(Map<GraphNode, Object> finalResults, Integer limitLevel, long maxNode, Boolean detail, List<INodeCallBackHandler> callBackHandlers, GraphNodeType type, GraphNode... startNodes) {
-        logger.info("job=" + this.toString() + " ; limitLevel=" + limitLevel);
+    private void mergeBreadthFirstSearch(Map<GraphNode, Object> finalResults, Integer limitLevel, long maxNode, Boolean detail, List<INodeCallBackHandler> callBackHandlers, SetMultimap<GraphNodeType, Set<GraphNode>> typeNodes){
         if (limitLevel <= 0) {
             return;
         }
@@ -102,6 +107,27 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
         if (finalResults.size() >= maxNode) {
             return;
         }
+
+        limitLevel--;
+
+        SetMultimap<GraphNodeType,Set<GraphNode>> nextTypeNodes = HashMultimap.create();
+
+        for (Map.Entry<GraphNodeType,Set<GraphNode>> entry:typeNodes.entries()){
+            SetMultimap<GraphNodeType,Set<GraphNode>> nextTypeNode = breadthFirstSearch(finalResults, limitLevel, detail, callBackHandlers, entry.getKey(), entry.getValue().toArray(new GraphNode[entry.getValue().size()]));
+            if (nextTypeNode.size()>0){
+                nextTypeNodes.putAll(nextTypeNode);
+            }
+        }
+
+        if (nextTypeNodes.size()>0){
+            mergeBreadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, nextTypeNodes);
+        }
+    }
+
+    private SetMultimap<GraphNodeType,Set<GraphNode>> breadthFirstSearch(Map<GraphNode, Object> finalResults, Integer limitLevel, Boolean detail, List<INodeCallBackHandler> callBackHandlers, GraphNodeType type, GraphNode... startNodes) {
+        logger.info(String.format(" limitLevel=%s ; type=%s ; node=%s ;",limitLevel,type.getType(),Arrays.toString(startNodes)));
+
+        SetMultimap<GraphNodeType,Set<GraphNode>> typeNodes = HashMultimap.create();
 
         Set<GraphRelation> relations = context.getRelation(type);
         for (GraphRelation relation : relations) {
@@ -120,14 +146,16 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                 if (nextNodes.size() == 0) {
                     continue;
                 } else {
-                    Map<GraphNode, Object> nextMap = Maps.asMap(nextNodes, new Function<GraphNode, Object>() {
-                        @Override
-                        public Object apply(GraphNode graphNode) {
-                            return new Object();
-                        }
-                    });
-                    finalResults.putAll(nextMap);
-                    breadthFirstSearch(finalResults, limitLevel-1, maxNode, detail, callBackHandlers, relation.getToType(), nextNodes.toArray(new GraphNode[nextNodes.size()]));
+                    synchronized (finalResults) {
+                        Map<GraphNode, Object> nextMap = Maps.asMap(nextNodes, new Function<GraphNode, Object>() {
+                            @Override
+                            public Object apply(GraphNode graphNode) {
+                                return new Object();
+                            }
+                        });
+                        finalResults.putAll(nextMap);
+                    }
+                    typeNodes.put(relation.getToType(),nextNodes);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -136,6 +164,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
                 continue;
             }
         }
+        return typeNodes;
     }
 
     class TempParam {

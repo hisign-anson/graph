@@ -15,6 +15,7 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
 
        <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
        <bean id="sfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="tableId" value="0001"/>
               <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
               <property name="pkColumn" value="SYSTEMID"/>
               <property name="fromType" ref="ajbh"/>
@@ -30,6 +31,7 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
 
        <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
        <bean id="sfzajgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="tableId" value="0002"/>
               <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
               <property name="pkColumn" value="SYSTEMID"/>
               <property name="fromType" ref="sfzh"/>
@@ -44,6 +46,8 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
        </bean>
 
        <bean id="ajsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="relationName" value="sfzajgx"/>
+              <property name="tableId" value="0002"/>
               <property name="pkColumn" value="SYSTEMID"/>
               <property name="fromType" ref="ajbh"/>
               <property name="toType" ref="sfzh"/>
@@ -55,6 +59,7 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
        </bean>
 
        <bean id="insfzdhhmgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="tableId" value="0003"/>
               <property name="pkColumn" value="ID"/>
               <property name="fromType" ref="sfzh"/>
               <property name="toType" ref="dhhm"/>
@@ -66,6 +71,8 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
        </bean>
 
        <bean id="indhhmsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="relationName" value="insfzdhhmgx"/>
+              <property name="tableId" value="0003"/>
               <property name="pkColumn" value="ID"/>
               <property name="fromType" ref="dhhm"/>
               <property name="toType" ref="sfzh"/>
@@ -77,6 +84,7 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
        </bean>
 
        <bean id="outsfzdhhmgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="tableId" value="0004"/>
               <property name="pkColumn" value="ID"/>
               <property name="fromType" ref="sfzh"/>
               <property name="toType" ref="dhhm"/>
@@ -88,6 +96,8 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
        </bean>
 
        <bean id="outdhhmsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+              <property name="relationName" value="outsfzdhhmgx"/>
+              <property name="tableId" value="0004"/>
               <property name="pkColumn" value="ID"/>
               <property name="fromType" ref="dhhm"/>
               <property name="toType" ref="sfzh"/>

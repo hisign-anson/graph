@@ -10,6 +10,7 @@ import java.util.Map;
  * Created by zhouyi1 on 2016/6/27 0027.
  */
 public class GraphRelation implements BeanNameAware {
+
     String relationName;
 
     String pkColumn;
@@ -42,6 +43,14 @@ public class GraphRelation implements BeanNameAware {
     }
 
     public GraphRelation() {
+    }
+
+    public String getTableId() {
+        return tableId==null?getRelationName():tableId;
+    }
+
+    public void setTableId(String tableId) {
+        this.tableId = tableId;
     }
 
     public String getPkColumn() {
@@ -106,6 +115,10 @@ public class GraphRelation implements BeanNameAware {
 
     public String getRelationName() {
         return relationName;
+    }
+
+    public void setRelationName(String relationName) {
+        this.relationName = relationName;
     }
 
     public Map<String, Object> getRelationDetail() {

@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <build>
-        <finalName>policeunion-share-${project.version}</finalName>
+        <finalName>gxwj-share-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -25,6 +25,9 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                    <arg>-verbose</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>

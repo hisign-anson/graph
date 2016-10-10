@@ -1,11 +1,14 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.common.resource;
 
+import cn.sinobest.policeunion.biz.gxwj.graph.common.init.SpringContextInit;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import jodd.util.StringUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ import java.util.Set;
 @Service(value = "gxwj.context")
 //@Lazy
 public class GraphContext {
+    private static final Log logger = LogFactory.getLog(GraphContext.class);
     public final static String defaultRelation = "normalRelation";
 
     private final String typeParam = "SXBS";
@@ -37,12 +41,12 @@ public class GraphContext {
 
     @PostConstruct
     public void init() {
-        /*ApplicationContext context = SpringContextInit.getContext();
+        ApplicationContext context = SpringContextInit.getContext();
         Map<String, GraphRelation> relationMap = context.getBeansOfType(GraphRelation.class);
         for (GraphRelation relation : relationMap.values()) {
             nodeStrConfig.put(relation.getFromType().toString(), relation);
-        }*/
-        List<String> nodeTypes = getNodeTypes();
+        }
+        /*List<String> nodeTypes = getNodeTypes();
         for (String fromNodeType : nodeTypes) {
             GraphNodeType fromGraphNodeType = new GraphNodeType(fromNodeType);
             List<Map<String, Object>> fromNodeTypeNames = getNodeTypeNames(fromNodeType);
@@ -60,24 +64,31 @@ public class GraphContext {
                     Map<String, Object> nextToNodeTypeNameMap = i == toNodeTypeNames.size() - 1 ? null : toNodeTypeNames.get(i + 1);
                     String toNodeTypeName = toNodeTypeNameMap.get(typeNameParam) == null ? "" : toNodeTypeNameMap.get(typeNameParam).toString();
                     String toNodeType = toNodeTypeNameMap.get(typeParam) == null ? "" : toNodeTypeNameMap.get(typeParam).toString();
-                    String nextToNodeType = nextToNodeTypeNameMap==null || nextToNodeTypeNameMap.get(typeParam) == null ? "" : nextToNodeTypeNameMap.get(typeParam).toString();
+                    String nextToNodeType = nextToNodeTypeNameMap == null || nextToNodeTypeNameMap.get(typeParam) == null ? "" : nextToNodeTypeNameMap.get(typeParam).toString();
                     toTypeName.add(toNodeTypeName);
                     sxbs = toNodeType;
                     if (nextToNodeTypeNameMap == null || !nextToNodeType.equals(sxbs)) {
-                        GraphRelation relation = new GraphRelation(fromGraphNodeType, fromTypeName, new GraphNodeType(toNodeType), StringUtil.join(toTypeName, ","), sql,tableId);
+                        GraphRelation relation = new GraphRelation(fromGraphNodeType, fromTypeName, new GraphNodeType(toNodeType), StringUtil.join(toTypeName, ","), sql, tableId);
                         relation.setPkColumn(pkColumn);
-                        nodeStrConfig.put(fromGraphNodeType.toString(),relation);
+                        nodeStrConfig.put(fromGraphNodeType.toString(), relation);
 //                        relation.setFromPKColumn(fromTypeName);
 //                        relation.setToPKColumn(StringUtil.join(toTypeName, ","));
                         toTypeName.clear();
                     }
                 }
             }
-        }
+        }*/
     }
 
     private String getPkColumn(String tableName) {
-        return jdbcTemplate.queryForObject("select sjxmc from FW_SJZYSJXJ where tname = ? and PRIMARYKEY='1' and rownum=1", String.class, tableName);
+        String pkColumn = null;
+        try {
+            pkColumn = jdbcTemplate.queryForObject("select sjxmc from FW_SJZYSJXJ where tname = ? and PRIMARYKEY='1' and rownum=1", String.class, tableName);
+        } catch (Exception e) {
+            logger.error(e);
+            return pkColumn;
+        }
+        return pkColumn;
     }
 
     private String getSql(String tableName) {

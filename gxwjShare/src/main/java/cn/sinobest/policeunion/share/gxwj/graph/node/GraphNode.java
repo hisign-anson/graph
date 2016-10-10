@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -17,7 +18,7 @@ public class GraphNode implements Serializable {
 
     private AtomicInteger totalSize = new AtomicInteger();
 
-    private Map<String,Map<Integer,Map<String,Object>>> nodes = new HashMap<String, Map<Integer,Map<String,Object>>>();
+    private Map<String,Map<Integer,Map<String,Object>>> nodes = new ConcurrentHashMap<String, Map<Integer,Map<String,Object>>>();
 
 //    private Map<Integer,Map<String,Object>> nodes = new HashMap();
 
@@ -38,12 +39,12 @@ public class GraphNode implements Serializable {
         return nodes;
     }
 
-    public void addNode(String relationName,Map<String,Object> nodeDetails,Object... primaryKeys) {
-        Map<Integer,Map<String,Object>> relationNodes = nodes.get(relationName);
+    public void addNode(String tableId,Map<String,Object> nodeDetails,Object... primaryKeys) {
+        Map<Integer,Map<String,Object>> relationNodes = nodes.get(tableId);
         if (relationNodes==null){
             relationNodes = new HashMap<Integer,Map<String,Object>>();
             relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
-            doAddNode(relationName,relationNodes);
+            doAddNode(tableId,relationNodes);
 //        }else {
 //            relationNodes.put(Arrays.hashCode(primaryKeys), nodeDetails);
         }

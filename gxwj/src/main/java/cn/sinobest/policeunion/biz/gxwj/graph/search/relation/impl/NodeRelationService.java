@@ -109,7 +109,8 @@ public class NodeRelationService implements IRelationService {
                         String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
                         if (fromNodeValue != null) {
                             synchronized (nodeFrom) {
-                                nodeFrom.addNode(relation.getRelationName(), detail ? maps : null, fromNodePkValue);
+                                nodeFrom.addNode(relation.getTableId(), detail ? maps : null, fromNodePkValue);
+//                                nodeFrom.addNode(relation.getRelationName(), detail ? maps : null, fromNodePkValue);
                                 nextNodes.add(nodeFrom);
                             }
                         }
@@ -118,12 +119,15 @@ public class NodeRelationService implements IRelationService {
                             for (String toNodeValue : toNodeValues) {
                                 GraphNode nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
                                 String toNodePkValue = iteratorToNodePkValues.hasNext() ? iteratorToNodePkValues.next() : toNodePkValues.get(0);
-                                nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
-                                if (!noNeedSearchNode.contains(nodeTo)) {
-                                    nextNodes.add(nodeTo);
-                                    for (INodeCallBackHandler callBackHandler : callBackHandlers) {
-                                        callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
+                                nodeTo.addNode(relation.getTableId(), detail ? maps : null, toNodePkValue);
+//                                nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
+                                synchronized (noNeedSearchNode) {
+                                    if (!noNeedSearchNode.contains(nodeTo)) {
+                                        nextNodes.add(nodeTo);
                                     }
+                                }
+                                for (INodeCallBackHandler callBackHandler : callBackHandlers) {
+                                    callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
                                 }
                             }
                         }

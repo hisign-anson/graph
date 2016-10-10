@@ -31,7 +31,7 @@ public class RelationCallBackHandler implements INodeCallBackHandler {
             relation[1] = nodeTo;
         }
 
-        Integer key = Arrays.hashCode(relation);
+        Integer key = Arrays.hashCode(new Object[]{relation[0],relation[1],relationName});
         if (!relationMap.containsKey(key)){
             relationMap.put(key,relationResult);
         }
