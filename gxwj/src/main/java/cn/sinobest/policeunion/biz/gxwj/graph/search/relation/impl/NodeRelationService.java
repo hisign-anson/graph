@@ -73,7 +73,7 @@ public class NodeRelationService implements IRelationService {
     public Set<GraphNode> search(final boolean first, Map<GraphNode, Object> noNeedSearchMap, final Integer level, final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
         final Set<GraphNode> nextNodes = Sets.newHashSet();
         if (fromNodes.length == 0) {
-            logger.error("资源：" + relation.getRelationName() + "的node为空！");
+            logger.error("source:" + relation.getRelationName() + "'s node is null!");
             return nextNodes;
         }
         final Set<GraphNode> noNeedSearchNode = noNeedSearchMap.keySet();
