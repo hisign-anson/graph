@@ -2,6 +2,7 @@ package cn.sinobest.policeunion.biz.gxwj.graph.common.resource;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.common.init.SpringContextInit;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import jodd.util.StringUtil;
@@ -41,12 +42,19 @@ public class GraphContext {
 
     @PostConstruct
     public void init() {
+        springInit();
+    }
+
+    private void springInit(){
         ApplicationContext context = SpringContextInit.getContext();
         Map<String, GraphRelation> relationMap = context.getBeansOfType(GraphRelation.class);
         for (GraphRelation relation : relationMap.values()) {
             nodeStrConfig.put(relation.getFromType().toString(), relation);
         }
-        /*List<String> nodeTypes = getNodeTypes();
+    }
+
+    private void dbInit(){
+        List<String> nodeTypes = getNodeTypes();
         for (String fromNodeType : nodeTypes) {
             GraphNodeType fromGraphNodeType = new GraphNodeType(fromNodeType);
             List<Map<String, Object>> fromNodeTypeNames = getNodeTypeNames(fromNodeType);
@@ -77,7 +85,7 @@ public class GraphContext {
                     }
                 }
             }
-        }*/
+        }
     }
 
     private String getPkColumn(String tableName) {
