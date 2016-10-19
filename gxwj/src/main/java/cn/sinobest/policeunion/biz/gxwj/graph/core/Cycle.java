@@ -12,6 +12,8 @@ public class Cycle {
     private HashMap<GraphNode,Boolean> maked = Maps.newHashMap();
     private List<Stack<GraphNode>> cycles = new LinkedList<Stack<GraphNode>>();
     private HashMap<GraphNode,GraphNode> edgeTo = Maps.newHashMap();
+//    private HashMap<GraphNode,GraphNode> cycleEdgeTo = Maps.newHashMap();
+    private HashMap<GraphNode,Boolean> cycleMaked = Maps.newHashMap();
 
     public Cycle(Graph graph) {
         Set<GraphNode> nodes = graph.getNodes();
@@ -20,7 +22,6 @@ public class Cycle {
                 dfs(graph, node, node);
             }
         }
-        System.out.println("end");
     }
 
     private void dfs(Graph graph,GraphNode node,GraphNode lastNode){
@@ -30,14 +31,16 @@ public class Cycle {
                 edgeTo.put(toNode,node);
                 dfs(graph, toNode, node);
 //                edgeTo.remove(toNode);
-//            }else if (!toNode.equals(lastNode)){
-//                Stack<GraphNode> cycle = new Stack<GraphNode>();
-//                for (GraphNode x=node;x!=toNode;x=edgeTo.get(x)){
-//                    cycle.push(x);
-//                }
-//                cycle.push(toNode);
-//                cycle.push(node);
-//                cycles.add(cycle);
+            }else if (!toNode.equals(lastNode) && (cycleMaked.get(toNode)==null || !cycleMaked.get(toNode))){
+                cycleMaked.put(node,true);
+                Stack<GraphNode> cycle = new Stack<GraphNode>();
+                for (GraphNode x=node;x!=toNode;x=edgeTo.get(x)){
+                    cycle.push(x);
+                }
+                cycle.push(toNode);
+                cycle.push(node);
+                cycles.add(cycle);
+                System.out.println("cycle end");
             }
         }
     }

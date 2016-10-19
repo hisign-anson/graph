@@ -21,7 +21,7 @@ public class Graph {
 
     private HashSet<GraphRelation> relations = new HashSet<GraphRelation>();
 
-    public void addEdge(GraphNode fromNode,GraphNode toNode,GraphRelation relation){
+    public void addEdge(GraphNode fromNode,GraphNode toNode,String relation){
         edges.put(fromNode,toNode);
         if (!isDirected){
             edges.put(toNode,fromNode);

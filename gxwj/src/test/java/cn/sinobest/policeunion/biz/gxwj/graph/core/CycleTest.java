@@ -1,6 +1,5 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.core;
 
-import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation;
 import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ public class CycleTest {
 
     @Test
     public void testGetCycles() throws Exception {
-        GraphRelation relation = new GraphRelation();
+        String relation = new String();
         GraphNode node1 = new GraphNode("1","sfzh");
         GraphNode node2 = new GraphNode("2","sfzh");
         GraphNode node3 = new GraphNode("3","sfzh");
