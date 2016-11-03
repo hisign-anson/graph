@@ -29,6 +29,13 @@ public class Graph {
         sumEdge++;
     }
 
+    public Graph() {
+    }
+
+    public Graph(boolean isDirected) {
+        this.isDirected = isDirected;
+    }
+
     public Collection<GraphNode> adj(GraphNode node){
         return edges.get(node);
     }
