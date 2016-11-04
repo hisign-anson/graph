@@ -40,7 +40,6 @@ public class Cycle {
                 cycle.push(toNode);
                 cycle.push(node);
                 cycles.add(cycle);
-                System.out.println("cycle end");
             }
         }
     }
