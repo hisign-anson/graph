@@ -8,12 +8,53 @@ import jodd.io.FileUtil;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 public class GraphTest {
+
+    public class GenericExtFilter implements FilenameFilter {
+
+        private String ext;
+
+        public GenericExtFilter(String ext) {
+            this.ext = ext;
+        }
+
+        public boolean accept(File dir, String name) {
+            return !(name.endsWith(ext.split(",")[0])) && !(name.endsWith(ext.split(",")[1])) && !(name.endsWith(ext.split(",")[2])) && !(name.endsWith(ext.split(",")[3]));
+        }
+    }
+
+    @Test
+    public void delFile() throws Exception {
+        String folder = "C:\\Users\\ZHOUYI1\\Desktop\\basic";
+        String ext = ".jsp,.class,.js,.xml";
+        delFile(folder,ext);
+    }
+
+    public void delFile(String folder,String ext) throws Exception {
+
+        GenericExtFilter filter = new GenericExtFilter(ext);
+        File dir = new File(folder);
+
+        //list out all the file name with .txt extension
+        File[] list = dir.listFiles(filter);
+
+        if (list.length == 0) return;
+
+        for (File fileDelete : list){
+            if (fileDelete.isDirectory()) {
+                delFile(fileDelete.getAbsolutePath(),ext);
+            }else {
+                boolean isdeleted = fileDelete.delete();
+                System.out.println("file : " + fileDelete.getAbsolutePath() + " is deleted : " + isdeleted);
+            }
+        }
+    }
 
     @Test
     public void testGetSumNode() throws Exception {
