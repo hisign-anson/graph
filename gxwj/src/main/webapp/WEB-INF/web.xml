@@ -61,6 +61,14 @@
     </servlet>
 
     <servlet>
+        <servlet-name>TestConfServlet</servlet-name>
+        <servlet-class>cn.sinobest.policeunion.biz.gxwj.servlet.GXWJConfServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestConfServlet</servlet-name>
+        <url-pattern>/testConf</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>cn.sinobest.policeunion.biz.gxwj.servlet.GXWJServlet</servlet-class>
     </servlet>

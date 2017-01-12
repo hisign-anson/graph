@@ -5,6 +5,8 @@ import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.callback.INodeCallBackHandler;
 import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
 import cn.sinobest.policeunion.share.gxwj.graph.search.callback.po.RelationResult;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -14,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by zhouyi1 on 2016/7/8 0008.
  */
 public class RelationCallBackHandler implements INodeCallBackHandler {
+    private static final Log logger = LogFactory.getLog(RelationCallBackHandler.class);
     private Map<Integer,RelationResult> relationMap = new ConcurrentHashMap();
     private Graph graph = new Graph();
 
@@ -22,6 +25,9 @@ public class RelationCallBackHandler implements INodeCallBackHandler {
         if (nodeFrom==null || nodeTo==null){
             return;
         }
+
+        logger.debug("fromNode:"+nodeFrom.getValue());
+        logger.debug("toNode:"+nodeTo.getValue());
         GraphNode[] relation = new GraphNode[2];
         RelationResult relationResult = new RelationResult(relation,relationName);
         int fromValue = nodeFrom.hashCode();
@@ -34,10 +40,10 @@ public class RelationCallBackHandler implements INodeCallBackHandler {
             relation[1] = nodeTo;
         }
 
-        Integer key = Arrays.hashCode(new Object[]{relation[0],relation[1],relationName});
+        Integer key = Arrays.hashCode(new Object[]{relation[0],relation[1]});
         if (!relationMap.containsKey(key)){
             relationMap.put(key,relationResult);
-            graph.addEdge(nodeFrom,nodeTo,relationName);
+//            graph.addEdge(nodeFrom,nodeTo,relationName);
         }
     }
 

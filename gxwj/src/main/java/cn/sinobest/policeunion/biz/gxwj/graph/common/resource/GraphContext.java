@@ -8,12 +8,12 @@ import com.google.common.collect.Sets;
 import jodd.util.StringUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,12 +37,17 @@ public class GraphContext {
 
     private SetMultimap<String, GraphRelation> nodeStrConfig = HashMultimap.create();
 
-    @Autowired
+    @Resource(name = "jdbcTemplateConf")
     private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void init() {
-        springInit();
+//        springInit();
+        dbInit();
+    }
+
+    public SetMultimap<String, GraphRelation> getNodeStrConfig(){
+        return nodeStrConfig;
     }
 
     private void springInit(){
@@ -76,7 +81,8 @@ public class GraphContext {
                     toTypeName.add(toNodeTypeName);
                     sxbs = toNodeType;
                     if (nextToNodeTypeNameMap == null || !nextToNodeType.equals(sxbs)) {
-                        GraphRelation relation = new GraphRelation(fromGraphNodeType, fromTypeName, new GraphNodeType(toNodeType), StringUtil.join(toTypeName, ","), sql, tableId);
+                        String toColumn = StringUtil.join(toTypeName, ",");
+                        GraphRelation relation = new GraphRelation(fromGraphNodeType, fromTypeName, new GraphNodeType(toNodeType), toColumn.substring(1, toColumn.length()-2), sql, tableId);
                         relation.setPkColumn(pkColumn);
                         nodeStrConfig.put(fromGraphNodeType.toString(), relation);
 //                        relation.setFromPKColumn(fromTypeName);
@@ -85,6 +91,10 @@ public class GraphContext {
                     }
                 }
             }
+        }
+
+        for (Map.Entry<String, GraphRelation> entry:nodeStrConfig.entries()){
+            logger.info("key:" + entry.getKey() + "       value:"+entry.getValue());
         }
     }
 
@@ -101,7 +111,8 @@ public class GraphContext {
 
     private String getSql(String tableName) {
         List<String> columns = jdbcTemplate.queryForList("select t.sjxmc from FW_SJZYSJXJ t where t.tname = ?\n", String.class, tableName);
-        String sql = String.format("select %s from %s ", StringUtil.join(columns, ","), tableName);
+        String joinStr = StringUtil.join(columns, ",");
+        String sql = String.format("select %s from %s where 1=1 ", joinStr.substring(1, joinStr.length() - 2), tableName);
         return sql;
     }
 

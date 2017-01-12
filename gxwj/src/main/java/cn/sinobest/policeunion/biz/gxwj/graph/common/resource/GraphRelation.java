@@ -33,6 +33,20 @@ public class GraphRelation implements BeanNameAware {
 
     Map<String,Object> relationDetail = new HashMap<String, Object>();
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" | fromType = " + fromType);
+        sb.append(" | fromColumn = " + fromColumn);
+        sb.append(" | toType = " + toType);
+        sb.append(" | toColumn = " + toColumn);
+        sb.append(" | relationSql = " + relationSql);
+        sb.append(" | tableId = " + tableId);
+        sb.append(" | pkColumn = " + pkColumn);
+        sb.append(" | relationName = " + relationName);
+        return sb.toString();
+    }
+
     public GraphRelation(GraphNodeType fromType, String fromColumn, GraphNodeType toType, String toColumn, String relationSql,String tableId) {
         this.fromType = fromType;
         this.fromColumn = fromColumn;
@@ -40,6 +54,7 @@ public class GraphRelation implements BeanNameAware {
         this.toColumn = toColumn;
         this.relationSql = relationSql;
         this.tableId = tableId;
+        this.relationName = tableId+"对应"+fromType+"和"+toType+"的关系";
     }
 
     public GraphRelation() {

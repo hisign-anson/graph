@@ -1,13 +1,13 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.search.adapter.impl;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType;
-import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
-import cn.sinobest.policeunion.share.gxwj.graph.search.adapter.IGraphService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.callback.INodeCallBackHandler;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.callback.impl.RelationCallBackHandler;
-import cn.sinobest.policeunion.share.gxwj.graph.search.callback.po.RelationResult;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
+import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
+import cn.sinobest.policeunion.share.gxwj.graph.search.adapter.IGraphService;
 import cn.sinobest.policeunion.share.gxwj.graph.search.adapter.po.GraphResult;
+import cn.sinobest.policeunion.share.gxwj.graph.search.callback.po.RelationResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +34,15 @@ public class GraphAdapter implements IGraphService {
     }
 
     public void init() {
-        callBackHandlers.add(relationCallBackHandler);
+//        callBackHandlers.add(relationCallBackHandler);
     }
 
     @Override
     public GraphResult breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, String type, GraphNode... startNodes) {
+        RelationCallBackHandler relationCallBackHandler1 = new RelationCallBackHandler();
+        callBackHandlers.add(relationCallBackHandler1);
         Set<GraphNode> nodes = searcher.breadthFirstSearch(limitLevel, maxNode, detail, callBackHandlers, new GraphNodeType(type), startNodes);
-        Map<Integer, RelationResult> relationResultMap = relationCallBackHandler.getRelationMap();
+        Map<Integer, RelationResult> relationResultMap = relationCallBackHandler1.getRelationMap();
         return new GraphResult(nodes,relationResultMap);
     }
 }
