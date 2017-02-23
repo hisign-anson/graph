@@ -107,11 +107,11 @@
        <!--</aop:config>-->
 
        <bean id="jdbcTemplateConf" class="org.springframework.jdbc.core.JdbcTemplate">
-              <property name="dataSource" ref="initDataSource" />
+              <property name="dataSource" ref="dataSource" />
        </bean>
 
        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-              <property name="dataSource" ref="dataSource" />
+              <property name="dataSource" ref="initDataSource" />
        </bean>
 
        <import resource="applicationContext-service.xml"/>
