@@ -1,17 +1,15 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.search.relation;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation;
-import cn.sinobest.policeunion.biz.gxwj.graph.search.callback.INodeCallBackHandler;
-import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Iterator;
 
 /**
  * Created by zhouyi1 on 2016/6/27 0027.
  */
 public interface IRelationService {
-//    Set<GraphNode> search(Map<GraphNode,Object> noNeedSearchMap, Integer level, Boolean detail, GraphRelation relation, List<INodeCallBackHandler> callBackHandler, GraphNode... startNodes);
-    Set<GraphNode> search(boolean first,Map<GraphNode,Object> noNeedSearchMap, Integer level, Boolean detail, GraphRelation relation, List<INodeCallBackHandler> callBackHandler,long maxNode, GraphNode... startNodes);
+//    Set<GraphNode> search(Map<GraphNode,Object> noNeedSearchMap, Integer level, Boolean detail, GraphNodeRelation relation, List<INodeCallBackHandler> callBackHandler, GraphNode... startNodes);
+    void search(Graph graph, Boolean detail, GraphRelation relation, Iterator<GraphNode> startNodes);
 }

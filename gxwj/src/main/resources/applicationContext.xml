@@ -19,7 +19,7 @@
               <property name="properties" ref="configProperties" />
        </bean>
 
-       <bean id="initDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+       <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
               <property name="username" value="${oracle.jdbc.username}"/>
               <property name="password" value="${oracle.jdbc.password}"/>
               <property name="driverClass" value="${oracle.jdbc.driver}"/>
@@ -30,55 +30,55 @@
               <constructor-arg name="druidLoggerDatasource" ref="initDataSource"/>
        </bean>-->
 
-       <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+       <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">-->
 
-              <property name="driverClassName" value="${oracle.jdbc.driver}"/>
-              <property name="url" value="${oracle.jdbc.url}"/>
-              <property name="username" value="${oracle.jdbc.username}"/>
-              <property name="password" value="${oracle.jdbc.password}"/>
+              <!--<property name="driverClassName" value="${oracle.jdbc.driver}"/>-->
+              <!--<property name="url" value="${oracle.jdbc.url}"/>-->
+              <!--<property name="username" value="${oracle.jdbc.username}"/>-->
+              <!--<property name="password" value="${oracle.jdbc.password}"/>-->
 
-              <property name="timeBetweenLogStatsMillis" value="${oracle.jdbc.timeBetweenLogStatsMillis}"/>
+              <!--<property name="timeBetweenLogStatsMillis" value="${oracle.jdbc.timeBetweenLogStatsMillis}"/>-->
 
-              <!-- 配置初始化大小、最小、最大 -->
-              <property name="initialSize" value="${oracle.jdbc.initialSize}"/>
-              <property name="minIdle" value="${oracle.jdbc.minIdle}"/>
-              <property name="maxActive" value="${oracle.jdbc.maxActive}"/>
+              <!--&lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;-->
+              <!--<property name="initialSize" value="${oracle.jdbc.initialSize}"/>-->
+              <!--<property name="minIdle" value="${oracle.jdbc.minIdle}"/>-->
+              <!--<property name="maxActive" value="${oracle.jdbc.maxActive}"/>-->
 
-              <!-- 配置获取连接等待超时的时间 -->
-              <property name="maxWait" value="${oracle.jdbc.maxWait}"/>
-              <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-              <property name="timeBetweenEvictionRunsMillis" value="${oracle.jdbc.timeBetweenEvictionRunsMillis}" />
+              <!--&lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;-->
+              <!--<property name="maxWait" value="${oracle.jdbc.maxWait}"/>-->
+              <!--&lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
+              <!--<property name="timeBetweenEvictionRunsMillis" value="${oracle.jdbc.timeBetweenEvictionRunsMillis}" />-->
 
-              <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-              <property name="minEvictableIdleTimeMillis" value="${oracle.jdbc.minEvictableIdleTimeMillis}" />
+              <!--&lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;-->
+              <!--<property name="minEvictableIdleTimeMillis" value="${oracle.jdbc.minEvictableIdleTimeMillis}" />-->
 
-              <!-- 查询超时时候 -->
-              <property name="queryTimeout" value="${oracle.jdbc.querytimeout}"/>
+              <!--&lt;!&ndash; 查询超时时候 &ndash;&gt;-->
+              <!--<property name="queryTimeout" value="${oracle.jdbc.querytimeout}"/>-->
 
-              <property name="validationQuery" value="${oracle.jdbc.validationQuery}" />
-              <property name="connectionInitSqls" value="${oracle.jdbc.connectionInitSqls}"/>
-              <property name="testWhileIdle" value="${oracle.jdbc.testWhileIdle}" />
-              <property name="testOnBorrow" value="${oracle.jdbc.testOnBorrow}" />
-              <property name="testOnReturn" value="${oracle.jdbc.testOnReturn}" />
+              <!--<property name="validationQuery" value="${oracle.jdbc.validationQuery}" />-->
+              <!--<property name="connectionInitSqls" value="${oracle.jdbc.connectionInitSqls}"/>-->
+              <!--<property name="testWhileIdle" value="${oracle.jdbc.testWhileIdle}" />-->
+              <!--<property name="testOnBorrow" value="${oracle.jdbc.testOnBorrow}" />-->
+              <!--<property name="testOnReturn" value="${oracle.jdbc.testOnReturn}" />-->
 
-              <!-- 打开PSCache，并且指定每个连接上PSCache的大小
-              如果用Oracle，则把poolPreparedStatements配置为true，gbase可以配置为false。-->
-              <property name="poolPreparedStatements" value="${oracle.jdbc.poolPreparedStatements}" />
-              <!--<property name="maxPoolPreparedStatementPerConnectionSize" value="${oracle.jdbc.maxPoolPreparedStatementPerConnectionSize}" />-->
+              <!--&lt;!&ndash; 打开PSCache，并且指定每个连接上PSCache的大小-->
+              <!--如果用Oracle，则把poolPreparedStatements配置为true，gbase可以配置为false。&ndash;&gt;-->
+              <!--<property name="poolPreparedStatements" value="${oracle.jdbc.poolPreparedStatements}" />-->
+              <!--&lt;!&ndash;<property name="maxPoolPreparedStatementPerConnectionSize" value="${oracle.jdbc.maxPoolPreparedStatementPerConnectionSize}" />&ndash;&gt;-->
 
-              <!--日志-->
-              <!--<property name="statLogger" ref="myOracleLogger" />-->
+              <!--&lt;!&ndash;日志&ndash;&gt;-->
+              <!--&lt;!&ndash;<property name="statLogger" ref="myOracleLogger" />&ndash;&gt;-->
 
-              <property name="proxyFilters">
-                     <list>
-                            <ref bean="synSqlFilter"/>
-                     </list>
-              </property>
+              <!--<property name="proxyFilters">-->
+                     <!--<list>-->
+                            <!--<ref bean="synSqlFilter"/>-->
+                     <!--</list>-->
+              <!--</property>-->
 
-              <!-- 配置监控统计拦截的filters -->
-              <property name="filters" value="${oracle.jdbc.filters}" />
+              <!--&lt;!&ndash; 配置监控统计拦截的filters &ndash;&gt;-->
+              <!--<property name="filters" value="${oracle.jdbc.filters}" />-->
 
-       </bean>
+       <!--</bean>-->
 
        <!-- 大对象处理器  -->
        <bean id="appDefLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"/>
@@ -111,10 +111,9 @@
        </bean>
 
        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-              <property name="dataSource" ref="initDataSource" />
+              <property name="dataSource" ref="dataSource" />
        </bean>
 
-       <import resource="applicationContext-service.xml"/>
        <import resource="applicationContext-synonym.xml"/>
        <import resource="applicationContext-graph.xml"/>
 </beans>

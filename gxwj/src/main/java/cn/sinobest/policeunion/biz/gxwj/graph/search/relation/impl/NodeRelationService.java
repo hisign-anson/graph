@@ -1,12 +1,13 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.search.relation.impl;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation;
-import cn.sinobest.policeunion.biz.gxwj.graph.search.callback.INodeCallBackHandler;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.relation.IRelationService;
-import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import jodd.util.StringUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +31,7 @@ public class NodeRelationService implements IRelationService {
     @Resource(name = "jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    public Map<String, GraphNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, GraphNode... fromNodes) {
+    public Map<String, GraphNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, Iterator<GraphNode> fromNodes) {
         final String conditionPartStr = relation.getFromColumn() + " in (";
 
         condition.append(" and (");
@@ -58,94 +59,56 @@ public class NodeRelationService implements IRelationService {
             condition.delete(condition.length() - ("or " + conditionPartStr).length(), condition.length());
             condition.append(")");
         }
+
         return fromNodeMaps;
     }
 
-    private boolean fromSetAble(GraphNode... graphNodes) {
-        return graphNodes[0].getNodes().isEmpty();
+    public String getNotSql(Graph graph,GraphRelation relation){
+        Set<GraphNode> nodeSet = graph.getNodesFromRelation(relation.getRelationName());
+        String[] nodeValues = new String[nodeSet.size()];
+        for (GraphNode node:nodeSet){
+            int i = 0;
+            nodeValues[i++] = node.getValue();
+        }
+        String notSqlPart = StringUtil.join(nodeValues,",");
+        return String.format(" and %s not in (%s) ",relation.getFromColumn(),notSqlPart);
     }
 
     @Value("#{configProperties['limitSQL']}")
     private String limitSQL;
 
-//    @Override
-//    public Set<GraphNode> search(Map<GraphNode,Object> noNeedSearchMap, final Integer level,final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers, final GraphNode... fromNodes) {
-//        return this.search(false,noNeedSearchMap,level,detail,relation,callBackHandlers,fromNodes);
-//    }
-
-    public Set<GraphNode> search(final boolean first, final Map<GraphNode, Object> noNeedSearchMap, final Integer level, final Boolean detail, final GraphRelation relation, final List<INodeCallBackHandler> callBackHandlers,final long maxNode, final GraphNode... fromNodes) {
-        final Set<GraphNode> nextNodes = Sets.newHashSet();
-        if (fromNodes.length == 0) {
-            logger.error("source:" + relation.getRelationName() + "'s node is null!");
-            return nextNodes;
-        }
-        final Set<GraphNode> noNeedSearchNode = noNeedSearchMap.keySet();
+    public void search(final Graph graph, final Boolean detail, final GraphRelation relation, Iterator<GraphNode> startNodes) {
         final StringBuilder condition = new StringBuilder();
-        final Map<String, GraphNode> fromNodeMaps = getFromNodeMap(condition, relation, fromNodes);
+        final Map<String, GraphNode> fromNodeMaps = getFromNodeMap(condition, relation, startNodes);
+        String notSql = getNotSql(graph,relation);
 
         StringBuilder conditionNoNeed = new StringBuilder();
-//        if (noNeedSearchNode.size()>0){
-//            conditionNoNeed.append(" and ");
-//            conditionNoNeed.append(relation.getToType().getPkColumnName() + " not in ('");
-//            conditionNoNeed.append(StringUtil.join(noNeedSearchNode,"'',"));
-//            conditionNoNeed.append("')");
-//        }
 
         String sql = relation.getRelationSql() + condition.toString() + conditionNoNeed.toString();
-        logger.trace("level:"+level);
-        logger.trace("relation:"+relation.getFromType()+"-"+relation.getToType());
-        logger.trace("dig sql:" + sql + " " + limitSQL);
+        logger.trace("relation:" + relation.getFromType() + "-" + relation.getToType());
+        logger.trace("dig sql:" + sql + notSql + " " + limitSQL);
 
         try {
 
-            jdbcTemplate.query(sql + " " + limitSQL, new ColumnMapRowMapper() {
+            jdbcTemplate.query(sql + notSql + " " + limitSQL, new ColumnMapRowMapper() {
                 @Override
                 public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
                     Map<String, Object> maps = super.mapRow(rs, rowNum);
                     List<String> toNodePkValues = getNodeValues(maps, relation.getToPKColumn());
                     Iterator<String> iteratorToNodePkValues = toNodePkValues.iterator();
-//                String toNodePkValue = maps.get(relation.getToPKColumn()) == null ? "" : maps.get(relation.getToPKColumn()).toString();
-//                String toNodeValue = maps.get(relation.getToColumn())==null?null:maps.get(relation.getToColumn()).toString();
+
                     List<String> toNodeValues = getNodeValues(maps, relation.getToColumn());
                     String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
                     GraphNode nodeFrom = fromNodeMaps.get(fromNodeValue);
-                    String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
-//                Set<GraphNode> nodeTos = Sets.newHashSet();
-                    if (first) {
-                        if (fromNodeValue != null) {
-                            synchronized (nodeFrom) {
-                                nodeFrom.addNode(relation.getTableId(), detail ? maps : null, fromNodePkValue);
-//                                nodeFrom.addNode(relation.getRelationName(), detail ? maps : null, fromNodePkValue);
-//                                if (noNeedSearchNode.size()+nextNodes.size()>=maxNode){
-//                                    return maps;
-//                                }
-                                nextNodes.add(nodeFrom);
-                            }
-                        }
-                    } else {
-                        nodeFrom.addNode(relation.getTableId(), detail ? maps : null, fromNodePkValue);
-                        if (!toNodeValues.isEmpty() && toNodeValues.size() > 0) {
-                            for (String toNodeValue : toNodeValues) {
-                                GraphNode nodeTo = new GraphNode(toNodeValue, relation.getToType().toString());
-                                String toNodePkValue = iteratorToNodePkValues.hasNext() ? iteratorToNodePkValues.next() : toNodePkValues.get(0);
-                                nodeTo.addNode(relation.getTableId(), detail ? maps : null, toNodePkValue);
-//                                nodeTo.addNode(relation.getRelationName(), detail ? maps : null, toNodePkValue);
-                                synchronized (noNeedSearchNode) {
-                                    if (!noNeedSearchNode.contains(nodeTo)) {
-//                                        if (noNeedSearchNode.size()+nextNodes.size()>=maxNode){
-//                                            return maps;
-//                                        }
-                                        nextNodes.add(nodeTo);
-//                                    }else {
-//                                        GraphNode graphNode = noNeedSearchMap.get(nodeTo);
 
-                                    }
-                                }
-                                for (INodeCallBackHandler callBackHandler : callBackHandlers) {
-                                    logger.debug("callbackHandler!");
-                                    callBackHandler.nodeCallBack(nodeFrom, nodeTo, level, relation.getRelationName());
-                                }
+                    if (!toNodeValues.isEmpty() && toNodeValues.size() > 0) {
+                        for (String toNodeValue : toNodeValues) {
+                            String toNodePkValue = iteratorToNodePkValues.hasNext() ? iteratorToNodePkValues.next() : toNodePkValues.get(0);
+                            GraphNode nodeTo = new GraphNode(toNodeValue,toNodePkValue);
+                            if (detail){
+                                nodeTo.setDetails(maps);
                             }
+                            graph.addEdge(nodeFrom,nodeTo,relation.getRelationName());
                         }
                     }
                     return maps;
@@ -154,11 +117,10 @@ public class NodeRelationService implements IRelationService {
         } catch (Exception e) {
             logger.error(e);
         }
-        return nextNodes;
     }
 
     private List<String> getNodeValues(Map<String, Object> maps, String column) {
-        logger.trace("column:"+column);
+        logger.trace("column:" + column);
         List<String> nodeValues = new ArrayList<String>();
         for (String columnName : column.split(",")) {
             String columnValue = maps.get(columnName) == null ? null : maps.get(columnName).toString();

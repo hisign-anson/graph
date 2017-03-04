@@ -3,23 +3,20 @@ package cn.sinobest.policeunion.biz.gxwj.graph.search.service.impl;
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphContext;
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType;
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation;
-import cn.sinobest.policeunion.biz.gxwj.graph.search.callback.INodeCallBackHandler;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.relation.IRelationService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
-import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
-import com.google.common.base.Function;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by zhouyi1 on 2016/6/27 0027.
@@ -39,217 +36,52 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
     @Resource(name = "gxwj.nodeRelationService")
     private IRelationService relationService;
 
-    private ExecutorCompletionService executorService = new ExecutorCompletionService(Executors.newScheduledThreadPool(50));
+    private ExecutorService executorService = Executors.newScheduledThreadPool(50);
 
     @Override
-    public Set<GraphNode> breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, List<INodeCallBackHandler> callBackHandlers, GraphNodeType type, GraphNode... startNodes) {
-        if (callBackHandlers == null) {
-            callBackHandlers = new ArrayList<INodeCallBackHandler>();
-        }
+    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, GraphNodeType type, Iterator<GraphNode> startNodes) {
         if (limitLevel == null && defaultLevel > 0) {
             limitLevel = defaultLevel;
         }
-
-        Map<GraphNode, Object> finalResults = new ConcurrentHashMap<GraphNode, Object>();
-//        Map<GraphNode, Object> startMap = Maps.asMap(Sets.newHashSet(startNodes), new Function<GraphNode, Object>() {
-//            @Override
-//            public Object apply(GraphNode graphNode) {
-//                return new Object();
-//            }
-//        });
-
-        Set<GraphRelation> relations = context.getRelation(type);
-        for (GraphRelation relation : relations) {
-            executorService.submit(new RelationTask(true, finalResults, startNodes, limitLevel, detail, relation, callBackHandlers,maxNode));
+        Graph graph = new Graph();
+        if (graph.getSumNode()>=maxNode){
+            return graph;
         }
-        for (int i = 0; i < relations.size(); i++) {
-            Future<TempParam> future = null;
-            try {
-                //poll可以调整超时
-                future = executorService.take();
-                TempParam tempParam = future.get();
-                Set<GraphNode> nextNodes = tempParam.getNextNodes();
-
-                if (nextNodes.size() == 0) {
-                    continue;
-                } else {
-                    Map<GraphNode, Object> nextMap = Maps.asMap(nextNodes, new Function<GraphNode, Object>() {
-                        @Override
-                        public Object apply(GraphNode graphNode) {
-                            return new Object();
-                        }
-                    });
-//                    synchronized (finalResults) {
-                        finalResults.putAll(nextMap);
-//                    }
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                logger.error("startNodes:" + Arrays.toString(startNodes) + " error!", e);
-                continue;
-            }
-        }
-
-//        finalResults.putAll(startMap);
-
-        SetMultimap<GraphNodeType,Set<GraphNode>> typeNodes = HashMultimap.create();
-        typeNodes.put(type,Sets.newHashSet(startNodes));
-        mergeBreadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, typeNodes);
-        return finalResults.keySet();
-    }
-
-    private void mergeBreadthFirstSearch(Map<GraphNode, Object> finalResults, Integer limitLevel, long maxNode, Boolean detail, List<INodeCallBackHandler> callBackHandlers, SetMultimap<GraphNodeType, Set<GraphNode>> typeNodes){
         if (limitLevel <= 0) {
-            return;
-        }
-
-        if (finalResults.size() >= maxNode) {
-            return;
+            return graph;
         }
 
         limitLevel--;
 
-        SetMultimap<GraphNodeType,Set<GraphNode>> nextTypeNodes = HashMultimap.create();
-
-        for (Map.Entry<GraphNodeType,Set<GraphNode>> entry:typeNodes.entries()){
-            SetMultimap<GraphNodeType,Set<GraphNode>> nextTypeNode = breadthFirstSearch(finalResults, limitLevel, detail, callBackHandlers, entry.getKey(), maxNode,entry.getValue().toArray(new GraphNode[entry.getValue().size()]));
-            if (nextTypeNode.size()>0){
-                nextTypeNodes.putAll(nextTypeNode);
-            }
-        }
-
-        if (nextTypeNodes.size()>0){
-            mergeBreadthFirstSearch(finalResults, limitLevel, maxNode, detail, callBackHandlers, nextTypeNodes);
-        }
-    }
-
-    private TempParam relationTask(boolean first, Map<GraphNode, Object> finalResults, GraphNode[] startNodes, Integer limitLevel, Boolean detail, GraphRelation relation, List<INodeCallBackHandler> callBackHandlers,long maxNode){
-        Set<GraphNode> loopNodes = Sets.newHashSet(startNodes);
-        Set<GraphNode> nextNodes = relationService.search(first, finalResults, limitLevel, detail, relation, callBackHandlers,maxNode, loopNodes.toArray(new GraphNode[loopNodes.size()]));
-        return new TempParam(nextNodes, relation);
-    }
-
-    private SetMultimap<GraphNodeType,Set<GraphNode>> breadthFirstSearch(Map<GraphNode, Object> finalResults, Integer limitLevel, Boolean detail, List<INodeCallBackHandler> callBackHandlers, GraphNodeType type,long maxNode,GraphNode... startNodes) {
-        logger.info(String.format(" limitLevel=%s ; type=%s ; node=%s ;",limitLevel,type.getType(),Arrays.toString(startNodes)));
-
-        SetMultimap<GraphNodeType,Set<GraphNode>> typeNodes = HashMultimap.create();
-
         Set<GraphRelation> relations = context.getRelation(type);
         for (GraphRelation relation : relations) {
-            TempParam tempParam = relationTask(false,finalResults, startNodes, limitLevel, detail, relation, callBackHandlers,maxNode);
-
-            Set<GraphNode> nextNodes = tempParam.getNextNodes();
-
-            if (nextNodes.size() == 0) {
-                continue;
-            } else {
-                synchronized (finalResults) {
-                    Map<GraphNode, Object> nextMap = Maps.asMap(nextNodes, new Function<GraphNode, Object>() {
-                        @Override
-                        public Object apply(GraphNode graphNode) {
-                            return new Object();
-                        }
-                    });
-                    finalResults.putAll(nextMap);
-                }
-                if (finalResults.size()>=maxNode){
-                    break;
-                }
-                typeNodes.put(relation.getToType(),nextNodes);
-            }
-//            executorService.submit(new RelationTask(finalResults, startNodes, limitLevel, detail, relation, callBackHandlers,maxNode));
+            executorService.execute(new RelationTask(graph, startNodes, detail, relation));
         }
 
-//        for (int i = 0; i < relations.size(); i++) {
-//            Future<TempParam> future = null;
-//            try {
-//                //poll可以调整超时
-//                future = executorService.take();
-//                TempParam tempParam = future.get();
-//                Set<GraphNode> nextNodes = tempParam.getNextNodes();
-//                GraphRelation relation = tempParam.getRelation();
-//
-//                if (nextNodes.size() == 0) {
-//                    continue;
-//                } else {
-//                    synchronized (finalResults) {
-//                        Map<GraphNode, Object> nextMap = Maps.asMap(nextNodes, new Function<GraphNode, Object>() {
-//                            @Override
-//                            public Object apply(GraphNode graphNode) {
-//                                return new Object();
-//                            }
-//                        });
-//                        finalResults.putAll(nextMap);
-//                    }
-//                    typeNodes.put(relation.getToType(),nextNodes);
-//                }
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            } catch (ExecutionException e) {
-//                logger.error("startNodes:" + Arrays.toString(startNodes) + " error!", e);
-//                continue;
-//            }
-//        }
-        return typeNodes;
+        breadthFirstSearch(limitLevel,maxNode,detail,type,graph.getNodes());
+        return graph;
     }
 
-    class TempParam {
-        private Set<GraphNode> nextNodes;
-        private GraphRelation relation;
+    class RelationTask implements Runnable {
 
-        public TempParam(Set<GraphNode> nextNodes, GraphRelation relation) {
-            this.nextNodes = nextNodes;
-            this.relation = relation;
-        }
-
-        public Set<GraphNode> getNextNodes() {
-            return nextNodes;
-        }
-
-        public GraphRelation getRelation() {
-            return relation;
-        }
-    }
-
-    class RelationTask implements Callable<TempParam> {
-
-        private GraphNode[] startNodes;
-
-        private Integer limitLevel;
+        private Iterator<GraphNode> startNodes;
 
         private Boolean detail;
 
         private GraphRelation relation;
 
-        private List<INodeCallBackHandler> callBackHandlers;
+        private Graph graph;
 
-        private Map<GraphNode, Object> finalResults;
-
-        private boolean first;
-
-        private long maxNode;
-
-        public RelationTask(Map<GraphNode, Object> finalResults, GraphNode[] startNodes, Integer limitLevel, Boolean detail, GraphRelation relation, List<INodeCallBackHandler> callBackHandlers,long maxNode) {
-            this(false, finalResults, startNodes, limitLevel, detail, relation, callBackHandlers,maxNode);
-        }
-
-        private RelationTask(boolean first, Map<GraphNode, Object> finalResults, GraphNode[] startNodes, Integer limitLevel, Boolean detail, GraphRelation relation, List<INodeCallBackHandler> callBackHandlers,long maxNode) {
-            this.first = first;
-            this.finalResults = finalResults;
+        private RelationTask(Graph graph, Iterator<GraphNode> startNodes, Boolean detail, GraphRelation relation) {
+            this.graph = graph;
             this.startNodes = startNodes;
-            this.limitLevel = limitLevel;
             this.detail = detail;
             this.relation = relation;
-            this.callBackHandlers = callBackHandlers;
-            this.maxNode = maxNode;
         }
 
         @Override
-        public TempParam call() throws Exception {
-            Set<GraphNode> loopNodes = Sets.newHashSet(startNodes);
-            Set<GraphNode> nextNodes = relationService.search(first, finalResults, limitLevel, detail, relation, callBackHandlers,maxNode, loopNodes.toArray(new GraphNode[loopNodes.size()]));
-            return new TempParam(nextNodes, relation);
+        public void run() {
+            relationService.search(graph, detail, relation, startNodes);
         }
     }
 

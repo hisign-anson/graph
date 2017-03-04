@@ -1,6 +1,7 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.core;
 
-import cn.sinobest.policeunion.share.gxwj.graph.node.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNodeRelation;
 import com.google.common.collect.Maps;
 
 import java.util.*;
@@ -16,8 +17,9 @@ public class Cycle {
     private HashMap<GraphNode,Boolean> cycleMaked = Maps.newHashMap();
 
     public Cycle(Graph graph) {
-        Set<GraphNode> nodes = graph.getNodes();
-        for (GraphNode node:nodes){
+        Iterator<GraphNode> nodes = graph.getNodes();
+        while (nodes.hasNext()){
+            GraphNode node = nodes.next();
             if (maked.get(node) == null || !maked.get(node)){
                 dfs(graph, node, node);
             }
@@ -26,7 +28,8 @@ public class Cycle {
 
     private void dfs(Graph graph,GraphNode node,GraphNode lastNode){
         maked.put(node, true);
-        for (GraphNode toNode:graph.adj(node)){
+        for (GraphNodeRelation toRelation:graph.adj(node)){
+            GraphNode toNode = toRelation.getNode();
             if (maked.get(toNode) == null || !maked.get(toNode)){
                 edgeTo.put(toNode,node);
                 dfs(graph, toNode, node);
