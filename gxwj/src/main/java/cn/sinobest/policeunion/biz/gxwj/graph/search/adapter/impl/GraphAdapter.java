@@ -5,11 +5,11 @@ import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.adapter.IGraphService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * Created by zhouyi1 on 2016/9/13 0013.
@@ -29,8 +29,8 @@ public class GraphAdapter implements IGraphService {
     }
 
     @Override
-    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, String type, GraphNode... startNodes) {
-        Graph graph = searcher.breadthFirstSearch(limitLevel, maxNode, detail, new GraphNodeType(type), new Iterators.Array<GraphNode>(startNodes));
+    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, String type, Set<GraphNode> startNodes) {
+        Graph graph = searcher.breadthFirstSearch(limitLevel, maxNode, detail, new GraphNodeType(type), startNodes);
         return graph;
     }
 }

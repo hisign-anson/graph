@@ -33,6 +33,10 @@ public class GraphRelation implements BeanNameAware {
 
     Map<String,Object> relationDetail = new HashMap<String, Object>();
 
+    public String getRelationPk() {
+        return tableId+relationName;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

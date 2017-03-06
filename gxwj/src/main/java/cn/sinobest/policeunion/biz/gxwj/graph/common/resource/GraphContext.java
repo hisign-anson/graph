@@ -42,8 +42,8 @@ public class GraphContext {
 
     @PostConstruct
     public void init() {
-//        springInit();
-        dbInit();
+        springInit();
+//        dbInit();
     }
 
     public SetMultimap<String, GraphRelation> getNodeStrConfig(){

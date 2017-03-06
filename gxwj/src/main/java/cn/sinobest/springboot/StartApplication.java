@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.annotation.Order;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,8 +18,9 @@ import javax.servlet.ServletException;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @Order(2)
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @EnableHystrixDashboard
+@EnableWebMvc
 @ImportResource("classpath:applicationContext.xml")
 public class StartApplication extends SpringBootServletInitializer {
     private static Class<StartApplication> applicationClass = StartApplication.class;

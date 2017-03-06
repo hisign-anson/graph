@@ -7,15 +7,16 @@ import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.relation.IRelationService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
+import com.google.common.collect.Sets;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.Executors;
 
 /**
@@ -36,15 +37,41 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
     @Resource(name = "gxwj.nodeRelationService")
     private IRelationService relationService;
 
-    private ExecutorService executorService = Executors.newScheduledThreadPool(50);
+    private ExecutorCompletionService executorService = new ExecutorCompletionService(Executors.newScheduledThreadPool(50));
+
+    /**
+     * 获得relationSets和startNodeSets的交集，并且最终的集合Value是唯一的
+     * @param relationSets
+     * @param startNodeSets
+     * @return
+     */
+    private Set<GraphNode> getUnionSet(Set<GraphNode> relationSets, Set<GraphNode> startNodeSets,GraphNodeType type) {
+        Set<GraphNode> nodeSet = Sets.newHashSet();
+//        if (!relationSets.isEmpty() && relationSets.size() > startNodeSets.size()) {
+//            for (GraphNode node : startNodeSets) {
+//                if (!relationSets.contains(node)) {
+//                    nodeSet.add(new GraphNode(node.getValue()));
+//                }
+//            }
+//            return nodeSet;
+//        }
+        for (GraphNode node:startNodeSets){
+            if (relationSets.isEmpty() || !relationSets.contains(node)) {
+                nodeSet.add(new GraphNode(node.getValue()));
+            }
+        }
+        return nodeSet;
+    }
+
+    private Graph graph = new Graph();
 
     @Override
-    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, GraphNodeType type, Iterator<GraphNode> startNodes) {
+    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, GraphNodeType type, Set<GraphNode> startNodes) {
+        logger.trace("limitLevel = " + limitLevel);
         if (limitLevel == null && defaultLevel > 0) {
             limitLevel = defaultLevel;
         }
-        Graph graph = new Graph();
-        if (graph.getSumNode()>=maxNode){
+        if (graph.getSumNode() >= maxNode) {
             return graph;
         }
         if (limitLevel <= 0) {
@@ -54,17 +81,31 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
         limitLevel--;
 
         Set<GraphRelation> relations = context.getRelation(type);
+        int j = 0;
         for (GraphRelation relation : relations) {
-            executorService.execute(new RelationTask(graph, startNodes, detail, relation));
+            Set<GraphNode> graphNodeSet = graph.getNodesFromRelation(relation.getRelationPk());
+            Set<GraphNode> nodeSet = getUnionSet(graphNodeSet, startNodes,type);
+            if (nodeSet.isEmpty()) {
+                continue;
+            }
+            executorService.submit(new RelationTask(graph, nodeSet, detail, relation));
+            j++;
+        }
+        for (int i = 0; i < j; i++) {
+            try {
+                executorService.take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
-        breadthFirstSearch(limitLevel,maxNode,detail,type,graph.getNodes());
+        breadthFirstSearch(limitLevel, maxNode, detail, type, graph.getNodesFromType(type.getType()));
         return graph;
     }
 
-    class RelationTask implements Runnable {
+    class RelationTask implements Callable {
 
-        private Iterator<GraphNode> startNodes;
+        private Set<GraphNode> startNodes;
 
         private Boolean detail;
 
@@ -72,7 +113,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 
         private Graph graph;
 
-        private RelationTask(Graph graph, Iterator<GraphNode> startNodes, Boolean detail, GraphRelation relation) {
+        private RelationTask(Graph graph, Set<GraphNode> startNodes, Boolean detail, GraphRelation relation) {
             this.graph = graph;
             this.startNodes = startNodes;
             this.detail = detail;
@@ -80,8 +121,9 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
         }
 
         @Override
-        public void run() {
+        public Boolean call() {
             relationService.search(graph, detail, relation, startNodes);
+            return true;
         }
     }
 

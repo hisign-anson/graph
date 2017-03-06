@@ -17,9 +17,8 @@ public class Cycle {
     private HashMap<GraphNode,Boolean> cycleMaked = Maps.newHashMap();
 
     public Cycle(Graph graph) {
-        Iterator<GraphNode> nodes = graph.getNodes();
-        while (nodes.hasNext()){
-            GraphNode node = nodes.next();
+        Set<GraphNode> nodes = graph.getNodes();
+        for (GraphNode node:nodes){
             if (maked.get(node) == null || !maked.get(node)){
                 dfs(graph, node, node);
             }

@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
  */
 @Order(1)
 public class LogApplication implements WebApplicationInitializer {
+    private static Class<LogApplication> applicationClass = LogApplication.class;
+
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         servletContext.setInitParameter("webAppRootKey","webapp.root");

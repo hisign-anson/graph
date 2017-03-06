@@ -31,13 +31,15 @@ public class NodeRelationService implements IRelationService {
     @Resource(name = "jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    public Map<String, GraphNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, Iterator<GraphNode> fromNodes) {
+    public Map<String, GraphNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, Set<GraphNode> fromNodes) {
         final String conditionPartStr = relation.getFromColumn() + " in (";
 
         condition.append(" and (");
         condition.append(conditionPartStr);
         final Integer[] count = {new Integer(maxSize)};
-        final Map<String, GraphNode> fromNodeMaps = Maps.uniqueIndex(Sets.newHashSet(fromNodes), new Function<GraphNode, String>() {
+        Set set = Sets.newHashSet(fromNodes);
+
+        final Map<String, GraphNode> fromNodeMaps = Maps.uniqueIndex(set, new Function<GraphNode, String>() {
             @Override
             public String apply(GraphNode node) {
                 condition.append("'");
@@ -63,24 +65,27 @@ public class NodeRelationService implements IRelationService {
         return fromNodeMaps;
     }
 
-    public String getNotSql(Graph graph,GraphRelation relation){
+    public String getNotSql(Graph graph, GraphRelation relation) {
         Set<GraphNode> nodeSet = graph.getNodesFromRelation(relation.getRelationName());
+        if (nodeSet.isEmpty()) {
+            return "";
+        }
         String[] nodeValues = new String[nodeSet.size()];
-        for (GraphNode node:nodeSet){
+        for (GraphNode node : nodeSet) {
             int i = 0;
             nodeValues[i++] = node.getValue();
         }
-        String notSqlPart = StringUtil.join(nodeValues,",");
-        return String.format(" and %s not in (%s) ",relation.getFromColumn(),notSqlPart);
+        String notSqlPart = StringUtil.join(nodeValues, ",");
+        return String.format(" and %s not in (%s) ", relation.getFromColumn(), notSqlPart);
     }
 
     @Value("#{configProperties['limitSQL']}")
     private String limitSQL;
 
-    public void search(final Graph graph, final Boolean detail, final GraphRelation relation, Iterator<GraphNode> startNodes) {
+    public void search(final Graph graph, final Boolean detail, final GraphRelation relation, Set<GraphNode> startNodes) {
         final StringBuilder condition = new StringBuilder();
         final Map<String, GraphNode> fromNodeMaps = getFromNodeMap(condition, relation, startNodes);
-        String notSql = getNotSql(graph,relation);
+        String notSql = getNotSql(graph, relation);
 
         StringBuilder conditionNoNeed = new StringBuilder();
 
@@ -94,21 +99,25 @@ public class NodeRelationService implements IRelationService {
                 @Override
                 public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
                     Map<String, Object> maps = super.mapRow(rs, rowNum);
-                    List<String> toNodePkValues = getNodeValues(maps, relation.getToPKColumn());
-                    Iterator<String> iteratorToNodePkValues = toNodePkValues.iterator();
-
                     List<String> toNodeValues = getNodeValues(maps, relation.getToColumn());
-                    String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
-                    GraphNode nodeFrom = fromNodeMaps.get(fromNodeValue);
 
                     if (!toNodeValues.isEmpty() && toNodeValues.size() > 0) {
+                        List<String> toNodePkValues = getNodeValues(maps, relation.getToPKColumn());
+                        Iterator<String> iteratorToNodePkValues = toNodePkValues.iterator();
                         for (String toNodeValue : toNodeValues) {
-                            String toNodePkValue = iteratorToNodePkValues.hasNext() ? iteratorToNodePkValues.next() : toNodePkValues.get(0);
+                            //如果为空则用value，否则按照顺序获得pkvalue，假如pkvalue不够则一直使用第一个
+                            String toNodePkValue = toNodePkValues.isEmpty()?toNodeValue:(iteratorToNodePkValues.hasNext() ? iteratorToNodePkValues.next() : toNodePkValues.get(0));
+
                             GraphNode nodeTo = new GraphNode(toNodeValue,toNodePkValue);
-                            if (detail){
+                            nodeTo.setType(relation.getToType().getType());
+                            if (detail) {
                                 nodeTo.setDetails(maps);
                             }
-                            graph.addEdge(nodeFrom,nodeTo,relation.getRelationName());
+                            String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
+                            String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
+                            GraphNode nodeFrom = new GraphNode(fromNodeValue,fromNodePkValue);
+                            nodeTo.setType(relation.getFromType().getType());
+                            graph.addEdge(nodeFrom, nodeTo, relation.getRelationPk());
                         }
                     }
                     return maps;

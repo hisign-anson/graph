@@ -8,7 +8,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -21,6 +20,7 @@ public class Graph {
     private Multimap<GraphNode,GraphNodeRelation> edges = LinkedListMultimap.create();
     private long sumEdge;
 
+    private SetMultimap<String,GraphNode> type2Node = HashMultimap.create();
     private SetMultimap<String,GraphNode> relation2Node = HashMultimap.create();
 
     public boolean addEdge(GraphNode fromNode,GraphNode toNode,String relation){
@@ -29,18 +29,22 @@ public class Graph {
         boolean putSuccess = edges.put(fromNode,graphToRelation);
 
         if (putSuccess){
+            type2Node.put(fromNode.getType(),fromNode);
             relation2Node.put(relation,fromNode);
-        }
 
-        if (!isDirected){
-            GraphNodeRelation graphFromRelation = new GraphNodeRelation(fromNode);
-            boolean toPutSuccess = edges.put(toNode,graphFromRelation);
+            if (!isDirected){
+                GraphNodeRelation graphFromRelation = new GraphNodeRelation(fromNode);
+                graphFromRelation.setPkRelation(relation);
+                boolean toPutSuccess = edges.put(toNode,graphFromRelation);
 
-            if (toPutSuccess){
-                relation2Node.put(relation,toNode);
+                //只是为了严谨
+                if (toPutSuccess){
+                    type2Node.put(toNode.getType(),toNode);
+                    relation2Node.put(relation,toNode);
+                }
             }
+            sumEdge++;
         }
-        sumEdge++;
         return putSuccess;
     }
 
@@ -55,8 +59,16 @@ public class Graph {
         return edges.get(node);
     }
 
-    public Iterator<GraphNode> getNodes(){
-        return edges.keySet().iterator();
+    public Set<GraphNode> getNodesFromType(String type){
+        return type2Node.get(type);
+    }
+
+    public Set<GraphNode> getNodes(){
+        return edges.keySet();
+    }
+
+    public Collection<GraphNodeRelation> getRelations(){
+        return edges.values();
     }
 
     public Set<GraphNode> getNodesFromRelation(String relation){
@@ -70,4 +82,5 @@ public class Graph {
     public long getSumEdge() {
         return sumEdge;
     }
+
 }
