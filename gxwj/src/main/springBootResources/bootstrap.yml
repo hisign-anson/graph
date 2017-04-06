@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: gxwj
+  cloud:
+    config:
+      uri: http://192.168.18.55:7003
+      label: xjg
+      profile: ss
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.18.55:1111/eureka/
+    fetchRegistry: false

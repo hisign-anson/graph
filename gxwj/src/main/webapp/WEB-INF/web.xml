@@ -47,40 +47,40 @@
         <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
     <!--</listener>-->
     <!-- Druid 前台监控servlet -->
-    <servlet>
-        <servlet-name>DruidStatView</servlet-name>
-        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-        <init-param>
-            <param-name>loginUsername</param-name>
-            <param-value>admin</param-value>
-        </init-param>
-        <init-param>
-            <param-name>loginPassword</param-name>
-            <param-value>sinobest2015</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DruidStatView</servlet-name>
-        <url-pattern>/druid/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>loginUsername</param-name>-->
+            <!--<param-value>admin</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>loginPassword</param-name>-->
+            <!--<param-value>sinobest2015</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<url-pattern>/druid/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>TestConfServlet</servlet-name>
-        <servlet-class>cn.sinobest.policeunion.biz.gxwj.servlet.GXWJConfServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TestConfServlet</servlet-name>
-        <url-pattern>/testConf</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>TestConfServlet</servlet-name>-->
+        <!--<servlet-class>cn.sinobest.policeunion.biz.gxwj.servlet.GXWJConfServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>TestConfServlet</servlet-name>-->
+        <!--<url-pattern>/testConf</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>cn.sinobest.policeunion.biz.gxwj.servlet.GXWJServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>TestServlet</servlet-name>-->
+        <!--<servlet-class>cn.sinobest.policeunion.biz.gxwj.servlet.GXWJServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>TestServlet</servlet-name>-->
+        <!--<url-pattern>/test</url-pattern>-->
+    <!--</servlet-mapping>-->
 
    <welcome-file-list>
       <welcome-file>index.jsp</welcome-file>
