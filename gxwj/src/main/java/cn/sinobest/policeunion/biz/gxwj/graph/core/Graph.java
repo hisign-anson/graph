@@ -36,15 +36,12 @@ public class Graph {
     }
 
     public boolean addEdge(GraphNode fromNode,GraphNode toNode,String relation){
-        GraphNodeRelation graphRelation = new GraphNodeRelation();
-        graphRelation.setPkRelation(relation);
-        graphRelation.setPkValue(fromNode.getPkValue());
-        graphRelation.setDetails(fromNode.getDetails());
 
-        fromNode.setRelation(graphRelation);
-        toNode.setRelation(graphRelation);
+        fromNode.setPkRelation(relation);
+        toNode.setPkRelation(relation);
         boolean putSuccess = edges.put(fromNode,toNode);
 
+        GraphNodeRelation graphRelation = fromNode.getRelation();
         putNodeMap(fromNode,graphRelation);
         putNodeMap(fromNode.getValueNode());
         putNodeMap(graphRelation,fromNode.getValueNode());

@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class GraphNode {
     private ValueNode valueNode = new ValueNode();
-    private GraphNodeRelation relation;
+    private GraphNodeRelation relation = new GraphNodeRelation();
 
     public GraphNode(String value) {
         valueNode.setValue(value);
@@ -29,12 +29,12 @@ public class GraphNode {
         return relation;
     }
 
-    public ValueNode getValueNode() {
-        return valueNode;
+    public void setPkRelation(String pkRelation){
+        relation.setPkRelation(pkRelation);
     }
 
-    public void setRelation(GraphNodeRelation relation) {
-        this.relation = relation;
+    public ValueNode getValueNode() {
+        return valueNode;
     }
 
     public String getType() {
