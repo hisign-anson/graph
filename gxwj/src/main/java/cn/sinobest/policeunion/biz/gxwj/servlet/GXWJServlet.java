@@ -2,7 +2,7 @@ package cn.sinobest.policeunion.biz.gxwj.servlet;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.common.init.SpringContextInit;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
-import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.ValueNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.adapter.IGraphService;
 import com.google.common.collect.Sets;
 
@@ -26,7 +26,7 @@ public class GXWJServlet extends HttpServlet {
         String startNodeType = req.getParameter("nodeType");
 
         IGraphService service = (IGraphService) SpringContextInit.getBeanByAware("gxwj.graphService");
-        Graph graph = service.breadthFirstSearch(limitLevel,maxNode,detail,startNodeType, Sets.<GraphNode>newHashSet(new GraphNode(startNodeValue)));
+        Graph graph = service.breadthFirstSearch(limitLevel,maxNode,detail,startNodeType, Sets.newHashSet(new ValueNode(startNodeValue)));
 
         System.out.println(1);
     }

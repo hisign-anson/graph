@@ -2,10 +2,8 @@ package cn.sinobest.policeunion.biz.gxwj.graph.core;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNodeRelation;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.SetMultimap;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.ValueNode;
+import com.google.common.collect.*;
 
 import java.util.Collection;
 import java.util.Set;
@@ -17,31 +15,46 @@ public class Graph {
 //    private HashSet<Queue<GraphNode>> edges = new HashSet<Queue<GraphNode>>();
     //默认无向图
     private boolean isDirected = false;
-    private Multimap<GraphNode,GraphNodeRelation> edges = LinkedListMultimap.create();
+    private Multimap<GraphNode,GraphNode> edges = LinkedListMultimap.create();
     private long sumEdge;
 
-    private SetMultimap<String,GraphNode> type2Node = HashMultimap.create();
-    private SetMultimap<String,GraphNode> relation2Node = HashMultimap.create();
+    private Multimap<GraphNode,GraphNodeRelation> nodeMap = ArrayListMultimap.create();
+
+    private SetMultimap<String,ValueNode> typeValue = HashMultimap.create();
+    private SetMultimap<GraphNodeRelation,ValueNode> relationValue = HashMultimap.create();
+
+    private void putNodeMap(GraphNode fromNode,GraphNodeRelation graphRelation){
+        nodeMap.put(fromNode,graphRelation);
+    }
+
+    private void putNodeMap(ValueNode valueNode){
+        typeValue.put(valueNode.getType(),valueNode);
+    }
+
+    private void putNodeMap(GraphNodeRelation relationm,ValueNode valueNode){
+        relationValue.put(relationm,valueNode);
+    }
 
     public boolean addEdge(GraphNode fromNode,GraphNode toNode,String relation){
-        GraphNodeRelation graphToRelation = new GraphNodeRelation(toNode);
-        graphToRelation.setPkRelation(relation);
-        boolean putSuccess = edges.put(fromNode,graphToRelation);
+        GraphNodeRelation graphRelation = new GraphNodeRelation();
+        graphRelation.setPkRelation(relation);
+        graphRelation.setPkValue(fromNode.getPkValue());
+        graphRelation.setDetails(fromNode.getDetails());
+
+        fromNode.setRelation(graphRelation);
+        toNode.setRelation(graphRelation);
+        boolean putSuccess = edges.put(fromNode,toNode);
+
+        putNodeMap(fromNode,graphRelation);
+        putNodeMap(fromNode.getValueNode());
+        putNodeMap(graphRelation,fromNode.getValueNode());
 
         if (putSuccess){
-            type2Node.put(fromNode.getType(),fromNode);
-            relation2Node.put(relation,fromNode);
 
             if (!isDirected){
-                GraphNodeRelation graphFromRelation = new GraphNodeRelation(fromNode);
-                graphFromRelation.setPkRelation(relation);
-                boolean toPutSuccess = edges.put(toNode,graphFromRelation);
-
-                //只是为了严谨
-                if (toPutSuccess){
-                    type2Node.put(toNode.getType(),toNode);
-                    relation2Node.put(relation,toNode);
-                }
+                boolean toPutSuccess = edges.put(toNode,fromNode);
+                putNodeMap(toNode.getValueNode());
+                putNodeMap(graphRelation,toNode.getValueNode());
             }
             sumEdge++;
         }
@@ -49,30 +62,35 @@ public class Graph {
     }
 
     public Graph() {
+        this(false);
     }
 
     public Graph(boolean isDirected) {
         this.isDirected = isDirected;
     }
 
-    public Collection<GraphNodeRelation> adj(GraphNode node){
-        return edges.get(node);
+    public Set<ValueNode> getValueNode(String type){
+        return typeValue.get(type);
     }
 
-    public Set<GraphNode> getNodesFromType(String type){
-        return type2Node.get(type);
+    public Set<ValueNode> getValueNode(GraphNodeRelation relation){
+        return relationValue.get(relation);
+    }
+
+    public Multimap<GraphNode,GraphNodeRelation> getNodeMap(){
+        return nodeMap;
+    }
+
+    public Collection<GraphNode> adj(GraphNode node){
+        return edges.get(node);
     }
 
     public Set<GraphNode> getNodes(){
         return edges.keySet();
     }
 
-    public Collection<GraphNodeRelation> getRelations(){
+    public Collection<GraphNode> getRelations(){
         return edges.values();
-    }
-
-    public Set<GraphNode> getNodesFromRelation(String relation){
-        return relation2Node.get(relation);
     }
 
     public long getSumNode() {

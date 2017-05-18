@@ -2,7 +2,7 @@ package cn.sinobest.policeunion.biz.gxwj.graph.search.adapter.impl;
 
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
-import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.ValueNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.adapter.IGraphService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
 import org.springframework.context.annotation.Scope;
@@ -29,7 +29,7 @@ public class GraphAdapter implements IGraphService {
     }
 
     @Override
-    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, String type, Set<GraphNode> startNodes) {
+    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, String type, Set<ValueNode> startNodes) {
         Graph graph = searcher.breadthFirstSearch(limitLevel, maxNode, detail, new GraphNodeType(type), startNodes);
         return graph;
     }

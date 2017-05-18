@@ -4,7 +4,7 @@ import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphContext;
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType;
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
-import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.ValueNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.relation.IRelationService;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.service.IGraphSearcher;
 import com.google.common.collect.Sets;
@@ -45,8 +45,8 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
      * @param startNodeSets
      * @return
      */
-    private Set<GraphNode> getUnionSet(Set<GraphNode> relationSets, Set<GraphNode> startNodeSets,GraphNodeType type) {
-        Set<GraphNode> nodeSet = Sets.newHashSet();
+    private Set<ValueNode> getUnionSet(Set<ValueNode> relationSets, Set<ValueNode> startNodeSets) {
+        Set<ValueNode> nodeSet = Sets.newHashSet();
 //        if (!relationSets.isEmpty() && relationSets.size() > startNodeSets.size()) {
 //            for (GraphNode node : startNodeSets) {
 //                if (!relationSets.contains(node)) {
@@ -55,9 +55,9 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 //            }
 //            return nodeSet;
 //        }
-        for (GraphNode node:startNodeSets){
+        for (ValueNode node:startNodeSets){
             if (relationSets.isEmpty() || !relationSets.contains(node)) {
-                nodeSet.add(new GraphNode(node.getValue()));
+                nodeSet.add(new ValueNode(node.getValue()));
             }
         }
         return nodeSet;
@@ -66,7 +66,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
     private Graph graph = new Graph();
 
     @Override
-    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, GraphNodeType type, Set<GraphNode> startNodes) {
+    public Graph breadthFirstSearch(Integer limitLevel, long maxNode, Boolean detail, GraphNodeType type, Set<ValueNode> startNodes) {
         logger.trace("limitLevel = " + limitLevel);
         if (limitLevel == null && defaultLevel > 0) {
             limitLevel = defaultLevel;
@@ -83,8 +83,8 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
         Set<GraphRelation> relations = context.getRelation(type);
         int j = 0;
         for (GraphRelation relation : relations) {
-            Set<GraphNode> graphNodeSet = graph.getNodesFromRelation(relation.getRelationPk());
-            Set<GraphNode> nodeSet = getUnionSet(graphNodeSet, startNodes,type);
+            Set<ValueNode> graphNodeSet = graph.getValueNode(relation.getRelationPk());
+            Set<ValueNode> nodeSet = getUnionSet(graphNodeSet, startNodes);
             if (nodeSet.isEmpty()) {
                 continue;
             }
@@ -99,13 +99,13 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
             }
         }
 
-        breadthFirstSearch(limitLevel, maxNode, detail, type, graph.getNodesFromType(type.getType()));
+        breadthFirstSearch(limitLevel, maxNode, detail, type, graph.getValueNode(type.getType()));
         return graph;
     }
 
     class RelationTask implements Callable {
 
-        private Set<GraphNode> startNodes;
+        private Set<ValueNode> startNodes;
 
         private Boolean detail;
 
@@ -113,7 +113,7 @@ public class GraphDBBFSSearcher implements IGraphSearcher {
 
         private Graph graph;
 
-        private RelationTask(Graph graph, Set<GraphNode> startNodes, Boolean detail, GraphRelation relation) {
+        private RelationTask(Graph graph, Set<ValueNode> startNodes, Boolean detail, GraphRelation relation) {
             this.graph = graph;
             this.startNodes = startNodes;
             this.detail = detail;

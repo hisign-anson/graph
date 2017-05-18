@@ -3,6 +3,7 @@ package cn.sinobest.policeunion.biz.gxwj.graph.search.relation.impl;
 import cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.Graph;
 import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.GraphNode;
+import cn.sinobest.policeunion.biz.gxwj.graph.core.pj.ValueNode;
 import cn.sinobest.policeunion.biz.gxwj.graph.search.relation.IRelationService;
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
@@ -31,7 +32,7 @@ public class NodeRelationService implements IRelationService {
     @Resource(name = "jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    public Map<String, GraphNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, Set<GraphNode> fromNodes) {
+    public Map<String, ValueNode> getFromNodeMap(final StringBuilder condition, final GraphRelation relation, Set<ValueNode> fromNodes) {
         final String conditionPartStr = relation.getFromColumn() + " in (";
 
         condition.append(" and (");
@@ -39,9 +40,9 @@ public class NodeRelationService implements IRelationService {
         final Integer[] count = {new Integer(maxSize)};
         Set set = Sets.newHashSet(fromNodes);
 
-        final Map<String, GraphNode> fromNodeMaps = Maps.uniqueIndex(set, new Function<GraphNode, String>() {
+        final Map<String, ValueNode> fromNodeMaps = Maps.uniqueIndex(set, new Function<ValueNode, String>() {
             @Override
-            public String apply(GraphNode node) {
+            public String apply(ValueNode node) {
                 condition.append("'");
                 condition.append(node.getValue());
                 if (--count[0] == 0) {
@@ -66,12 +67,12 @@ public class NodeRelationService implements IRelationService {
     }
 
     public String getNotSql(Graph graph, GraphRelation relation) {
-        Set<GraphNode> nodeSet = graph.getNodesFromRelation(relation.getRelationName());
+        Set<ValueNode> nodeSet = graph.getValueNode(relation.getRelationName());
         if (nodeSet.isEmpty()) {
             return "";
         }
         String[] nodeValues = new String[nodeSet.size()];
-        for (GraphNode node : nodeSet) {
+        for (ValueNode node : nodeSet) {
             int i = 0;
             nodeValues[i++] = node.getValue();
         }
@@ -82,9 +83,9 @@ public class NodeRelationService implements IRelationService {
     @Value("#{configProperties['limitSQL']}")
     private String limitSQL;
 
-    public void search(final Graph graph, final Boolean detail, final GraphRelation relation, Set<GraphNode> startNodes) {
+    public void search(final Graph graph, final Boolean detail, final GraphRelation relation, Set<ValueNode> startNodes) {
         final StringBuilder condition = new StringBuilder();
-        final Map<String, GraphNode> fromNodeMaps = getFromNodeMap(condition, relation, startNodes);
+        final Map<String, ValueNode> fromNodeMaps = getFromNodeMap(condition, relation, startNodes);
         String notSql = getNotSql(graph, relation);
 
         StringBuilder conditionNoNeed = new StringBuilder();

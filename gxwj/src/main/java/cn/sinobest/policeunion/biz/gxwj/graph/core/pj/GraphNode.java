@@ -1,7 +1,5 @@
 package cn.sinobest.policeunion.biz.gxwj.graph.core.pj;
 
-import com.google.common.collect.Maps;
-
 import java.util.Arrays;
 import java.util.Map;
 
@@ -9,75 +7,91 @@ import java.util.Map;
  * Created by zy-xx on 17/3/3.
  */
 public class GraphNode {
-    private String value;
-    private String type;
-    private String pkValue = "";
-    private Map<String,Object> details = Maps.newHashMap();
-    private String describe;
+    private ValueNode valueNode = new ValueNode();
+    private GraphNodeRelation relation;
 
     public GraphNode(String value) {
-        this.value = value;
+        valueNode.setValue(value);
     }
 
     public GraphNode(String value, String pkValue) {
-        this.value = value;
-        this.pkValue = pkValue;
+        valueNode.setValue(value);
+        relation.setPkValue(pkValue);
+    }
+
+    public GraphNode(String value, String pkValue, String type) {
+        valueNode.setValue(value);
+        relation.setPkValue(pkValue);
+        valueNode.setType(type);
+    }
+
+    public GraphNodeRelation getRelation() {
+        return relation;
+    }
+
+    public ValueNode getValueNode() {
+        return valueNode;
+    }
+
+    public void setRelation(GraphNodeRelation relation) {
+        this.relation = relation;
     }
 
     public String getType() {
-        return type;
+        return valueNode.getType();
     }
 
     public void setType(String type) {
-        this.type = type;
+        valueNode.setType(type);
     }
 
     public String getPkValue() {
-        return pkValue;
+        return relation.getPkValue();
     }
 
     public void setPkValue(String pkValue) {
-        this.pkValue = pkValue;
+        relation.setPkValue(pkValue);
     }
 
     public Map<String, Object> getDetails() {
-        return details;
+        return relation.getDetails();
     }
 
     public void setDetails(Map<String, Object> details) {
-        this.details = details;
+        relation.setDetails(details);
     }
 
     public String getValue() {
-        return value;
+        return valueNode.getValue();
     }
 
     public void setValue(String value) {
-        this.value = value;
+        valueNode.setValue(value);
     }
 
     public String getDescribe() {
-        return describe;
+        return valueNode.getDescribe();
     }
 
     public void setDescribe(String describe) {
-        this.describe = describe;
+        valueNode.setDescribe(describe);
     }
+
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof GraphNode)){
+        if (!(obj instanceof GraphNode)) {
             return false;
         }
-        if (obj==null){
+        if (obj == null) {
             return false;
         }
 
-        GraphNode target = (GraphNode)obj;
-        return pkValue.equals(target.getPkValue()) && value.equals(target.getValue());
+        GraphNode target = (GraphNode) obj;
+        return getPkValue().equals(target.getPkValue()) && getValue().equals(target.getValue()) && getType().equals(target.getType());
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new int[] {value.hashCode(),pkValue.hashCode()});
+        return Arrays.hashCode(new int[]{getValue().hashCode(), getPkValue().hashCode(), getType().hashCode()});
     }
 }

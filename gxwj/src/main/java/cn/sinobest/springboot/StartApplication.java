@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.util.Log4jConfigListener;
@@ -20,7 +19,7 @@ import javax.servlet.ServletRegistration;
  * Created by zy-xx on 17/3/2.
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @EnableHystrixDashboard
 @ImportResource("classpath:applicationContext.xml")
 public class StartApplication extends SpringBootServletInitializer {
