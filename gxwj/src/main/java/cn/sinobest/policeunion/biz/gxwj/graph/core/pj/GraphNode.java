@@ -33,6 +33,10 @@ public class GraphNode {
         relation.setPkRelation(pkRelation);
     }
 
+    public String getPkRelation(){
+        return relation.getPkRelation();
+    }
+
     public ValueNode getValueNode() {
         return valueNode;
     }
@@ -87,11 +91,13 @@ public class GraphNode {
         }
 
         GraphNode target = (GraphNode) obj;
-        return getPkValue().equals(target.getPkValue()) && getValue().equals(target.getValue()) && getType().equals(target.getType());
+//        return getPkValue().equals(target.getPkValue()) && getValue().equals(target.getValue()) && getType().equals(target.getType());
+        return getValue().equals(target.getValue()) && getType().equals(target.getType());
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new int[]{getValue().hashCode(), getPkValue().hashCode(), getType().hashCode()});
+        return Arrays.hashCode(new int[]{getValue().hashCode(), getType().hashCode()});
+//        return Arrays.hashCode(new int[]{getValue().hashCode(), getPkValue().hashCode(), getType().hashCode()});
     }
 }

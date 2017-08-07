@@ -1,0 +1,317 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/dataTool.js"></script>
+</head>
+<body>
+
+<div id="main" style="width: 200%;height:200%;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    /////////////////////////////
+    //填写图形脚本
+    option = {
+        title: {text: '案件线索关系图'},
+        tooltip: {
+            formatter: function (x) {
+                return x.data.des;
+            }
+        },
+        series: [
+            {
+                type: 'graph',
+                layout: 'force',
+                symbolSize: 80,
+                legendHoverLink: true,
+                hoverAnimation: true,
+                roam: true,
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [4, 10],
+                edgeLabel: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    }
+                },
+                force: {
+                    repulsion: 2500,
+                    edgeLength: [200, 500]
+                },
+                draggable: true,
+                itemStyle: {
+                    normal: {
+                        color: '#4b565b'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 2,
+                        color: '#4b565b'
+
+                    }
+                },
+                edgeLabel: {
+                    normal: {
+                        show: true,
+                        formatter: function (x) {
+                            return x.data.name;
+                        }
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {}
+                    }
+                },
+                nodes: [
+                    {
+                        name: '案件名称1',
+                        des: '案件编号1',
+                        x: 50,
+                        y: 100,
+                        fixed: true,
+                        symbolSize: 100,
+                        itemStyle: {
+                            normal: {
+                                color: 'red'
+                            }
+                        }
+                    }, {
+                        name: '案件名称2',
+                        des: '案件编号2',
+                        x: 50,
+                        y: 400,
+                        fixed: true,
+                        symbolSize: 100,
+                        itemStyle: {
+                            normal: {
+                                color: 'red'
+                            }
+                        }
+                    }, {
+                        name: '案件名称3',
+                        des: '案件编号3',
+                        x: 50,
+                        y: 700,
+                        fixed: true,
+                        symbolSize: 100,
+                        itemStyle: {
+                            normal: {
+                                color: 'red'
+                            }
+                        }
+                    }, {
+                        name: '现勘指纹D',
+                        des: '现勘指纹编号D',
+                        symbolSize: 50,
+                        x: 300,
+                        y: 40,
+                        fixed: true,
+                        itemStyle: {
+                            normal: {
+                                color: 'blue'
+                            }
+                        }
+                    }, {
+                        name: '现勘指纹U',
+                        des: '现勘指纹编号U',
+                        symbolSize: 50,
+                        x: 300,
+                        y: 760,
+                        fixed: true,
+                        itemStyle: {
+                            normal: {
+                                color: 'blue'
+                            }
+                        }
+                    }, {
+                        name: '现勘DNAX',
+                        des: '现勘DNA编号X',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'purple'
+                            }
+                        }
+                    }, {
+                        name: '现勘DNAQ',
+                        des: '现勘DNA编号Q',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'purple'
+                            }
+                        }
+                    }, {
+                        name: '现勘足迹N',
+                        des: '现勘足迹编号N',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'green'
+                            }
+                        }
+                    }, {
+                        name: '现勘足迹L',
+                        des: '现勘足迹编号L',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'green'
+                            }
+                        }
+                    }, {
+                        name: '人类指纹V',
+                        des: '人类指纹编号V',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'black'
+                            }
+                        }
+                    }, {
+                        name: '人类指纹J',
+                        des: '人类指纹编号H',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'black'
+                            }
+                        }
+                    }, {
+                        name: '人类DNAR',
+                        des: '人类DNA编号R',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'orange'
+                            }
+                        }
+                    }, {
+                        name: '人类DNAP',
+                        des: '人类DNA编号P',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'orange'
+                            }
+                        }
+                    }, {
+                        name: '张三',
+                        des: '张三详细信息',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'yellow'
+                            }
+                        }
+                    }, {
+                        name: '李四',
+                        des: '李四详细信息',
+                        symbolSize: 50,
+                        itemStyle: {
+                            normal: {
+                                color: 'yellow'
+                            }
+                        }
+                    }
+                ],
+                links: [
+                    {
+                        source: '案件名称1',
+                        target: '现勘指纹D',
+                        name: ''
+                    }, {
+                        source: '现勘指纹D',
+                        target: '人类指纹V',
+                        name: ''
+                    }, {
+                        source: '现勘指纹D',
+                        target: '现勘指纹U',
+                        name: '指纹比中'
+                    }, {
+                        source: '人类指纹V',
+                        target: '张三',
+                        name: ''
+                    }, {
+                        source: '人类指纹V',
+                        target: '人类指纹J',
+                        name: '指纹比中'
+                    }, {
+                        source: '案件名称1',
+                        target: '现勘DNAX',
+                        name: ''
+                    }, {
+                        source: '现勘DNAX',
+                        target: '人类DNAP',
+                        name: ''
+                    }, {
+                        source: '案件名称2',
+                        target: '现勘足迹N',
+                        name: ''
+                    }, {
+                        source: '案件名称2',
+                        target: '现勘足迹L',
+                        name: ''
+                    }, {
+                        source: '案件名称3',
+                        target: '现勘指纹U',
+                        name: ''
+                    }, {
+                        source: '案件名称3',
+                        target: '现勘足迹L',
+                        name: ''
+                    }, {
+                        source: '现勘足迹N',
+                        target: '现勘足迹L',
+                        name: '足迹比中'
+                    }, {
+                        source: '现勘指纹U',
+                        target: '人类指纹J',
+                        name: ''
+                    }, {
+                        source: '现勘DNAQ',
+                        target: '人类DNAR',
+                        name: ''
+                    }, {
+                        source: '人类DNAR',
+                        target: '李四',
+                        name: ''
+                    }, {
+                        source: '人类DNAR',
+                        target: '人类DNAP',
+                        name: 'DNA比中'
+                    }
+                ]
+            }
+        ]
+    };
+
+    //    $.ajax({
+    //        url: 'getGraph?limitLevel=3&maxNode=1000&detail=true&startNodeValue=18520117227&startNodeType=dhhm',
+    //        type: 'GET',
+    //        data: "{}",
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            option.series[0].nodes = data.nodes;
+    //            option.series[0].links = data.links;
+    //            myChart.setOption(option);
+    //        },
+    //        error: function (errorMsg) {
+    //            alert("图表请求数据失败!");
+    //        }
+    //    });
+
+    myChart.setOption(option);
+    window.onresize = myChart.resize;
+    /////////////////////////////
+</script>
+</body>
+</html>

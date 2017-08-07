@@ -8,6 +8,7 @@ spring:
 #      profile: ss
 server:
   port: 8089
+  address: 127.0.0.1
 #eureka:
 #  client:
 #    serviceUrl:

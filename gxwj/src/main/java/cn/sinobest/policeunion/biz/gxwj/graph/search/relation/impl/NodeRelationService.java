@@ -116,8 +116,8 @@ public class NodeRelationService implements IRelationService {
                             }
                             String fromNodeValue = maps.get(relation.getFromColumn()) == null ? null : maps.get(relation.getFromColumn()).toString();
                             String fromNodePkValue = maps.get(relation.getFromPKColumn()) == null ? "" : maps.get(relation.getFromPKColumn()).toString();
-                            GraphNode nodeFrom = new GraphNode(fromNodeValue,fromNodePkValue);
-                            nodeTo.setType(relation.getFromType().getType());
+                            GraphNode nodeFrom = new GraphNode(fromNodeValue,fromNodePkValue,relation.getFromType().getType());
+                            nodeTo.setType(relation.getToType().getType());
                             graph.addEdge(nodeFrom, nodeTo, relation.getRelationPk());
                         }
                     }
@@ -125,7 +125,7 @@ public class NodeRelationService implements IRelationService {
                 }
             });
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.getMessage(),e);
         }
     }
 

@@ -41,17 +41,17 @@ public class Graph {
         toNode.setPkRelation(relation);
         boolean putSuccess = edges.put(fromNode,toNode);
 
-        GraphNodeRelation graphRelation = fromNode.getRelation();
-        putNodeMap(fromNode,graphRelation);
-        putNodeMap(fromNode.getValueNode());
-        putNodeMap(graphRelation,fromNode.getValueNode());
+        GraphNodeRelation graphRelation = toNode.getRelation();
+//        putNodeMap(fromNode,graphRelation);
+//        putNodeMap(fromNode.getValueNode());
+//        putNodeMap(graphRelation,fromNode.getValueNode());
 
         if (putSuccess){
 
             if (!isDirected){
                 boolean toPutSuccess = edges.put(toNode,fromNode);
-                putNodeMap(toNode.getValueNode());
-                putNodeMap(graphRelation,toNode.getValueNode());
+//                putNodeMap(toNode.getValueNode());
+//                putNodeMap(graphRelation,toNode.getValueNode());
             }
             sumEdge++;
         }

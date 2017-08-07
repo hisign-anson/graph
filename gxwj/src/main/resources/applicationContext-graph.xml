@@ -6,106 +6,122 @@ http://localhost:8080/policeGXWJ/test?limitLevel=3&maxNode=1000&detail=true&node
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-       <!--标识号名称：身份证，电话号码等等，以供后面复用-->
-       <bean id="ajbh" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType"/>
+    <!--标识号名称：身份证，电话号码等等，以供后面复用-->
+    <bean id="ajbh" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType"/>
 
-       <bean id="sfzh" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType"/>
+    <bean id="sfzh" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType"/>
 
-       <bean id="dhhm" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType"/>
+    <bean id="dhhm" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphNodeType"/>
 
-       <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
-       <bean id="sfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="tableId" value="0001"/>
-              <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
-              <property name="pkColumn" value="SYSTEMID"/>
-              <property name="fromType" ref="ajbh"/>
-              <property name="toType" ref="dhhm"/>
-              <!--开始和结束节点对应那个字段-->
-              <property name="fromColumn" value="AJBH"/>
-              <property name="toColumn" value="YSDWDH,YSDWDH_NEW"/>
-              <!--关系语句-->
-              <property name="relationSql">
-                     <value>select * from B_ASJ_AJ t where 1=1 </value>
-              </property>
-       </bean>
+    <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
+    <bean id="dhsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="tableId" value="0001"/>
+        <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
+        <property name="pkColumn" value="SYSTEMID"/>
+        <property name="fromType" ref="dhhm"/>
+        <property name="toType" ref="ajbh"/>
+        <!--开始和结束节点对应那个字段-->
+        <property name="fromColumn" value="YSDWDH"/>
+        <property name="toColumn" value="AJBH"/>
+        <!--关系语句-->
+        <property name="relationSql">
+            <value>select * from B_ASJ_AJ t where 1=1</value>
+        </property>
+    </bean>
 
-       <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
-       <bean id="sfzajgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="tableId" value="0002"/>
-              <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
-              <property name="pkColumn" value="SYSTEMID"/>
-              <property name="fromType" ref="sfzh"/>
-              <property name="toType" ref="ajbh"/>
-              <!--开始和结束节点对应那个字段-->
-              <property name="fromColumn" value="BSHID"/>
-              <property name="toColumn" value="AJBH"/>
-              <!--关系语句-->
-              <property name="relationSql">
-                     <value>select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001' </value>
-              </property>
-       </bean>
+    <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
+    <bean id="sfzdhgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="tableId" value="0001"/>
+        <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
+        <property name="pkColumn" value="SYSTEMID"/>
+        <property name="fromType" ref="ajbh"/>
+        <property name="toType" ref="dhhm"/>
+        <!--开始和结束节点对应那个字段-->
+        <property name="fromColumn" value="AJBH"/>
+        <property name="toColumn" value="YSDWDH"/>
+        <!--关系语句-->
+        <property name="relationSql">
+            <value>select * from B_ASJ_AJ t where 1=1</value>
+        </property>
+    </bean>
 
-       <bean id="ajsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="relationName" value="sfzajgx"/>
-              <property name="tableId" value="0002"/>
-              <property name="pkColumn" value="SYSTEMID"/>
-              <property name="fromType" ref="ajbh"/>
-              <property name="toType" ref="sfzh"/>
-              <property name="fromColumn" value="AJBH"/>
-              <property name="toColumn" value="BSHID"/>
-              <property name="relationSql">
-                     <value>select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001' </value>
-              </property>
-       </bean>
+    <!--配置关系，假如关系可以从A->B，也可以从B->A的话需要配置两个-->
+    <bean id="sfzajgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="tableId" value="0002"/>
+        <!--对应资源是从之前配置的那个标识号类型到那个标识号类型的关系-->
+        <property name="pkColumn" value="SYSTEMID"/>
+        <property name="fromType" ref="sfzh"/>
+        <property name="toType" ref="ajbh"/>
+        <!--开始和结束节点对应那个字段-->
+        <property name="fromColumn" value="BSHID"/>
+        <property name="toColumn" value="AJBH"/>
+        <!--关系语句-->
+        <property name="relationSql">
+            <value>select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'</value>
+        </property>
+    </bean>
 
-       <bean id="insfzdhhmgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="tableId" value="0003"/>
-              <property name="pkColumn" value="ID"/>
-              <property name="fromType" ref="sfzh"/>
-              <property name="toType" ref="dhhm"/>
-              <property name="fromColumn" value="FOID"/>
-              <property name="toColumn" value="PHONE"/>
-              <property name="relationSql">
-                     <value>select * from T_WBZY_HK_PASSENGER_IN t where 1=1 </value>
-              </property>
-       </bean>
+    <bean id="ajsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="relationName" value="sfzajgx"/>
+        <property name="tableId" value="0002"/>
+        <property name="pkColumn" value="SYSTEMID"/>
+        <property name="fromType" ref="ajbh"/>
+        <property name="toType" ref="sfzh"/>
+        <property name="fromColumn" value="AJBH"/>
+        <property name="toColumn" value="BSHID"/>
+        <property name="relationSql">
+            <value>select * from B_YPGJ_YPKJ_AJBSHGX t where 1=1 and t.BSHLX = '001'</value>
+        </property>
+    </bean>
 
-       <bean id="indhhmsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="relationName" value="insfzdhhmgx"/>
-              <property name="tableId" value="0003"/>
-              <property name="pkColumn" value="ID"/>
-              <property name="fromType" ref="dhhm"/>
-              <property name="toType" ref="sfzh"/>
-              <property name="fromColumn" value="PHONE"/>
-              <property name="toColumn" value="FOID"/>
-              <property name="relationSql">
-                     <value>select * from T_WBZY_HK_PASSENGER_IN t where 1=1 </value>
-              </property>
-       </bean>
+    <bean id="insfzdhhmgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="tableId" value="0003"/>
+        <property name="pkColumn" value="ID"/>
+        <property name="fromType" ref="sfzh"/>
+        <property name="toType" ref="dhhm"/>
+        <property name="fromColumn" value="FOID"/>
+        <property name="toColumn" value="PHONE"/>
+        <property name="relationSql">
+            <value>select * from T_WBZY_HK_PASSENGER_IN t where 1=1</value>
+        </property>
+    </bean>
 
-       <bean id="outsfzdhhmgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="tableId" value="0004"/>
-              <property name="pkColumn" value="ID"/>
-              <property name="fromType" ref="sfzh"/>
-              <property name="toType" ref="dhhm"/>
-              <property name="fromColumn" value="FOID"/>
-              <property name="toColumn" value="PHONE"/>
-              <property name="relationSql">
-                     <value>select * from T_WBZY_HK_PASSENGER_OUT t where 1=1 </value>
-              </property>
-       </bean>
+    <bean id="indhhmsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="relationName" value="insfzdhhmgx"/>
+        <property name="tableId" value="0003"/>
+        <property name="pkColumn" value="ID"/>
+        <property name="fromType" ref="dhhm"/>
+        <property name="toType" ref="sfzh"/>
+        <property name="fromColumn" value="PHONE"/>
+        <property name="toColumn" value="FOID"/>
+        <property name="relationSql">
+            <value>select * from T_WBZY_HK_PASSENGER_IN t where 1=1</value>
+        </property>
+    </bean>
 
-       <bean id="outdhhmsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
-              <property name="relationName" value="outsfzdhhmgx"/>
-              <property name="tableId" value="0004"/>
-              <property name="pkColumn" value="ID"/>
-              <property name="fromType" ref="dhhm"/>
-              <property name="toType" ref="sfzh"/>
-              <property name="fromColumn" value="PHONE"/>
-              <property name="toColumn" value="FOID"/>
-              <property name="relationSql">
-                     <value>select * from T_WBZY_HK_PASSENGER_OUT t where 1=1 </value>
-              </property>
-       </bean>
+    <bean id="outsfzdhhmgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="tableId" value="0004"/>
+        <property name="pkColumn" value="ID"/>
+        <property name="fromType" ref="sfzh"/>
+        <property name="toType" ref="dhhm"/>
+        <property name="fromColumn" value="FOID"/>
+        <property name="toColumn" value="PHONE"/>
+        <property name="relationSql">
+            <value>select * from T_WBZY_HK_PASSENGER_OUT t where 1=1</value>
+        </property>
+    </bean>
+
+    <bean id="outdhhmsfzgx" class="cn.sinobest.policeunion.biz.gxwj.graph.common.resource.GraphRelation">
+        <property name="relationName" value="outsfzdhhmgx"/>
+        <property name="tableId" value="0004"/>
+        <property name="pkColumn" value="ID"/>
+        <property name="fromType" ref="dhhm"/>
+        <property name="toType" ref="sfzh"/>
+        <property name="fromColumn" value="PHONE"/>
+        <property name="toColumn" value="FOID"/>
+        <property name="relationSql">
+            <value>select * from T_WBZY_HK_PASSENGER_OUT t where 1=1</value>
+        </property>
+    </bean>
 
 </beans>
