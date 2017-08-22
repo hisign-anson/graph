@@ -144,13 +144,7 @@
         };
 
         //运动刷新
-        var firstEnd = false;
-        layout.on("end", function(){
-            if (!firstEnd){
-                moveFunc();
-                firstEnd = true;
-            }
-        });
+        var firstEnd = true;
         layout.on("tick", function(){
             if (firstEnd){
                 moveFunc();

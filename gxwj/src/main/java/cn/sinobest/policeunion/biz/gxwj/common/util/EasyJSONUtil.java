@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.util.FieldInfo;
 import com.alibaba.fastjson.util.TypeUtils;
+import jodd.util.ObjectUtil;
+import org.apache.commons.lang.ObjectUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
