@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js/d3.3.5.17.js"></script>
-    <!--<script src="js/relation.js"></script>-->
     <script src="js/jquery.js"></script>
 </head>
 <style>
@@ -20,144 +19,23 @@
         fill: #000079;
         fill-opacity: 1.0;
     }
+
+    .link.resolved {
+      stroke-dasharray: 0,2 1;
+    }
 </style>
 <body>
-<script type="text/javascript">
-    var width = 1200,
-        height = 700;
-    var img_w = 77,
-        img_h = 90;
-    var svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height);
-
-    d3.json("relation.json", function (error, root) {
-        console.log(d3.version);
-        if (error) {
-            return console.log(error);
-        }
-        //定义力学图的布局
-        var layout = d3.layout.force()
-            .nodes(root.nodes)
-            .links(root.edges)
-            .size([width, height])
-            .linkDistance(200)
-            .charge(-2000)
-            .start();
-//        var layout = d3.layout.cluster()
-//            .nodes(root.nodes)
-//            .links(root.edges)
-//            .size([width, height])
-//            .children(function(d,i){
-//                alert(i);
-//                return d.children;
-//            });
-//        var force = d3.forceSimulation(root.nodes)
-//            .force("link", d3.forceLink(root.edges).distance(100))
-//            .force("charge", d3.forceManyBody())
-//            .force("center", d3.forceCenter(width / 2, height / 2));
-        //绘制连接线
-        var edges_line = svg.selectAll("line")
-            .data(root.edges)
-            .enter()
-            .append("line")
-            .style("stroke", "#ccc")
-            .style("stroke_width", 1);
-        var edges_text = svg.selectAll(".linetext")
-            .data(root.edges)
-            .enter()
-            .append("text")
-            .attr("class", "linetext")
-            .text(function (d) {
-                return d.relation;
-            });
-        //绘制结点
-        var node_img = svg.selectAll("image")
-            .data(root.nodes)
-            .enter()
-            .append("image")
-            .attr("width", img_w)
-            .attr("height", img_h)
-            .attr("xlink:href", function (d) {
-                return d.image
-            })
-            .on("dblclick", function (d, i) {
-                d.fixed = false;
-            })//.call(force.drag().on("start"));
-            .call(layout.drag);
-        var node_dx = -20,
-            node_dy = 20;
-        var node_text = svg.selectAll(".nodetext")
-            .data(root.nodes)
-            .enter()
-            .append("text")
-            .attr("class", "nodetext")
-            .attr("dx", node_dx)
-            .attr("dy", node_dy)
-            .text(function (d) {
-                return d.name
-            });
-
-        var moveFunc = function () {
-            //限制结点的边界
-            root.nodes.forEach(function (d, i) {
-                d.x = d.x - img_w / 2 < 0 ? img_w : d.x;
-                d.x = d.x + img_w / 2 > width ? width - img_w / 2 : d.x;
-                d.y = d.y - img_h / 2 < 0 ? img_h / 2 : d.y;
-                d.y = d.y + img_h > height ? height - img_h : d.y;
-            });
-            //刷新连接线的位置
-            edges_line.attr("x1", function (d) {
-                return d.source.x;
-            })
-                .attr("y1", function (d) {
-                    return d.source.y;
-                })
-                .attr("x2", function (d) {
-                    return d.target.x;
-                })
-                .attr("y2", function (d) {
-                    return d.target.y;
-                });
-            //刷新连接线上的文字位置
-            edges_text.attr("x", function (d) {
-                return (d.source.x + d.target.x) / 2;
-            })
-                .attr("y", function (d) {
-                    return (d.source.y + d.target.y) / 2;
-                });
-            //刷新结点图片位置
-            node_img.attr("x", function (d) {
-                return d.x - img_w / 2;
-            })
-                .attr("y", function (d) {
-                    return d.y - img_h / 2
-                });
-            //刷新结点图片位置
-            node_text.attr("x", function (d) {
-                return d.x
-            })
-                .attr("y", function (d) {
-                    return d.y + img_h / 2.5
-                });
-
-        };
-
-        //运动刷新
-        var firstEnd = true;
-        layout.on("tick", function(){
-            if (firstEnd){
-                moveFunc();
+<script>
+    function updateGraph(jsonUrl){
+        d3.json(jsonUrl, function (error, json) {
+            if (error) {
+                return console.log(error);
             }
+            update(json);
         });
-        //拖拽开始后设定被拖拽对象为固定
-        var drag = layout.drag()
-            .on("dragstart", function (d) {
-                d.fixed = true;
-            });
-    })
-    ;
-
+    }
 </script>
+<script src="js/graph.js"></script>
+<input type="button" value="update" onclick="updateGraph('relation.json')"/>
 </body>
 </html>

@@ -1,0 +1,156 @@
+{
+  "nodes": [
+    {
+      "name": "某某持枪杀人案",
+      "image": "images/case.png",
+      "depth": 0
+    },
+    {
+      "name": "王二被杀案",
+      "image": "images/case.png",
+      "depth": 0
+    },
+    {
+      "name": "案件地走访调查",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "案件材料获取",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "受害人家庭背景了解",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "基站话单分析",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "案件地基站话单获取",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "核实电话号码",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "受害人家庭背景了解",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "案发地监控调取",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "反馈线索1",
+      "image": "images/xkdna.jpg",
+      "depth": 0
+    },
+    {
+      "name": "反馈线索2",
+      "image": "images/xkdna.jpg",
+      "depth": 0
+    },
+    {
+      "name": "反馈线索3",
+      "image": "images/xkdna.jpg",
+      "depth": 0
+    },
+    {
+      "name": "反馈线索4",
+      "image": "images/xkdna.jpg",
+      "depth": 0
+    },
+    {
+      "name": "反馈线索5",
+      "image": "images/xkdna.jpg",
+      "depth": 0
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "target": 1,
+      "relation": "串并案"
+    },
+    {
+      "source": 1,
+      "target": 0,
+      "relation": "串并案"
+    },
+    {
+      "source": 0,
+      "target": 4,
+      "relation": ""
+    },
+    {
+      "source": 1,
+      "target": 2,
+      "relation": ""
+    },
+    {
+      "source": 2,
+      "target": 10,
+      "relation": ""
+    },
+    {
+      "source": 10,
+      "target": 9,
+      "relation": ""
+    },
+    {
+      "source": 2,
+      "target": 3,
+      "relation": ""
+    },
+    {
+      "source": 3,
+      "target": 11,
+      "relation": ""
+    },
+    {
+      "source": 1,
+      "target": 8,
+      "relation": ""
+    },
+    {
+      "source": 1,
+      "target": 12,
+      "relation": ""
+    },
+    {
+      "source": 1,
+      "target": 5,
+      "relation": ""
+    },
+    {
+      "source": 5,
+      "target": 13,
+      "relation": ""
+    },
+    {
+      "source": 13,
+      "target": 7,
+      "relation": ""
+    },
+    {
+      "source": 5,
+      "target": 6,
+      "relation": ""
+    },
+    {
+      "source": 6,
+      "target": 14,
+      "relation": ""
+    }
+  ]
+}
