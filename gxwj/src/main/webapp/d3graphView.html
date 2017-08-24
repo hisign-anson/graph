@@ -25,16 +25,6 @@
     }
 </style>
 <body>
-<script>
-    function updateGraph(jsonUrl){
-        d3.json(jsonUrl, function (error, json) {
-            if (error) {
-                return console.log(error);
-            }
-            update(json);
-        });
-    }
-</script>
 <script src="js/graph.js"></script>
 <input type="button" value="update" onclick="updateGraph('relation.json')"/>
 </body>
