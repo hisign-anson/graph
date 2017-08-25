@@ -63,11 +63,29 @@ function update(json) {
         .attr("width", img_w)
         .attr("height", img_h)
         .attr("xlink:href", function (d) {
-            return d.image
+            return d.image;
         })
-        .on("dblclick", function (d, i) {
-            d.fixed = false;
-        })//.call(force.drag().on("start"));
+        // .on("dblclick", function (d, i) {
+        //     d.fixed = false;
+        // })
+        .on("click",function (d, i) {
+            var tooltip = "<div id='tooltip"+i+"'> 我正在测试浮动提示</div>";
+            $("body").append(tooltip);
+            $("#tooltip"+i).css({
+                "position":"absolute",
+                "top":(d.y+10)+"px",
+                "left":(d.x+35)+"px"
+            }).show();
+        })
+        .on("mouseout",function (d, i) {
+            $("#tooltip"+i).remove();
+        })
+        .on("mousemove",function (d, i) {
+            $("#tooltip"+i).css({
+                "top":(d.y+10)+"px",
+                "left":(d.x+35)+"px"
+            });
+        })
         .call(layout.drag);
     node_imgSVG.exit().remove();
 
