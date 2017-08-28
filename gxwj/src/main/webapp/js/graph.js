@@ -65,12 +65,14 @@ function update(json) {
         .attr("xlink:href", function (d) {
             return d.image;
         })
-        .on("dblclick", function (d, i) {
-            d.fixed = false;
-        })
+        // .on("dblclick", function (d, i) {
+        //     d.fixed = false;
+        // })
         .on("click",function (d, i) {
-            var tooltip = "<div id='tooltip"+i+"'> 我正在测试浮动提示</div>";
-            $("body").append(tooltip);
+            if ($("#tooltip"+i).length<=0){
+                var tooltipDiv = "<div id='tooltip"+i+"'> 我正在测试浮动提示</div>";
+                $("body").append(tooltipDiv);
+            }
             $("#tooltip"+i).css({
                 "position":"absolute",
                 "top":(d.y+10)+"px",
@@ -106,6 +108,11 @@ function update(json) {
     //拖拽开始后设定被拖拽对象为固定
     var drag = layout.drag()
         .on("dragstart", function (d) {
+            //释放其他节点
+            jsonContext.nodes.forEach(function (d, i) {
+                d.fixed = false;
+            });
+            //本节点固定
             d.fixed = true;
         });
 }
