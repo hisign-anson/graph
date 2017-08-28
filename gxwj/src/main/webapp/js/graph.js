@@ -65,9 +65,9 @@ function update(json) {
         .attr("xlink:href", function (d) {
             return d.image;
         })
-        // .on("dblclick", function (d, i) {
-        //     d.fixed = false;
-        // })
+        .on("dblclick", function (d, i) {
+            d.fixed = false;
+        })
         .on("click",function (d, i) {
             var tooltip = "<div id='tooltip"+i+"'> 我正在测试浮动提示</div>";
             $("body").append(tooltip);
