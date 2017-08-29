@@ -18,22 +18,22 @@ function addNode(nodeArrays,linkArrays){
             jsonContext.edges.push.apply( jsonContext.edges, linkArrays.slice( i, Math.max(i+5000,lenNodes)) );
         }
     }
-    update(jsonContext);
+    updateGraphJSON(jsonContext);
 }
 
-updateGraph(jsonInitUrl);
+updateGraphURL(jsonInitUrl);
 //根据链接更新
-function updateGraph(jsonUrl){
+function updateGraphURL(jsonUrl){
     d3.json(jsonUrl, function (error, json) {
         if (error) {
             return console.log(error);
         }
-        update(json);
+        updateGraphJSON(json);
     });
 }
 
 //根据json更新
-function update(json) {
+function updateGraphJSON(json) {
     jsonContext = json;
     layout
         .nodes(json.nodes)

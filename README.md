@@ -4,11 +4,14 @@
 
 ## graph.js
 主要逻辑在graph.js里面：
-- 可以通过addNode(nodeArrays,linkArrays)进行新增，必须是数组否则无效
-- 包含动态加载URL得到JSON数据
-    1. 动态加载URL数据方法updateGraph('relation.json')
+- 包含新增节点和连接线
+    1. addNode(nodeArrays,linkArrays)，必须是数组否则无效
+- 包含动态加载URL得到JSON数据得到新的图
+    1. updateGraphURL('relation.json')
+- 包含动态加载JSON得到新的图
+    1. updateGraphJSON(jsonObject)
 - 添加线，线的文字，节点图，节点文字四个元素，这四个元素会根据力导图的物理模型进行TICK的计算
-- 有向图线的箭头marker
+- 有向图线的箭头marker，决定展示出来的是有向图还是无向图的关键因素
 - 增加图标的点击等等事件，目前给出点击菜单配置
 - 目前对于力导图的物理模型增加了摩擦力设置friction(0.6)和gravity(0.08)保证TICK效果不会过分弹（增加刚性并不能有效解决）
 
