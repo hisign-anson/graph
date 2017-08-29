@@ -1,79 +1,108 @@
 {
   "nodes": [
     {
+      "id":"001",
       "name": "某某持枪杀人案",
       "image": "images/case.png",
+      "type": "1",
       "desc": "",
       "depth": 0
     },
     {
+      "id":"002",
       "name": "王二被杀案",
       "image": "images/case.png",
+      "type": "1",
       "depth": 0
     },
     {
+      "id":"003",
       "name": "案件地走访调查",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"004",
       "name": "案件材料获取",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"005",
       "name": "受害人家庭背景了解",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"006",
       "name": "基站话单分析",
       "image": "images/xkfinger.jpg",
       "depth": 1
     },
     {
+      "id":"007",
       "name": "案件地基站话单获取",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"008",
       "name": "核实电话号码",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"009",
       "name": "受害人家庭背景了解",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"010",
       "name": "案发地监控调取",
       "image": "images/xkfinger.jpg",
+      "type": "2",
       "depth": 1
     },
     {
+      "id":"011",
       "name": "反馈线索1",
       "image": "images/xkdna.jpg",
+      "type": "3",
       "depth": 0
     },
     {
+      "id":"012",
       "name": "反馈线索2",
       "image": "images/xkdna.jpg",
+      "type": "3",
       "depth": 0
     },
     {
+      "id":"013",
       "name": "反馈线索3",
       "image": "images/xkdna.jpg",
+      "type": "3",
       "depth": 0
     },
     {
+      "id":"014",
       "name": "反馈线索4",
       "image": "images/xkdna.jpg",
+      "type": "3",
       "depth": 0
     },
     {
+      "id":"015",
       "name": "反馈线索5",
       "image": "images/xkdna.jpg",
+      "type": "3",
       "depth": 0
     }
   ],
