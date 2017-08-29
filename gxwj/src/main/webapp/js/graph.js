@@ -5,6 +5,22 @@ var img_w = 50,
 var jsonContext,edges_line,edges_text,node_img,node_text;
 var jsonInitUrl = "huangshijinTest.json";
 
+function addNode(nodeArrays,linkArrays){
+    var lenNodes = nodeArrays.length;
+    var lenLinks = linkArrays.length;
+    if (lenNodes>0){
+        for (var i=0; i < lenNodes; i=i+5000) {
+            jsonContext.nodes.push.apply( jsonContext.nodes, nodeArrays.slice( i, Math.max(i+5000,lenNodes)) );
+        }
+    }
+    if (lenLinks>0){
+        for (var i=0; i < lenLinks; i=i+5000) {
+            jsonContext.edges.push.apply( jsonContext.edges, linkArrays.slice( i, Math.max(i+5000,lenNodes)) );
+        }
+    }
+    update(jsonContext);
+}
+
 updateGraph(jsonInitUrl);
 //根据链接更新
 function updateGraph(jsonUrl){

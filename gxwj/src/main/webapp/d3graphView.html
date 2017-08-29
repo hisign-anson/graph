@@ -26,6 +26,44 @@
 </style>
 <body>
 <script src="js/graph.js"></script>
+<script>
+    function addNodes(){
+        var nodeStr1 = "\n" +
+            "    {\n" +
+            "      \"name\": \"反馈线索xxxxx\",\n" +
+            "      \"image\": \"images/xkdna.jpg\",\n" +
+            "      \"depth\": 0\n" +
+            "    }";
+        var nodeStr2 =
+            "    {\n" +
+            "      \"name\": \"反馈线索ccccc\",\n" +
+            "      \"image\": \"images/xkdna.jpg\",\n" +
+            "      \"depth\": 0\n" +
+            "    }";
+        var linkStr1 = "\n" +
+            "    {\n" +
+            "      \"source\": 3,\n" +
+            "      \"target\": 16,\n" +
+            "      \"relation\": \"\"\n" +
+            "    }";
+        var linkStr2 = "\n" +
+            "    {\n" +
+            "      \"source\": 4,\n" +
+            "      \"target\": 15,\n" +
+            "      \"relation\": \"\"\n" +
+            "    }";
+        var node1 = JSON.parse(nodeStr1);
+        var node2 = JSON.parse(nodeStr2);
+        var link1 = JSON.parse(linkStr1);
+        var nodeArray = new Array();
+        nodeArray.push(node1);
+        nodeArray.push(node2);
+        var linkArray = new Array();
+        linkArray.push(link1);
+        addNode(nodeArray,linkArray);
+    }
+</script>
 <input type="button" value="update" onclick="updateGraph('relation.json')"/>
+<input type="button" value="add" onclick="addNodes()"/>
 </body>
 </html>
