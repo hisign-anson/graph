@@ -9,22 +9,12 @@ var zTreeObj;
 var setting = {
     callback: {
         beforeClick: function (treeId, treeNode, clickFlag) {
-            // if (!treeNode.isParent) {
-            //     alert("请选择父节点");
-            //     return false;
-            // } else {
-            //     return true;
-            // }
-
             alert("[ beforeClick ]:" + treeNode.name);
             return (treeNode.click != false);
-        },
-        // beforeAsync: beforeAsync,
-        // onAsyncError: onAsyncError,
-        // onAsyncSuccess: onAsyncSuccess
+        }
     }
 };
-// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+
 var zNodes0 = [
     {
         name: "父节点菜单1",
@@ -122,9 +112,12 @@ function updateGraphJSON(json) {
         .attr("xlink:href", function (d) {
             return d.image;
         })
+        //右键节点显示菜单
+
         // .on("dblclick", function (d, i) {
         //     d.fixed = false;
         // })
+        //点击节点显示菜单
         .on("click", function (d, i) {
             var that = $(this);
             if ($("#tooltip" + i).length <= 0) {
