@@ -4,7 +4,48 @@ var img_w = 50,
     img_h = 60;
 var jsonContext,edges_line,edges_text,node_img,node_text;
 var jsonInitUrl = "huangshijinTest.json";
+var zTreeObj;
+// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+var setting = {
+    callback: {
+        beforeClick: function (treeId, treeNode, clickFlag) {
+            // if (!treeNode.isParent) {
+            //     alert("请选择父节点");
+            //     return false;
+            // } else {
+            //     return true;
+            // }
 
+            alert("[ beforeClick ]:" + treeNode.name);
+            return (treeNode.click != false);
+        },
+        // beforeAsync: beforeAsync,
+        // onAsyncError: onAsyncError,
+        // onAsyncSuccess: onAsyncSuccess
+    }
+};
+// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+var zNodes0 = [
+    {
+        name: "父节点菜单1",
+        open: true,
+        children: [
+            {name: "父节点菜单1的子节点1"},
+            {name: "父节点菜单1的子节点2"}
+        ]
+    },
+    {
+        name: "父节点菜单2",
+        open: true,
+        children: [
+            {name: "父节点菜单2的子节点1"},
+            {name: "父节点菜单2的子节点2"}
+        ]
+    },
+    {
+        name: "没有子节点的父节点菜单2"
+    }
+];
 function addNode(nodeArrays,linkArrays){
     var lenNodes = nodeArrays.length;
     var lenLinks = linkArrays.length;
@@ -84,24 +125,74 @@ function updateGraphJSON(json) {
         // .on("dblclick", function (d, i) {
         //     d.fixed = false;
         // })
-        .on("click",function (d, i) {
-            if ($("#tooltip"+i).length<=0){
-                var tooltipDiv = "<div id='tooltip"+i+"'> 我正在测试浮动提示</div>";
+        .on("click", function (d, i) {
+            var that = $(this);
+            if ($("#tooltip" + i).length <= 0) {
+                var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
                 $("body").append(tooltipDiv);
             }
-            $("#tooltip"+i).css({
-                "position":"absolute",
-                "top":(d.y+10)+"px",
-                "left":(d.x+35)+"px"
+            console.info(d);
+            console.info(i);
+            $("#tooltip" + i).css({
+                "position": "absolute",
+                "top": (d.y - img_h) + "px",
+                "left": (d.x + 35) + "px"
             }).show();
+            // // 加载不同的树形菜单数据
+            // var zNodes = "zNodes"+i;
+            // zNodes = eval('(' + zNodes + ')');
+            //加载同一个树形菜单数据
+            var zNodes = zNodes0;
+            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
+            //如果还有兄弟元素tooltip显示，则remove兄弟元素
+            var tooltipCurrent = $("#tooltip" + i);
+            var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+            if (tooltipSiblings.length > 0) {
+                console.info(tooltipSiblings);
+                tooltipSiblings.remove();
+            }
+            //当点击的区域是节点或者菜单之外时
+            $(document).click(function (e) {
+                var target = e.target.tagName;
+                if (target != "image") {
+                    tooltipCurrent.remove();
+                }
+            });
         })
-        .on("mouseout",function (d, i) {
-            $("#tooltip"+i).remove();
+        //当鼠标指针位于元素上方时
+        // .on("mouseover",function (d, i) {
+        //     if ($("#tooltip"+i).length<=0){
+        //         var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
+        //         $("body").append(tooltipDiv);
+        //     }
+        //     console.info(d);
+        //     console.info(i);
+        //     $("#tooltip" + i).css({
+        //         "position": "absolute",
+        //         "top": (d.y - img_h) + "px",
+        //         "left": (d.x + 35) + "px"
+        //     }).show();
+        //     // // 加载不同的树形菜单数据
+        //     // var zNodes = "zNodes"+i;
+        //     // zNodes = eval('(' + zNodes + ')');
+        //     //加载同一个树形菜单数据
+        //     var zNodes = zNodes0;
+        //     zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
+        //     //如果还有兄弟元素tooltip显示，则remove兄弟元素
+        //     var tooltipCurrent = $("#tooltip" + i);
+        //     var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+        //     if(tooltipSiblings.length > 0){
+        //         console.info(tooltipSiblings);
+        //         tooltipSiblings.remove();
+        //     }
+        // })
+        .on("mouseout", function (d, i) {
+            // $("#tooltip"+i).remove();
         })
-        .on("mousemove",function (d, i) {
-            $("#tooltip"+i).css({
-                "top":(d.y+10)+"px",
-                "left":(d.x+35)+"px"
+        .on("mousemove", function (d, i) {
+            $("#tooltip" + i).css({
+                "top": (d.y - img_h) + "px",
+                "left": (d.x + 35) + "px"
             });
         })
         .call(layout.drag);

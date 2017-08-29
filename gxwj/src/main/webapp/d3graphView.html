@@ -2,29 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="js/d3.3.5.17.js"></script>
-    <script src="js/jquery.js"></script>
+    <title>d3graph-demo</title>
+    <link rel="stylesheet" href="plugins/ztree/ztree.css">
+    <link rel="stylesheet" href="css/graph.css">
 </head>
-<style>
-    .nodetext {
-        font-size: 12px;
-        font-family: SimSun;
-        fill: #ff3451;
-    }
-
-    .linetext {
-        font-size: 12px;
-        font-family: SimSun;
-        fill: #000079;
-        fill-opacity: 1.0;
-    }
-
-    .link.resolved {
-      stroke-dasharray: 0,2 1;
-    }
-</style>
 <body>
+<script src="js/d3.3.5.17.js"></script>
+<script src="js/jquery.js"></script>
+<script src="plugins/ztree/ztree.js"></script>
+
 <script src="js/graph.js"></script>
 <script>
     function addNodes(){

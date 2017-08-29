@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../font/font-awesome/fontawesome-webfont.eot');
+    src: url('../font/font-awesome/fontawesome-webfont-iefix.eot') format('embedded-opentype'),
+    url('../font/font-awesome/fontawesome-webfont.woff2') format('woff2'),
+    url('../font/font-awesome/fontawesome-webfont.woff') format('woff'),
+    url('../font/font-awesome/fontawesome-webfont.ttf') format('truetype'),
+    url('../font/font-awesome/fontawesome-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Microsoft Yahei',Arial,SimSun,sans-serif;
+    font-size: 12px;
+}
+/*覆盖ztree的样式 start */
+/*.ztree *{*/
+    /*font-size: 14px!important;*/
+    /*font-family: "Microsoft YaHei"!important;*/
+/*}*/
+
+.ztree li a:hover {
+    text-decoration: none;
+}
+.ztree li,
+.ztree li a.curSelectedNode,
+.ztree li span{
+    line-height: 26px!important;
+}
+.ztree li a.curSelectedNode {
+    padding-top: 1px;
+}
+.ztree li a,
+.ztree li span.button,
+.ztree li a.curSelectedNode,
+.ztree li a.tmpTargetNode_inner{
+    height: 26px;
+}
+.ztree li span.button.ico_docu,
+.ztree li span.button.ico_close,
+.ztree li span.button.ico_open{
+    background-image: url('');
+    vertical-align: top!important;
+    color: #FFB62C;
+}
+.ztree li span.button.ico_docu:before,
+.ztree li span.button.ico_close:before,
+.ztree li span.button.ico_open:before {
+    font-family: FontAwesome;
+}
+.ztree li span.button.ico_docu:before{
+    content: "\f15c";
+}
+.ztree li span.button.ico_close:before{
+    content: "\f07b";
+}
+.ztree li span.button.ico_open:before{
+    content: "\f07c";
+}
+.ztree a.curSelectedNode{
+    background-color: transparent!important;
+    border: none!important;
+}
+/*.ztree a > span[id$='_span'],*/
+.ztree a.curSelectedNode > span[id$='_span']{
+    padding: 1px 5px;
+    background-color: #FFB62C;
+    color: #ffffff;
+    border-radius: 3px;
+}
+.ztree.deploy span.button.ico_docu,
+.ztree.deploy span.button.ico_close,
+.ztree.deploy span.button.ico_open{
+    color: #22A0E2;
+}
+/*.ztree.deploy a > span[id$='_span']:hover,*/
+.ztree.deploy a.curSelectedNode > span[id$='_span']{
+    background-color: #22A0E2;
+}
+.ztree li.already_drag > a span[id$='_ico']{
+    color: #dddddd!important;
+}
+.ztree li.already_drag > a span[id$='_span']{
+    color: #dddddd!important;
+}
+.ztree li.already_drag > a.curSelectedNode > span[id$='_span']{
+    color: #ffffff!important;
+    background: #dddddd!important;
+}
+/*覆盖ztree的样式 end*/
+/*tooltip的样式 start*/
+.tooltip-box{
+    background-color: #dddddd;
+}
+.tooltip-box:before{
+    /*content: ' ';*/
+    /*position: absolute;*/
+    /*left: -10px;*/
+    /*top: 0;*/
+    /*border-top: 10px solid transparent;*/
+    /*border-bottom: 10px solid transparent;*/
+    /*border-right: 10px solid #22A0E2;*/
+    /*font-size: 0;*/
+    /*line-height: 0;*/
+}
+.tooltip-box .ztree{
+    width: 200px;
+    overflow: auto;
+}
+/*tooltip的样式 end*/
+.nodetext {
+    fill: #ff3451;
+}
+
+.linetext {
+    fill: #000079;
+    fill-opacity: 1.0;
+}
+
+.link.resolved {
+    stroke-dasharray: 0,2 1;
+}
