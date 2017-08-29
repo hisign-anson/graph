@@ -6,7 +6,7 @@
 主要逻辑在graph.js里面：
 - 可以通过addNode(nodeArrays,linkArrays)进行新增，必须是数组否则无效
 - 包含动态加载URL得到JSON数据
-1. 动态加载URl数据方法updateGraph('relation.json')
+1. `动态加载URl数据方法updateGraph('relation.json')`
 - 添加线，线的文字，节点图，节点文字四个元素，这四个元素会根据力导图的物理模型进行TICK的计算
 - 有向图线的箭头marker
 - 增加图标的点击等等事件，目前给出点击菜单配置
