@@ -505,9 +505,9 @@ function updateGraphJSON(json) {
                 });
             }
         })
-        // .on("dblclick", function (d, i) {
-        //     d.fixed = false;
-        // })
+        .on("dblclick", function (d, i) {
+            d.fixed = false;
+        })
         //点击节点显示菜单
         // .on("click", function (d, i) {
         //     var that = $(this);
