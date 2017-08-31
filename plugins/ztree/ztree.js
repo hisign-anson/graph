@@ -1,4 +1,3 @@
-typeof $style === 'function' && $style(getDistPath() + 'plugin/ztree/ztree.css');
 (function (p) {
     var G, H, I, J, K, L, r = {}, u = {}, v = {}, M = {
             treeId: "",

@@ -2,51 +2,377 @@ var width = 1200,
     height = 900;
 var img_w = 50,
     img_h = 60;
-var jsonContext,edges_line,edges_text,node_img,node_text;
+var jsonContext, edges_line, edges_text, node_img, node_text;
+//DOM事件对象——d3.event
+var event = d3.event;
 var jsonInitUrl = "huangshijinTest.json";
 var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 var setting = {
     callback: {
+        //单击菜单节点之前的事件回调函数
         beforeClick: function (treeId, treeNode, clickFlag) {
-            alert("[ beforeClick ]:" + treeNode.name);
+            console.info("[ beforeClick ]:" + treeNode.name);
+            return (treeNode.click != false);
+        },
+        //菜单节点被点击的事件回调函数
+        onClick: function (event, treeId, treeNode, clickFlag) {
+            alert("[ onClick ]:" + treeNode.name);
             return (treeNode.click != false);
         }
     }
 };
-
-var zNodes0 = [
+//菜单数据
+var menuDefault = [
     {
-        name: "父节点菜单1",
+        name: "默认菜单1",
         open: true,
         children: [
-            {name: "父节点菜单1的子节点1"},
-            {name: "父节点菜单1的子节点2"}
+            {name: "默认菜单1的子节点1"},
+            {name: "默认菜单1的子节点2"}
         ]
     },
     {
-        name: "父节点菜单2",
+        name: "默认菜单2",
         open: true,
         children: [
-            {name: "父节点菜单2的子节点1"},
-            {name: "父节点菜单2的子节点2"}
+            {name: "默认菜单2的子节点1"},
+            {name: "默认菜单2的子节点2"}
         ]
     },
     {
-        name: "没有子节点的父节点菜单2"
+        name: "没有子节点的默认菜单3"
     }
 ];
-function addNode(nodeArrays,linkArrays){
+var menuById = [
+    {
+        "menuName": "zNodes0",
+        "type": "1",
+        "menuData": [
+            {
+                name: "001菜单1",
+                open: true,
+                children: [
+                    {name: "001菜单1的子节点1"},
+                    {name: "001菜单1的子节点2"}
+                ]
+            },
+            {
+                name: "001菜单2",
+                open: true,
+                children: [
+                    {name: "001菜单2的子节点1"},
+                    {name: "001菜单2的子节点2"}
+                ]
+            },
+            {
+                name: "001没有子节点的菜单2"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes1",
+        "type": "1",
+        "menuData": [
+            {
+                name: "002菜单1",
+                open: true,
+                children: [
+                    {name: "002菜单1的子节点1"},
+                    {name: "002菜单1的子节点2"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes2",
+        "type": "1",
+        "menuData": [
+            {
+                name: "003没有子节点的菜单1"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes3",
+        "type": "1",
+        "menuData": [
+            {
+                name: "004菜单1",
+                open: true,
+                children: [
+                    {name: "004菜单1的子节点1"},
+                    {name: "004菜单1的子节点2"}
+                ]
+            },
+            {
+                name: "004菜单2",
+                open: true,
+                children: [
+                    {name: "004菜单2的子节点1"}
+                ]
+            },
+            {
+                name: "004没有子节点的菜单2"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes4",
+        "type": "1",
+        "menuData": [
+            {
+                name: "005菜单1",
+                open: true,
+                children: [
+                    {name: "005菜单1的子节点1"}
+                ]
+            },
+            {
+                name: "005菜单2",
+                open: true,
+                children: [
+                    {name: "005菜单2的子节点1"},
+                    {name: "005菜单2的子节点2"}
+                ]
+            },
+            {
+                name: "005没有子节点的菜单2"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes5",
+        "type": "1",
+        "menuData": [
+            {
+                name: "006菜单1",
+                open: true,
+                children: [
+                    {
+                        name: "006菜单1的子节点1",
+                        open: true,
+                        children: [
+                            {name: "006菜单1的子节点1的子节点1"},
+                            {name: "006菜单1的子节点1的子节点2"}
+                        ]
+                    },
+                    {name: "006菜单1的子节点2"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes6",
+        "type": "1",
+        "menuData": [
+            {
+                name: "007菜单1",
+                open: true,
+                children: [
+                    {name: "007菜单1的子节点1"},
+                    {name: "007菜单1的子节点2"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes7",
+        "type": "1",
+        "menuData": [
+            {
+                name: "008菜单1",
+                open: true,
+                children: [
+                    {name: "008菜单1的子节点1"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes8",
+        "type": "1",
+        "menuData": [
+            {
+                name: "009菜单1",
+                open: true,
+                children: [
+                    {name: "009菜单1的子节点1"},
+                    {name: "009菜单1的子节点2"}
+                ]
+            },
+            {
+                name: "009菜单2",
+                open: true,
+                children: [
+                    {name: "009菜单2的子节点1"},
+                    {name: "009菜单2的子节点2"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes9",
+        "type": "1",
+        "menuData": [
+            {
+                name: "010菜单1",
+                open: true,
+                children: [
+                    {name: "010菜单1的子节点1"},
+                    {name: "010菜单1的子节点2"}
+                ]
+            },
+            {
+                name: "010菜单2",
+                open: true,
+                children: [
+                    {name: "010菜单2的子节点1"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes10",
+        "type": "1",
+        "menuData": [
+            {
+                name: "011菜单1",
+                open: true,
+                children: [
+                    {name: "011菜单1的子节点1"},
+                    {name: "011菜单1的子节点2"}
+                ]
+            },
+            {
+                name: "011菜单2",
+                open: true,
+                children: [
+                    {name: "011菜单2的子节点1"},
+                    {name: "011菜单2的子节点2"}
+                ]
+            },
+            {
+                name: "011没有子节点的菜单2"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes11",
+        "type": "1",
+        "menuData": [
+            {
+                name: "012没有子节点的菜单1"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes12",
+        "type": "1",
+        "menuData": [
+            {
+                name: "013没有子节点的菜单1"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes13",
+        "type": "1",
+        "menuData": [
+            {
+                name: "014菜单1",
+                open: true,
+                children: [
+                    {name: "014菜单1的子节点1"},
+                    {name: "014菜单1的子节点2"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes14",
+        "type": "1",
+        "menuData": [
+            {
+                name: "015菜单1",
+                open: true,
+                children: [
+                    {name: "015菜单1的子节点1"}
+                ]
+            },
+            {
+                name: "015菜单2",
+                open: true,
+                children: [
+                    {name: "015菜单2的子节点1"},
+                    {name: "015菜单2的子节点2"}
+                ]
+            }
+        ]
+    }
+];
+var menuByType = [
+    {
+        "menuName": "zNodes1",
+        "type": "1",
+        "menuData": [
+            {
+                name: "type1菜单1",
+                open: true,
+                children: [
+                    {name: "type1菜单1的子节点1"},
+                    {name: "type1菜单1的子节点2"}
+                ]
+            },
+            {
+                name: "type1菜单2",
+                open: true,
+                children: [
+                    {name: "type1菜单2的子节点1"},
+                    {name: "type1菜单2的子节点2"}
+                ]
+            },
+            {
+                name: "type1没有子节点的菜单2"
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes2",
+        "type": "2",
+        "menuData": [
+            {
+                name: "type2菜单1",
+                open: true,
+                children: [
+                    {name: "type2菜单1的子节点1"},
+                    {name: "type2菜单1的子节点2"}
+                ]
+            }
+        ]
+    },
+    {
+        "menuName": "zNodes3",
+        "type": "3",
+        "menuData": [
+            {
+                name: "type3没有子节点的菜单1"
+            }
+        ]
+    }
+];
+
+function addNode(nodeArrays, linkArrays) {
     var lenNodes = nodeArrays.length;
     var lenLinks = linkArrays.length;
-    if (lenNodes>0){
-        for (var i=0; i < lenNodes; i=i+5000) {
-            jsonContext.nodes.push.apply( jsonContext.nodes, nodeArrays.slice( i, Math.max(i+5000,lenNodes)) );
+    if (lenNodes > 0) {
+        for (var i = 0; i < lenNodes; i = i + 5000) {
+            jsonContext.nodes.push.apply(jsonContext.nodes, nodeArrays.slice(i, Math.max(i + 5000, lenNodes)));
         }
     }
-    if (lenLinks>0){
-        for (var i=0; i < lenLinks; i=i+5000) {
-            jsonContext.edges.push.apply( jsonContext.edges, linkArrays.slice( i, Math.max(i+5000,lenNodes)) );
+    if (lenLinks > 0) {
+        for (var i = 0; i < lenLinks; i = i + 5000) {
+            jsonContext.edges.push.apply(jsonContext.edges, linkArrays.slice(i, Math.max(i + 5000, lenNodes)));
         }
     }
     updateGraphJSON(jsonContext);
@@ -54,7 +380,7 @@ function addNode(nodeArrays,linkArrays){
 
 updateGraphURL(jsonInitUrl);
 //根据链接更新
-function updateGraphURL(jsonUrl){
+function updateGraphURL(jsonUrl) {
     d3.json(jsonUrl, function (error, json) {
         if (error) {
             return console.log(error);
@@ -83,7 +409,6 @@ function updateGraphJSON(json) {
     svg.selectAll(".nodetext").remove();
     var node_textSVG = svg.selectAll(".nodetext")
         .data(json.nodes);
-
     //绘制连接线
     edges_line = edges_lineSVG
         .enter()
@@ -102,7 +427,6 @@ function updateGraphJSON(json) {
             return d.relation;
         });
     edges_textSVG.exit().remove();
-
     //绘制结点
     node_img = node_imgSVG
         .enter()
@@ -112,46 +436,112 @@ function updateGraphJSON(json) {
         .attr("xlink:href", function (d) {
             return d.image;
         })
+        //去掉默认的contextmenu事件，否则会和右键事件同时出现。
+        .on("contextmenu", function () {
+            event.preventDefault();
+        })
         //右键节点显示菜单
+        .on("mousedown", function (d, i) {
+            //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
+            if (event.button == 2) {
+                var that = $(this);
+                if ($("#tooltip" + i).length <= 0) {
+                    var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
+                    $("body").append(tooltipDiv);
+                }
+                console.info(d);
+                console.info(i);
+                //根据id和type显示不同的菜单
+                var zNodes;
+                if (d.id) {
+                    // 加载不同的树形菜单数据
+                    // var zNodes = "zNodes" + i;
+                    // zNodes = eval('(' + zNodes + ')');
+                    zNodes = menuById[i].menuData;
+                } else {
+                    if (d.type) {
+                        switch (d.type){
+                            case "1":
+                                zNodes = menuByType[1].menuData;
+                                break;
+                            case "2":
+                                zNodes = menuByType[2].menuData;
+                                break;
+                            case "3":
+                                zNodes = menuByType[3].menuData;
+                                break;
+                            default:
+                                zNodes = menuDefault;
+                        }
+                    } else {
+                        //加载同一个树形菜单数据
+                        zNodes = menuDefault;
+                    }
+                }
+                zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
 
+                $("#tooltip" + i).css({
+                    "position": "absolute",
+                    "top": (d.y - (img_h / 2)) + "px",
+                    "left": (d.x + 35) + "px"
+                }).show();
+                var tooltipCurrent = $("#tooltip" + i);
+                var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+                //如果还有兄弟元素tooltip显示，则remove兄弟元素
+                if (tooltipSiblings.length > 0) {
+                    tooltipSiblings.remove();
+                }
+                $(document).click(function (e) {
+                    var target = e.target;
+                    var isShowTooltip = $(target).parents(".tooltip-box").is(":visible");
+                    // //当点击的区域是节点或者菜单之外时
+                    // if (target.tagName != "image" && !isShowTooltip) {
+                    //     tooltipCurrent.remove();
+                    // }
+                    //当点击的区域是菜单之外时
+                    if (!isShowTooltip) {
+                        tooltipCurrent.remove();
+                    }
+                });
+            }
+        })
         // .on("dblclick", function (d, i) {
         //     d.fixed = false;
         // })
         //点击节点显示菜单
-        .on("click", function (d, i) {
-            var that = $(this);
-            if ($("#tooltip" + i).length <= 0) {
-                var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
-                $("body").append(tooltipDiv);
-            }
-            console.info(d);
-            console.info(i);
-            $("#tooltip" + i).css({
-                "position": "absolute",
-                "top": (d.y - img_h) + "px",
-                "left": (d.x + 35) + "px"
-            }).show();
-            // // 加载不同的树形菜单数据
-            // var zNodes = "zNodes"+i;
-            // zNodes = eval('(' + zNodes + ')');
-            //加载同一个树形菜单数据
-            var zNodes = zNodes0;
-            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
-            //如果还有兄弟元素tooltip显示，则remove兄弟元素
-            var tooltipCurrent = $("#tooltip" + i);
-            var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
-            if (tooltipSiblings.length > 0) {
-                console.info(tooltipSiblings);
-                tooltipSiblings.remove();
-            }
-            //当点击的区域是节点或者菜单之外时
-            $(document).click(function (e) {
-                var target = e.target.tagName;
-                if (target != "image") {
-                    tooltipCurrent.remove();
-                }
-            });
-        })
+        // .on("click", function (d, i) {
+        //     var that = $(this);
+        //     if ($("#tooltip" + i).length <= 0) {
+        //         var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
+        //         $("body").append(tooltipDiv);
+        //     }
+        //     console.info(d);
+        //     console.info(i);
+        //     $("#tooltip" + i).css({
+        //         "position": "absolute",
+        //         "top": (d.y - img_h) + "px",
+        //         "left": (d.x + 35) + "px"
+        //     }).show();
+        //     // // 加载不同的树形菜单数据
+        //     // var zNodes = "zNodes"+i;
+        //     // zNodes = eval('(' + zNodes + ')');
+        //     //加载同一个树形菜单数据
+        //     var zNodes = zNodes0;
+        //     zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
+        //     //如果还有兄弟元素tooltip显示，则remove兄弟元素
+        //     var tooltipCurrent = $("#tooltip" + i);
+        //     var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+        //     if (tooltipSiblings.length > 0) {
+        //         tooltipSiblings.remove();
+        //     }
+        //     //当点击的区域是节点或者菜单之外时
+        //     $(document).click(function (e) {
+        //         var target = e.target.tagName;
+        //         if (target != "image") {
+        //             tooltipCurrent.remove();
+        //         }
+        //     });
+        // })
         //当鼠标指针位于元素上方时
         // .on("mouseover",function (d, i) {
         //     if ($("#tooltip"+i).length<=0){
@@ -179,12 +569,12 @@ function updateGraphJSON(json) {
         //         tooltipSiblings.remove();
         //     }
         // })
-        .on("mouseout", function (d, i) {
-            // $("#tooltip"+i).remove();
-        })
+        // .on("mouseout", function (d, i) {
+        //     // $("#tooltip"+i).remove();
+        // })
         .on("mousemove", function (d, i) {
             $("#tooltip" + i).css({
-                "top": (d.y - img_h) + "px",
+                "top": (d.y - (img_h / 2)) + "px",
                 "left": (d.x + 35) + "px"
             });
         })
