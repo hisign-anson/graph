@@ -7,50 +7,12 @@
     <link rel="stylesheet" href="css/graph.css">
 </head>
 <body>
-<div id="test">dianji</div>
 <script src="js/d3.3.5.17.js"></script>
 <script src="js/jquery.js"></script>
 <script src="plugins/ztree/ztree.js"></script>
 
 <script src="js/graph.js"></script>
 <script>
-    var zNodes0 = [
-        {
-            name: "父节点菜单1",
-            open: true,
-            children: [
-                {name: "父节点菜单1的子节点1"},
-                {name: "父节点菜单1的子节点2"}
-            ]
-        },
-        {
-            name: "父节点菜单2",
-            open: true,
-            children: [
-                {name: "父节点菜单2的子节点1"},
-                {name: "父节点菜单2的子节点2"}
-            ]
-        },
-        {
-            name: "没有子节点的父节点菜单2"
-        }
-    ];
-
-    window.onload = function(){
-        //去掉默认的contextmenu事件，否则会和右键事件同时出现。
-        document.getElementById("test").oncontextmenu = function(e){
-            e.preventDefault();
-        };
-        document.getElementById("test").onmousedown = function(e){
-            if(e.button ==2){
-                alert("你点了右键");
-            }else if(e.button ==0){
-                alert("你点了左键");
-            }else if(e.button ==1){
-                alert("你点了滚轮");
-            }
-        }
-    };
     function addNodes(){
         var nodeStr1 = "{\n" +
             "      \"id\":\"011\",\n" +
