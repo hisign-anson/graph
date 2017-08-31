@@ -599,9 +599,9 @@ function updateGraphJSON(json) {
     var drag = layout.drag()
         .on("dragstart", function (d) {
             //释放其他节点
-            jsonContext.nodes.forEach(function (d, i) {
-                d.fixed = false;
-            });
+            // jsonContext.nodes.forEach(function (d, i) {
+            //     d.fixed = false;
+            // });
             //本节点固定
             d.fixed = true;
         });

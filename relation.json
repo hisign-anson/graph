@@ -1,0 +1,161 @@
+{
+  "nodes": [
+    {
+      "name": "案件名称1",
+      "image": "images/case.png",
+      "depth": 0
+    },
+    {
+      "name": "案件名称2",
+      "image": "images/case.png",
+      "depth": 0
+    },
+    {
+      "name": "案件名称3",
+      "image": "images/case.png",
+      "depth": 0
+    },
+    {
+      "name": "现勘指纹D",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "现勘指纹U",
+      "image": "images/xkfinger.jpg",
+      "depth": 1
+    },
+    {
+      "name": "现勘DNAX",
+      "image": "images/xkdna.jpg",
+      "depth": 1
+    },
+    {
+      "name": "现勘DNAQ",
+      "image": "images/xkdna.jpg",
+      "depth": 1
+    },
+    {
+      "name": "现勘足迹N",
+      "image": "images/foot.jpg",
+      "depth": 1
+    },
+    {
+      "name": "现勘足迹L",
+      "image": "images/foot.jpg",
+      "depth": 1
+    },
+    {
+      "name": "人类指纹V",
+      "image": "images/finger.png",
+      "depth": 2
+    },
+    {
+      "name": "人类指纹J",
+      "image": "images/finger.png",
+      "depth": 2
+    },
+    {
+      "name": "人类DNAR",
+      "image": "images/dna.jpg",
+      "depth": 2
+    },
+    {
+      "name": "人类DNAP",
+      "image": "images/dna.jpg",
+      "depth": 2
+    },
+    {
+      "name": "张三",
+      "image": "images/person.png",
+      "depth": 3
+    },
+    {
+      "name": "李四",
+      "image": "images/person.png",
+      "depth": 3
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "target": 3,
+      "relation": ""
+    },
+    {
+      "source": 3,
+      "target": 9,
+      "relation": ""
+    },
+    {
+      "source": 3,
+      "target": 4,
+      "relation": "指纹比中"
+    },
+    {
+      "source": 9,
+      "target": 13,
+      "relation": ""
+    },
+    {
+      "source": 9,
+      "target": 10,
+      "relation": "指纹比中"
+    },
+    {
+      "source": 0,
+      "target": 5,
+      "relation": ""
+    },
+    {
+      "source": 5,
+      "target": 12,
+      "relation": ""
+    },
+    {
+      "source": 1,
+      "target": 7,
+      "relation": ""
+    },
+    {
+      "source": 1,
+      "target": 8,
+      "relation": ""
+    },
+    {
+      "source": 2,
+      "target": 4,
+      "relation": ""
+    },
+    {
+      "source": 2,
+      "target": 8,
+      "relation": ""
+    },
+    {
+      "source": 7,
+      "target": 8,
+      "relation": "足迹比中"
+    },
+    {
+      "source": 4,
+      "target": 10,
+      "relation": ""
+    },
+    {
+      "source": 6,
+      "target": 11,
+      "relation": ""
+    },
+    {
+      "source": 11,
+      "target": 14,
+      "relation": ""
+    },
+    {
+      "source": 11,
+      "target": 12,
+      "relation": "DNA比中"
+    }
+  ]
+}
