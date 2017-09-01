@@ -460,7 +460,7 @@ function updateGraphJSON(json) {
                     zNodes = menuById[i].menuData;
                 } else {
                     if (d.type) {
-                        switch (d.type){
+                        switch (d.type) {
                             case "1":
                                 zNodes = menuByType[1].menuData;
                                 break;
@@ -480,13 +480,35 @@ function updateGraphJSON(json) {
                 }
                 zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
 
-                $("#tooltip" + i).css({
+                var tooltipCurrent = $("#tooltip" + i);
+                var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+                tooltipCurrent.css({
                     "position": "absolute",
                     "top": (d.y - (img_h / 2)) + "px",
                     "left": (d.x + 35) + "px"
                 }).show();
-                var tooltipCurrent = $("#tooltip" + i);
-                var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+                //start 判断当前节点的位置
+                var a = (d.x + 35) + tooltipCurrent.width();
+                var b = (d.y - (img_h / 2)) + tooltipCurrent.height();
+                if (a > $(window).width()) {
+                    tooltipCurrent.css({
+                        "left": (d.x - tooltipCurrent.width() - 30) + "px"
+                    })
+                }
+                if (b > $(window).height()) {
+                    tooltipCurrent.css({
+                        "top": (d.y - tooltipCurrent.height()) + "px"
+                    });
+                } else {
+                    var winST = $(window).scrollTop();
+                    if ((d.y - (img_h / 2)) <= winST) {
+                        tooltipCurrent.css({
+                            "top": (winST + 5) + "px"
+                        });
+                        console.info("top");
+                    }
+                }
+                //end 判断当前节点的位置
                 //如果还有兄弟元素tooltip显示，则remove兄弟元素
                 if (tooltipSiblings.length > 0) {
                     tooltipSiblings.remove();
@@ -494,10 +516,6 @@ function updateGraphJSON(json) {
                 $(document).click(function (e) {
                     var target = e.target;
                     var isShowTooltip = $(target).parents(".tooltip-box").is(":visible");
-                    // //当点击的区域是节点或者菜单之外时
-                    // if (target.tagName != "image" && !isShowTooltip) {
-                    //     tooltipCurrent.remove();
-                    // }
                     //当点击的区域是菜单之外时
                     if (!isShowTooltip) {
                         tooltipCurrent.remove();
@@ -508,75 +526,34 @@ function updateGraphJSON(json) {
         .on("dblclick", function (d, i) {
             d.fixed = false;
         })
-        //点击节点显示菜单
-        // .on("click", function (d, i) {
-        //     var that = $(this);
-        //     if ($("#tooltip" + i).length <= 0) {
-        //         var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
-        //         $("body").append(tooltipDiv);
-        //     }
-        //     console.info(d);
-        //     console.info(i);
-        //     $("#tooltip" + i).css({
-        //         "position": "absolute",
-        //         "top": (d.y - img_h) + "px",
-        //         "left": (d.x + 35) + "px"
-        //     }).show();
-        //     // // 加载不同的树形菜单数据
-        //     // var zNodes = "zNodes"+i;
-        //     // zNodes = eval('(' + zNodes + ')');
-        //     //加载同一个树形菜单数据
-        //     var zNodes = zNodes0;
-        //     zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
-        //     //如果还有兄弟元素tooltip显示，则remove兄弟元素
-        //     var tooltipCurrent = $("#tooltip" + i);
-        //     var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
-        //     if (tooltipSiblings.length > 0) {
-        //         tooltipSiblings.remove();
-        //     }
-        //     //当点击的区域是节点或者菜单之外时
-        //     $(document).click(function (e) {
-        //         var target = e.target.tagName;
-        //         if (target != "image") {
-        //             tooltipCurrent.remove();
-        //         }
-        //     });
-        // })
-        //当鼠标指针位于元素上方时
-        // .on("mouseover",function (d, i) {
-        //     if ($("#tooltip"+i).length<=0){
-        //         var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
-        //         $("body").append(tooltipDiv);
-        //     }
-        //     console.info(d);
-        //     console.info(i);
-        //     $("#tooltip" + i).css({
-        //         "position": "absolute",
-        //         "top": (d.y - img_h) + "px",
-        //         "left": (d.x + 35) + "px"
-        //     }).show();
-        //     // // 加载不同的树形菜单数据
-        //     // var zNodes = "zNodes"+i;
-        //     // zNodes = eval('(' + zNodes + ')');
-        //     //加载同一个树形菜单数据
-        //     var zNodes = zNodes0;
-        //     zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
-        //     //如果还有兄弟元素tooltip显示，则remove兄弟元素
-        //     var tooltipCurrent = $("#tooltip" + i);
-        //     var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
-        //     if(tooltipSiblings.length > 0){
-        //         console.info(tooltipSiblings);
-        //         tooltipSiblings.remove();
-        //     }
-        // })
-        // .on("mouseout", function (d, i) {
-        //     // $("#tooltip"+i).remove();
-        // })
         .on("mousemove", function (d, i) {
-            $("#tooltip" + i).css({
+            var tooltipCurrent = $("#tooltip" + i);
+            tooltipCurrent.css({
                 "top": (d.y - (img_h / 2)) + "px",
                 "left": (d.x + 35) + "px"
             });
+            //start 判断当前节点的位置
+            var a = (d.x + 35) + tooltipCurrent.width();
+            var b = (d.y - (img_h / 2)) + tooltipCurrent.height();
+            if (a > $(window).width()) {
+                tooltipCurrent.css({
+                    "left": (d.x - tooltipCurrent.width() - 30) + "px"
+                })
+            }
+            if (b > $(window).height()) {
+                tooltipCurrent.css({
+                    "top": (d.y - tooltipCurrent.height()) + "px"
+                });
+            } else {
+                var winST = $(window).scrollTop();
+                if ((d.y - (img_h / 2)) <= winST) {
+                    tooltipCurrent.css({
+                        "top": (winST + 5) + "px"
+                    });
+                    console.info("top");
+                }
+            }
+            //end 判断当前节点的位置
         })
         .call(layout.drag);
     node_imgSVG.exit().remove();
