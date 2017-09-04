@@ -3,8 +3,6 @@ var width = 1200,
 var img_w = 50,
     img_h = 60;
 var jsonContext, edges_line, edges_text, node_img, node_text;
-//DOM事件对象——d3.event
-var event = d3.event;
 var jsonInitUrl = "huangshijinTest.json";
 var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
@@ -438,13 +436,14 @@ function updateGraphJSON(json) {
         })
         //去掉默认的contextmenu事件，否则会和右键事件同时出现。
         .on("contextmenu", function () {
-            event.preventDefault();
+            //DOM事件对象——d3.event
+            d3.event.preventDefault();
         })
         //右键节点显示菜单
         .on("mousedown", function (d, i) {
+            var that = d3.event;
             //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
-            if (event.button == 2) {
-                var that = $(this);
+            if (that.button == 2) {
                 if ($("#tooltip" + i).length <= 0) {
                     var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
                     $("body").append(tooltipDiv);
