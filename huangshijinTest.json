@@ -1,186 +1,501 @@
 {
   "nodes": [
     {
-      "id":"001",
-      "name": "某某持枪杀人案",
-      "image": "images/case.png",
-      "type": "1",
-      "desc": "",
-      "depth": 0
+      "image": "taskid.jpg",
+      "name": "@31-OCT-17 06.55.52.803000 PM",
+      "taskCreateTime": "2017-10-31 18:55:52",
+      "id": "5CD691B37DC7F035E050A8C052013BDD",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
     },
     {
-      "id":"002",
-      "name": "916特大杀人案专案组",
-      "image": "images/case.png",
-      "type": "1",
-      "depth": 0
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "@01-NOV-17 10.01.26.364000 AM",
+      "id": "5CE3329258E946CEE050A8C052016BCB",
+      "type": "fkid"
     },
     {
-      "id":"003",
-      "name": "案件地走访调查",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "taskid.jpg",
+      "name": "@01-NOV-17 11.08.30.215000 AM",
+      "taskCreateTime": "2017-11-01 11:08:30",
+      "id": "5CE41A7B199D8DBCE050A8C052016ECA",
+      "type": "taskid",
+      "taskCreatorUserId": "9B70E3ADD8D74D6F9EE8468FE0EA18E4",
+      "taskStatus": "0"
     },
     {
-      "id":"004",
-      "name": "案件材料获取",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "taskid.jpg",
+      "name": "@31-OCT-17 05.25.00.352000 PM",
+      "taskCreateTime": "2017-10-31 17:25:00",
+      "id": "5CCF58DB4DB20467E050A8C052014B9D",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "0"
     },
     {
-      "id":"005",
-      "name": "受害人家庭背景了解",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "fkid.jpg",
+      "feedBackUserId": "9B70E3ADD8D74D6F9EE8468FE0EA18E4",
+      "name": "嗯哦哦分KKK@01-NOV-17 11.22.41.651000 AM",
+      "id": "5CE46264B39C063EE050A8C052016ECE",
+      "type": "fkid"
     },
     {
-      "id":"006",
-      "name": "基站话单分析",
-      "image": "images/xkfinger.jpg",
-      "depth": 1
+      "image": "taskid.jpg",
+      "name": "aaa@01-NOV-17 11.58.46.131000 AM",
+      "taskCreateTime": "2017-11-01 11:58:46",
+      "id": "5CE3329258EF46CEE050A8C052016BCB",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
     },
     {
-      "id":"007",
-      "name": "案件地基站话单获取",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "测试1030——反馈线索@01-NOV-17 09.57.46.898000 AM",
+      "id": "5CE3329258E646CEE050A8C052016BCB",
+      "type": "fkid"
     },
     {
-      "id":"008",
-      "name": "核实电话号码",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "taskid.jpg",
+      "name": "任务（嗯哦啦）的反馈线索（额咯KKK啦）的追加任务@31-OCT-17 03.40.05.472000 PM",
+      "taskCreateTime": "2017-10-31 15:40:05",
+      "id": "5CD2F03AE76ECB98E050A8C052014B99",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
     },
     {
-      "id":"009",
-      "name": "受害人家庭背景了解",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "额咯KKK啦@30-OCT-17 01.09.24.126000 PM",
+      "id": "5CBD7E8C9826BEAAE050A8C052010A44",
+      "type": "fkid"
     },
     {
-      "id":"010",
-      "name": "案发地监控调取",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
+      "image": "groupid.jpg",
+      "name": "广州专案组",
+      "id": "5CBD7E8C981EBEAAE050A8C052010A44",
+      "type": "groupid"
     },
     {
-      "id":"011",
-      "name": "反馈线索1",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "or民工名额和你@30-OCT-17 04.13.14.656000 PM",
+      "id": "5CC031DE754C2DF3E050A8C052014050",
+      "type": "fkid"
     },
     {
-      "id":"012",
-      "name": "反馈线索2",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
+      "image": "fkid.jpg",
+      "feedBackUserId": "9B70E3ADD8D74D6F9EE8468FE0EA18E4",
+      "name": "嗯1哦哦婆婆外婆@01-NOV-17 11.21.41.725000 AM",
+      "id": "5CE41A7B199F8DBCE050A8C052016ECA",
+      "type": "fkid"
     },
     {
-      "id":"013",
-      "name": "反馈线索3",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
+      "image": "taskid.jpg",
+      "name": "任务（测试1030）的补充任务@31-OCT-17 03.42.16.666000 PM",
+      "taskCreateTime": "2017-10-31 15:42:16",
+      "id": "5CD0B3B389D69FA2E050A8C052014B9B",
+      "type": "taskid",
+      "taskCreatorUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "taskStatus": "1"
     },
     {
-      "id":"014",
-      "name": "反馈线索4",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
+      "image": "ajid.jpg",
+      "name": "梁土尧未申报居住登记信息",
+      "id": "PCS4403201709260000000176937883",
+      "type": "ajid"
     },
     {
-      "id":"015",
-      "name": "反馈线索5",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
+      "image": "taskid.jpg",
+      "name": "@31-OCT-17 05.39.14.786000 PM",
+      "taskCreateTime": "2017-10-31 17:39:14",
+      "id": "5CCF58DB4DB40467E050A8C052014B9D",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "0"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "9B70E3ADD8D74D6F9EE8468FE0EA18E4",
+      "name": "定型哦破@01-NOV-17 11.23.11.798000 AM",
+      "id": "5CE46264B39F063EE050A8C052016ECE",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "@30-OCT-17 02.44.01.996000 PM",
+      "taskCreateTime": "2017-10-30 14:44:01",
+      "id": "5CBEC3E8256BF5C2E050A8C052012855",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "1158@01-NOV-17 11.58.31.882000 AM",
+      "taskCreateTime": "2017-11-01 11:58:31",
+      "id": "5CE3329258ED46CEE050A8C052016BCB",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "0"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "三次反馈@01-NOV-17 10.06.02.451000 AM",
+      "id": "5CE34A86722652E2E050A8C052016ECC",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "@30-OCT-17 03.02.14.018000 PM",
+      "taskCreateTime": "2017-10-30 15:02:14",
+      "id": "5CBEC3E8256DF5C2E050A8C052012855",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "查到一条线索@31-OCT-17 06.14.59.099000 PM",
+      "id": "5CD606EFFE0CE4A3E050A8C052013282",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "@01-NOV-17 12.01.40.753000 PM",
+      "taskCreateTime": "2017-11-01 12:01:40",
+      "id": "5CE41A7B6E973D37E050A8C052016EC7",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "0"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "明明莫名@31-OCT-17 06.47.38.687000 PM",
+      "id": "5CD66AD094F6DA01E050A8C052013BE0",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "@31-OCT-17 05.46.48.890000 PM",
+      "taskCreateTime": "2017-10-31 17:46:48",
+      "id": "5CCF58DB4DB60467E050A8C052014B9D",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "迷宫哦婆婆@30-OCT-17 03.58.57.839000 PM",
+      "id": "5CBFFECC5206F66DE050A8C052013BD3",
+      "type": "fkid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "mix嗖嗖嗖@31-OCT-17 06.55.09.313000 PM",
+      "id": "5CD67BD6E35793DDE050A8C052013BE2",
+      "type": "fkid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "哦破婆婆POS@30-OCT-17 03.34.59.117000 PM",
+      "id": "5CBF3D485A0A8FC1E050A8C052012852",
+      "type": "fkid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "or民工名额和你@30-OCT-17 04.15.16.488000 PM",
+      "id": "5CC039217DA7BBE2E050A8C052014136",
+      "type": "fkid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "111@01-NOV-17 01.34.49.739000 PM",
+      "id": "5CE34A86722952E2E050A8C052016ECC",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "aaa@01-NOV-17 02.12.36.436000 PM",
+      "taskCreateTime": "2017-11-01 14:12:36",
+      "id": "5CE3A5602B71F66FE050A8C05201684D",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "0"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "一条反馈线索@31-OCT-17 06.20.43.176000 PM",
+      "id": "5CD0B3B389DA9FA2E050A8C052014B9B",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "1157@01-NOV-17 11.57.48.488000 AM",
+      "taskCreateTime": "2017-11-01 11:57:48",
+      "id": "5CE3329258EB46CEE050A8C052016BCB",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "0"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "now图JJ——反馈线索2@01-NOV-17 10.04.26.241000 AM",
+      "id": "5CE34A86722452E2E050A8C052016ECC",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "测试1030-任务名称@31-OCT-17 01.57.12.515000 PM",
+      "taskCreateTime": "2017-10-30 14:29:48",
+      "id": "5CBEC3E82569F5C2E050A8C052012855",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "2"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "再反馈@31-OCT-17 06.24.25.611000 PM",
+      "id": "5CD624FC4FAAC837E050A8C052013896",
+      "type": "fkid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "name": "你还希望在@30-OCT-17 03.44.49.195000 PM",
+      "id": "5CBF44848F49F42FE050A8C052012859",
+      "type": "fkid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedBackUserId": "72A754038B9E4A6B8F6FC7278E3B1EF9",
+      "name": "df@01-NOV-17 01.55.45.899000 PM",
+      "id": "5CE41A7B6E9B3D37E050A8C052016EC7",
+      "type": "fkid"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "@30-OCT-17 01.08.46.655000 PM",
+      "taskCreateTime": "2017-10-30 13:08:46",
+      "id": "5CBD8FB2C9094B66E050A8C052010A49",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
+    },
+    {
+      "image": "taskid.jpg",
+      "name": "@31-OCT-17 03.36.50.514000 PM",
+      "taskCreateTime": "2017-10-31 15:36:50",
+      "id": "5CCF58DB4DAE0467E050A8C052014B9D",
+      "type": "taskid",
+      "taskCreatorUserId": "88021FFBD7AQ4836870F189A0C813934",
+      "taskStatus": "1"
     }
   ],
   "edges": [
     {
       "source": 0,
-      "target": 1,
-      "relation": "串并案"
-    },
-    {
-      "source": 1,
-      "target": 0,
-      "relation": "串并案"
+      "target": 11,
+      "relation": "反馈"
     },
     {
       "source": 0,
       "target": 4,
-      "relation": ""
+      "relation": "反馈"
     },
     {
-      "source": 1,
-      "target": 2,
-      "relation": ""
-    },
-    {
-      "source": 2,
-      "target": 10,
-      "relation": ""
-    },
-    {
-      "source": 10,
-      "target": 9,
-      "relation": ""
+      "source": 0,
+      "target": 15,
+      "relation": "反馈"
     },
     {
       "source": 2,
-      "target": 3,
-      "relation": ""
-    },
-    {
-      "source": 3,
-      "target": 11,
-      "relation": ""
-    },
-    {
-      "source": 1,
-      "target": 8,
-      "relation": ""
-    },
-    {
-      "source": 1,
-      "target": 12,
-      "relation": ""
-    },
-    {
-      "source": 1,
-      "target": 5,
-      "relation": ""
+      "target": 0,
+      "relation": "任务补充"
     },
     {
       "source": 5,
+      "target": 36,
+      "relation": "反馈"
+    },
+    {
+      "source": 5,
+      "target": 28,
+      "relation": "反馈"
+    },
+    {
+      "source": 7,
+      "target": 34,
+      "relation": "反馈"
+    },
+    {
+      "source": 7,
+      "target": 18,
+      "relation": "反馈"
+    },
+    {
+      "source": 7,
+      "target": 20,
+      "relation": "反馈"
+    },
+    {
+      "source": 9,
       "target": 13,
-      "relation": ""
+      "relation": "涉及案件"
     },
     {
-      "source": 13,
+      "source": 9,
+      "target": 23,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 21,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 17,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 16,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 19,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 3,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 12,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 5,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 0,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
       "target": 7,
-      "relation": ""
+      "relation": "新任务"
     },
     {
-      "source": 5,
-      "target": 6,
-      "relation": ""
+      "source": 9,
+      "target": 37,
+      "relation": "新任务"
     },
     {
-      "source": 6,
+      "source": 9,
+      "target": 29,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 38,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 33,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
+      "target": 31,
+      "relation": "新任务"
+    },
+    {
+      "source": 9,
       "target": 14,
-      "relation": ""
+      "relation": "新任务"
+    },
+    {
+      "source": 12,
+      "target": 6,
+      "relation": "反馈"
+    },
+    {
+      "source": 12,
+      "target": 30,
+      "relation": "反馈"
+    },
+    {
+      "source": 16,
+      "target": 25,
+      "relation": "反馈"
+    },
+    {
+      "source": 19,
+      "target": 26,
+      "relation": "反馈"
+    },
+    {
+      "source": 19,
+      "target": 35,
+      "relation": "反馈"
+    },
+    {
+      "source": 19,
+      "target": 27,
+      "relation": "反馈"
+    },
+    {
+      "source": 19,
+      "target": 10,
+      "relation": "反馈"
+    },
+    {
+      "source": 19,
+      "target": 24,
+      "relation": "反馈"
+    },
+    {
+      "source": 23,
+      "target": 22,
+      "relation": "反馈"
+    },
+    {
+      "source": 37,
+      "target": 8,
+      "relation": "反馈"
+    },
+    {
+      "source": 38,
+      "target": 1,
+      "relation": "反馈"
+    },
+    {
+      "source": 38,
+      "target": 32,
+      "relation": "反馈"
     }
   ]
 }
