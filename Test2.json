@@ -1,15 +1,13 @@
 {
   "nodes": [{
     "image": "taskid.jpg",
+    "hidden": true,
     "name": "任务名称7@",
     "taskCreateTime": "FQ_TIME",
     "id": "taskid7",
     "type": "taskid",
     "taskCreatorUserId": "FQR",
-    "taskStatus": "0",
-    "toEdges": [{
-      "index": 10
-    }]
+    "taskStatus": "0"
   },
     {
       "image": "taskid.jpg",
@@ -18,10 +16,7 @@
       "id": "taskid6",
       "type": "taskid",
       "taskCreatorUserId": "FQR",
-      "taskStatus": "0",
-      "toEdges": [{
-        "index": 11
-      }]
+      "taskStatus": "0"
     },
     {
       "image": "taskid.jpg",
@@ -30,10 +25,7 @@
       "id": "taskid5",
       "type": "taskid",
       "taskCreatorUserId": "FQR",
-      "taskStatus": "0",
-      "outEdges": [{
-        "index": 0
-      }]
+      "taskStatus": "0"
     },
     {
       "image": "taskid.jpg",
@@ -42,13 +34,7 @@
       "id": "taskid4",
       "type": "taskid",
       "taskCreatorUserId": "FQR",
-      "taskStatus": "0",
-      "outEdges": [{
-        "index": 2
-      },
-        {
-          "index": 3
-        }]
+      "taskStatus": "0"
     },
     {
       "image": "taskid.jpg",
@@ -57,16 +43,7 @@
       "id": "taskid3",
       "type": "taskid",
       "taskCreatorUserId": "FQR",
-      "taskStatus": "0",
-      "toEdges": [{
-        "index": 7
-      }],
-      "outEdges": [{
-        "index": 4
-      },
-        {
-          "index": 1
-        }]
+      "taskStatus": "0"
     },
     {
       "image": "taskid.jpg",
@@ -75,15 +52,7 @@
       "id": "taskid2",
       "type": "taskid",
       "taskCreatorUserId": "FQR",
-      "taskStatus": "0",
-      "toEdges": [{
-        "index": 3
-      },{
-        "index": 8
-      }],
-      "outEdges": [{
-        "index": 5
-      }]
+      "taskStatus": "0"
     },
     {
       "image": "taskid.jpg",
@@ -92,83 +61,40 @@
       "id": "taskid1",
       "type": "taskid",
       "taskCreatorUserId": "FQR",
-      "taskStatus": "0",
-      "toEdges": [{
-        "index": 9
-      }]
+      "taskStatus": "0"
     },
     {
       "image": "groupid.jpg",
       "name": "专案组名称2",
       "id": "groupid2",
-      "type": "groupid",
-      "outEdges": [{
-        "index": 6
-      },
-        {
-          "index": 7
-        },
-        {
-          "index": 8
-        },
-        {
-          "index": 9
-        }]
+      "type": "groupid"
     },
     {
       "image": "fkid.jpg",
       "feedBackUserId": "FKR",
       "name": "反馈线索4@",
       "id": "fkid4",
-      "type": "fkid",
-      "toEdges": [{
-        "index": 0
-      }]
+      "type": "fkid"
     },
     {
       "image": "fkid.jpg",
       "feedBackUserId": "FKR",
       "name": "反馈线索3@",
       "id": "fkid3",
-      "type": "fkid",
-      "toEdges": [{
-        "index": 2
-      }]
-    },
-    {
-      "image": "fkid.jpg",
-      "feedBackUserId": "FKR",
-      "name": "反馈线索2@",
-      "id": "fkid2",
-      "type": "fkid",
-      "toEdges": [{
-        "index": 4
-      }],
-      "outEdges": [{
-        "index": 10
-      }]
+      "type": "fkid"
     },
     {
       "image": "fkid.jpg",
       "feedBackUserId": "FKR",
       "name": "反馈线索1@",
       "id": "fkid1",
-      "type": "fkid",
-      "toEdges": [{
-        "index": 5
-      }],
-      "outEdges": [{
-        "index": 11
-      }]
+      "type": "fkid"
     },
     {
       "image": "ajid.jpg",
       "name": "孙灿荣被绑架案",
       "id": "PCS4420201709280000000116713859",
-      "type": "ajid",
-      "toEdges": [{
-        "index": 6
-      }]
+      "type": "ajid"
     }],
   "edges": [{
     "source": 2,
@@ -176,8 +102,8 @@
     "relation": "反馈"
   },
     {
-      "source": 4,
-      "target": 2,
+      "source": 2,
+      "target": 4,
       "relation": "任务补充"
     },
     {
@@ -197,12 +123,12 @@
     },
     {
       "source": 5,
-      "target": 11,
+      "target": 10,
       "relation": "反馈"
     },
     {
       "source": 7,
-      "target": 12,
+      "target": 11,
       "relation": "涉及案件"
     },
     {
@@ -222,12 +148,8 @@
     },
     {
       "source": 10,
-      "target": 0,
-      "relation": "追加任务"
-    },
-    {
-      "source": 11,
       "target": 1,
-      "relation": "追加任务"
+      "hidden": true,
+      "relation": "111追加任务"
     }]
 }

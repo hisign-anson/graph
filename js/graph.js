@@ -363,27 +363,15 @@ var menuByType = [
     }
 ];
 
-function addNode(nodeArrays, linkArrays) {
-    var lenNodes = nodeArrays.length;
-    var lenLinks = linkArrays.length;
-    if (lenNodes > 0) {
-        for (var i = 0; i < lenNodes; i = i + 5000) {
-            jsonContext.nodes.push.apply(jsonContext.nodes, nodeArrays.slice(i, Math.max(i + 5000, lenNodes)));
-        }
-    }
-    if (lenLinks > 0) {
-        for (var i = 0; i < lenLinks; i = i + 5000) {
-            jsonContext.edges.push.apply(jsonContext.edges, linkArrays.slice(i, Math.max(i + 5000, lenNodes)));
-        }
-    }
-    updateGraphJSON(jsonContext);
-}
+var edges_lineSVG;
+var edges_textSVG;
+var node_imgSVG;
+var node_textSVG;
 
 updateGraphURL(jsonInitUrl);
 //根据链接更新
 function updateGraphURL(jsonUrl) {
-    d3.json(jsonInitUrl, function (error, json) {
-        debugger
+    d3.json(jsonUrl, function (error, json) {
         if (error) {
             return console.log(error);
         }
@@ -400,24 +388,33 @@ function updateGraphJSON(json) {
         .start();
 
     svg.selectAll("line").remove();
-    var edges_lineSVG = svg.selectAll("line")
+    edges_lineSVG = svg.selectAll("line")
         .data(json.edges);
     svg.selectAll(".linetext").remove();
-    var edges_textSVG = svg.selectAll(".linetext")
+    edges_textSVG = svg.selectAll(".linetext")
         .data(json.edges);
     svg.selectAll("image").remove();
-    var node_imgSVG = svg.selectAll("image")
+    node_imgSVG = svg.selectAll("image")
         .data(json.nodes);
     svg.selectAll(".nodetext").remove();
-    var node_textSVG = svg.selectAll(".nodetext")
+    node_textSVG = svg.selectAll(".nodetext")
         .data(json.nodes);
+
     //绘制连接线
     edges_line = edges_lineSVG
         .enter()
         .append("line")
+        // .attr("style",function (d) {
+        //     if (d.hidden==true){
+        //         console.log(d.relation);
+        //         return "display:none";
+        //     }else {
+        //         return "display:block";
+        //     }
+        // })
         .style("stroke", "#808080")//颜色
         .style("stroke_width", 1)
-        .style("marker-end", "url(#resolved)")
+        .style("marker-end", "url(#resolved)");
     edges_lineSVG.exit().remove();
 
     //连线上的字
@@ -429,10 +426,30 @@ function updateGraphJSON(json) {
             return d.relation;
         });
     edges_textSVG.exit().remove();
+
     //绘制结点
     node_img = node_imgSVG
         .enter()
         .append("image")
+        .attr("edges",function (d) {
+            var nodeToEdges = d.toEdges;
+            var nodeOutEdges = d.outEdges;
+            var nodeEdges;
+            if (!nodeToEdges){
+                nodeEdges = nodeOutEdges;
+            }else if (!nodeOutEdges){
+                nodeEdges = nodeToEdges;
+            }else if (nodeToEdges && nodeOutEdges){
+                nodeEdges = nodeToEdges.concat(nodeOutEdges)
+            }else {
+                return;
+            }
+            var result = "";
+            for (var i=0;i<nodeEdges.length;i++){
+                result += nodeEdges[i].index+",";
+            }
+            return result;
+        })
         .attr("width", img_w)
         .attr("height", img_h)
         .attr("xlink:href", function (d) {
@@ -450,7 +467,6 @@ function updateGraphJSON(json) {
                 case "ajid":
                     image = "images/graph/type_case.png";
                     break;
-
             }
             return image;
         })
@@ -590,7 +606,7 @@ function updateGraphJSON(json) {
         .attr("dy", node_dy)
         // .html(html)
         .text(function (d) {
-            console.info(d.name);
+            // console.info(d.name);
             var arr = [];
             arr = d.name.split("@");
             var name = arr[0];
