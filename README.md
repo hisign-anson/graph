@@ -2,8 +2,10 @@
  目前采用力导图来布局，好处在于可以不用过分在乎节点位置，
  也能自动让节点看上去更加舒服、不紧凑
 
-## graph.js
+## graphLayout.js
 graph.js提供出来的方法
+- removeNode(index)
+    1. 根据index的数值，删除对应node节点，和该节点所有相关联的线（包括指向该节点和该节点指向出去的）
 - addNode(nodeArrays,linkArrays)
     1. 包含新增节点和连接线，必须是数组否则无效
 - updateGraphURL('relation.json')
@@ -46,6 +48,7 @@ graph.js的主要逻辑：
 - 添加线，线的文字，节点图，节点文字四个元素，这四个元素会根据力导图的物理模型进行TICK的计算
 - 有向图线的箭头marker，决定展示出来的是有向图还是无向图的关键因素
 - 目前对于力导图的物理模型增加了摩擦力设置friction(0.6)和gravity(0.08)保证TICK效果不会过分弹（增加刚性并不能有效解决）
+- 将模块分为graphLayout和graphAction。布局主要是节点和线等等样式的调试，而动作主要指拖拉，编辑节点等操作。
 
 ## force
 由于都是采用FORCE力导图，则简单说下力导图的原理。

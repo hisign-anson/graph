@@ -1,16 +1,19 @@
 {
-  "nodes": [{
-    "image": "taskid.jpg",
-    "name": "任务名称7@",
-    "taskCreateTime": "FQ_TIME",
-    "id": "taskid7",
-    "type": "taskid",
-    "taskCreatorUserId": "FQR",
-    "taskStatus": "0",
-    "toEdges": [{
-      "index": 10
-    }]
-  },
+  "nodes": [
+    {
+      "image": "taskid.jpg",
+      "name": "任务名称7@",
+      "taskCreateTime": "FQ_TIME",
+      "id": "taskid7",
+      "type": "taskid",
+      "taskCreatorUserId": "FQR",
+      "taskStatus": "0",
+      "toEdges": [
+        {
+          "index": 10
+        }
+      ]
+    },
     {
       "image": "taskid.jpg",
       "name": "任务名称6@",
@@ -19,9 +22,11 @@
       "type": "taskid",
       "taskCreatorUserId": "FQR",
       "taskStatus": "0",
-      "toEdges": [{
-        "index": 11
-      }]
+      "toEdges": [
+        {
+          "index": 11
+        }
+      ]
     },
     {
       "image": "taskid.jpg",
@@ -31,9 +36,16 @@
       "type": "taskid",
       "taskCreatorUserId": "FQR",
       "taskStatus": "0",
-      "outEdges": [{
-        "index": 0
-      }]
+      "toEdges": [
+        {
+          "index": 1
+        }
+      ],
+      "outEdges": [
+        {
+          "index": 0
+        }
+      ]
     },
     {
       "image": "taskid.jpg",
@@ -43,12 +55,14 @@
       "type": "taskid",
       "taskCreatorUserId": "FQR",
       "taskStatus": "0",
-      "outEdges": [{
-        "index": 2
-      },
+      "outEdges": [
+        {
+          "index": 2
+        },
         {
           "index": 3
-        }]
+        }
+      ]
     },
     {
       "image": "taskid.jpg",
@@ -58,15 +72,19 @@
       "type": "taskid",
       "taskCreatorUserId": "FQR",
       "taskStatus": "0",
-      "toEdges": [{
-        "index": 7
-      }],
-      "outEdges": [{
-        "index": 4
-      },
+      "toEdges": [
+        {
+          "index": 7
+        }
+      ],
+      "outEdges": [
+        {
+          "index": 4
+        },
         {
           "index": 1
-        }]
+        }
+      ]
     },
     {
       "image": "taskid.jpg",
@@ -76,14 +94,19 @@
       "type": "taskid",
       "taskCreatorUserId": "FQR",
       "taskStatus": "0",
-      "toEdges": [{
-        "index": 3
-      },{
-        "index": 8
-      }],
-      "outEdges": [{
-        "index": 5
-      }]
+      "toEdges": [
+        {
+          "index": 3
+        },
+        {
+          "index": 8
+        }
+      ],
+      "outEdges": [
+        {
+          "index": 5
+        }
+      ]
     },
     {
       "image": "taskid.jpg",
@@ -93,18 +116,21 @@
       "type": "taskid",
       "taskCreatorUserId": "FQR",
       "taskStatus": "0",
-      "toEdges": [{
-        "index": 9
-      }]
+      "toEdges": [
+        {
+          "index": 9
+        }
+      ]
     },
     {
       "image": "groupid.jpg",
       "name": "专案组名称2",
       "id": "groupid2",
       "type": "groupid",
-      "outEdges": [{
-        "index": 6
-      },
+      "outEdges": [
+        {
+          "index": 6
+        },
         {
           "index": 7
         },
@@ -113,7 +139,8 @@
         },
         {
           "index": 9
-        }]
+        }
+      ]
     },
     {
       "image": "fkid.jpg",
@@ -121,9 +148,11 @@
       "name": "反馈线索4@",
       "id": "fkid4",
       "type": "fkid",
-      "toEdges": [{
-        "index": 0
-      }]
+      "toEdges": [
+        {
+          "index": 0
+        }
+      ]
     },
     {
       "image": "fkid.jpg",
@@ -131,9 +160,11 @@
       "name": "反馈线索3@",
       "id": "fkid3",
       "type": "fkid",
-      "toEdges": [{
-        "index": 2
-      }]
+      "toEdges": [
+        {
+          "index": 2
+        }
+      ]
     },
     {
       "image": "fkid.jpg",
@@ -141,12 +172,16 @@
       "name": "反馈线索2@",
       "id": "fkid2",
       "type": "fkid",
-      "toEdges": [{
-        "index": 4
-      }],
-      "outEdges": [{
-        "index": 10
-      }]
+      "toEdges": [
+        {
+          "index": 4
+        }
+      ],
+      "outEdges": [
+        {
+          "index": 10
+        }
+      ]
     },
     {
       "image": "fkid.jpg",
@@ -154,27 +189,35 @@
       "name": "反馈线索1@",
       "id": "fkid1",
       "type": "fkid",
-      "toEdges": [{
-        "index": 5
-      }],
-      "outEdges": [{
-        "index": 11
-      }]
+      "toEdges": [
+        {
+          "index": 5
+        }
+      ],
+      "outEdges": [
+        {
+          "index": 11
+        }
+      ]
     },
     {
       "image": "ajid.jpg",
       "name": "孙灿荣被绑架案",
       "id": "PCS4420201709280000000116713859",
       "type": "ajid",
-      "toEdges": [{
-        "index": 6
-      }]
-    }],
-  "edges": [{
-    "source": 2,
-    "target": 8,
-    "relation": "反馈"
-  },
+      "toEdges": [
+        {
+          "index": 6
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": 2,
+      "target": 8,
+      "relation": "反馈"
+    },
     {
       "source": 4,
       "target": 2,
@@ -229,5 +272,6 @@
       "source": 11,
       "target": 1,
       "relation": "追加任务"
-    }]
+    }
+  ]
 }

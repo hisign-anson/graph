@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="css/graph.css">
 </head>
 <body>
-<script src="js/d3.3.5.17.js"></script>
 <script src="js/jquery.js"></script>
 <script src="plugins/ztree/ztree.js"></script>
 
-<script src="js/graph.js"></script>
+<script src="js/require.js" data-main="js/graphMain"></script>
 <script>
     function addNodes(){
         var nodeStr1 = "{\n" +
@@ -53,7 +52,7 @@
     }
 </script>
 <input type="button" value="update" onclick="updateGraphURL('Test2.json')"/>
-<input type="button" value="add" onclick="addNodes()"/>
+<input type="button" value="add" onclick="addNode()"/>
 <input id="indexValue" type="text"/>
 <input type="button" value="remove3" onclick="var indexValue = $('#indexValue').val();removeNode(indexValue)"/>
 </body>
