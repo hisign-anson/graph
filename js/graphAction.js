@@ -355,13 +355,20 @@ var menuByType = [
 ];
 
 function removeNode(index) {
+    if (!node_imgSVG[0][index]){
+        return;
+    }
     node_imgSVG[0][index].remove();
     var node = node_imgSVG[0];
     node_textSVG[0][index].remove();
 
-    var edgesStr = node[index].attributes["edges"].value;
+    var edgesArray = node[index].attributes["edges"];
+    if (!edgesArray) {
+        return;
+    }
+    var edgesStr = edgesArray.value;
     var edges = edgesStr.split(",");
-    console.log(edges)
+    // console.log(edges);
     for (var i = 0; i < edges.length; i++) {
         var edgeIndex = edges[i];
         if (edgeIndex != "") {
@@ -402,15 +409,15 @@ define(['graphLayout'], function () {
 
         node_imgSVG
             .attr("edges", function (d) {
-                var nodeToEdges = d.toEdges;
+                var nodeInEdges = d.inEdges;
                 var nodeOutEdges = d.outEdges;
                 var nodeEdges;
-                if (!nodeToEdges) {
+                if (!nodeInEdges && nodeOutEdges) {
                     nodeEdges = nodeOutEdges;
-                } else if (!nodeOutEdges) {
-                    nodeEdges = nodeToEdges;
-                } else if (nodeToEdges && nodeOutEdges) {
-                    nodeEdges = nodeToEdges.concat(nodeOutEdges)
+                } else if (!nodeOutEdges && nodeInEdges) {
+                    nodeEdges = nodeInEdges;
+                } else if (nodeInEdges && nodeOutEdges) {
+                    nodeEdges = nodeInEdges.concat(nodeOutEdges);
                 } else {
                     return;
                 }
@@ -574,6 +581,6 @@ define(['graphLayout'], function () {
     }
 
     return {
-        graphAction:graphAction
+        graphAction: graphAction
     }
 });
