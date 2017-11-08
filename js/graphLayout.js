@@ -76,6 +76,8 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
                 return console.log(error);
             }
             updateGraphJSON(json);
+
+            graphAction.graphAction(layout);
         });
     }
 
@@ -142,10 +144,6 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
         // .html(html)
         ;
         node_textSVG.exit().remove();
-
-        if (graphAction) {
-            graphAction.graphAction(layout);
-        }
     }
 
 //定义svg画板
@@ -173,7 +171,8 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
             .attr('fill', '#808080');//箭头颜色
 
     return {
-        updateGraphURL: updateGraphURL
+        updateGraphURL: updateGraphURL,
+        layout:layout
     };
 });
 // .attr("width", width)

@@ -355,6 +355,7 @@ var menuByType = [
 ];
 
 function removeNode(index) {
+    console.log(index);
     if (!node_imgSVG[0][index]){
         return;
     }
