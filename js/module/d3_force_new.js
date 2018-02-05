@@ -1,6 +1,6 @@
 define(['jQuery', 'd3V4'], function (jQuery, d3) {
     var width = 960, height = 500;
-    var svg, graphJson;
+    var svg, marker,forceLink,forceCharge,forceCenter,graphJson;
     var simulation;//力模拟器
     //图片节点属性
     var imgW = 48, imgH = 48, imgSrc = '../images/graph/';
@@ -87,50 +87,50 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
         });
     }
 
-    function mousedown() {
-        if (!mousedown_node && !mousedown_link) {
-            return;
-        }
-    }
-
-    function mousemove() {
-        if (!mousedown_node) return;
-
-        // update drag line
-        drag_line
-            .attr("x1", mousedown_node.x)
-            .attr("y1", mousedown_node.y)
-            .attr("x2", d3.mouse(this)[0])
-            .attr("y2", d3.mouse(this)[1]);
-
-    }
-
-    function mouseup() {
-        if (mousedown_node) {
-            // hide drag line
-            drag_line.attr("class", "drag_line_hidden");
-
-            if (!mouseup_node) {
-                // add node
-                var point = d3.mouse(this),
-                    node = {x: point[0], y: point[1]},
-                    n = nodesData.push(node);
-
-                // select new node
-                selected_node = node;
-                // selected_link = null;
-
-                // add link to mousedown node
-                linksData.push({
-                    relation: "新增线" + linksData.length, source: mousedown_node, target: node
-                });
-            }
-
-            _selfNew.d3Draw();
-        }
-        // clear mouse event vars
-        resetMouseVars();
-    }
+    // function mousedown() {
+    //     if (!mousedown_node && !mousedown_link) {
+    //         return;
+    //     }
+    // }
+    //
+    // function mousemove() {
+    //     if (!mousedown_node) return;
+    //
+    //     // update drag line
+    //     drag_line
+    //         .attr("x1", mousedown_node.x)
+    //         .attr("y1", mousedown_node.y)
+    //         .attr("x2", d3.mouse(this)[0])
+    //         .attr("y2", d3.mouse(this)[1]);
+    //
+    // }
+    //
+    // function mouseup() {
+    //     if (mousedown_node) {
+    //         // hide drag line
+    //         drag_line.attr("class", "drag_line_hidden");
+    //
+    //         if (!mouseup_node) {
+    //             // add node
+    //             var point = d3.mouse(this),
+    //                 node = {x: point[0], y: point[1]},
+    //                 n = nodesData.push(node);
+    //
+    //             // select new node
+    //             selected_node = node;
+    //             // selected_link = null;
+    //
+    //             // add link to mousedown node
+    //             linksData.push({
+    //                 relation: "新增线" + linksData.length, source: mousedown_node, target: node
+    //             });
+    //         }
+    //
+    //         _selfNew.d3Draw();
+    //     }
+    //     // clear mouse event vars
+    //     resetMouseVars();
+    // }
 
     return {
         d3Init: function () {
@@ -156,31 +156,21 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
              * d3.forceLink().distance()：设置连接距离
              * d3.forceLink().iterations()：设置迭代次数
              * */
-            var forceLink = d3.forceLink().strength(0.6).distance(200);
+            forceLink = d3.forceLink().strength(0.6).distance(200);
 
             /*
              * d3.forceManyBody()：创建多体力
              * d3.forceManyBody().strength()：设置力强度
              * */
-            var forceCharge = d3.forceManyBody().strength(-400);
+            forceCharge = d3.forceManyBody().strength(-400);
 
             /*
              * d3.forceCenter()：创建一个力中心
              * */
-            var forceCenter = d3.forceCenter(width / 2, height / 2);
-
-            /*
-             * d3.forceSimulation()：创建一个力模拟
-             * d3.forceSimulation().force(name[, force])：添加或移除力
-             * 描述：指定力的名称，并返回该力模拟
-             */
-            simulation = d3.forceSimulation()
-                .force("link", forceLink)
-                .force("charge", forceCharge)
-                .force("center", forceCenter);
+            forceCenter = d3.forceCenter(width / 2, height / 2);
 
             //绘制箭头
-            var marker =
+            marker =
                 svg.append("marker")
                     .attr("id", "resolved")
                     .attr("markerUnits", "userSpaceOnUse")
@@ -195,6 +185,7 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
                     .attr("d", "M0,-5L10,0L0,5")//箭头的路径
                     .attr('fill', '#808080');//箭头颜色
 
+
             drag_line = svg.append("g")
                 .attr("class", "drag-line-g")
                 .selectAll(".drag-line-g")
@@ -205,27 +196,27 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
                 .attr("x2", 0)
                 .attr("y2", 0);
 
-            d3.select(window).on("keydown", function () {
-                if (!selected_node && !selected_link) return;
-                switch (d3.event.keyCode) {
-                    case 8: // backspace
-                    case 46: { // delete
-                        if (selected_node) {
-                            nodesData.splice(nodesData.indexOf(selected_node), 1);
-                            spliceLinksForNode(selected_node);
-                        }
-                        else if (selected_link) {
-                            linksData.splice(linksData.indexOf(selected_link), 1);
-                        }
-                        selected_link = null;
-                        selected_node = null;
-                        _selfNew.d3Draw();
-                        break;
-                    }
-                }
-            });
+            // d3.select(window).on("keydown", function () {
+            //     if (!selected_node && !selected_link) return;
+            //     switch (d3.event.keyCode) {
+            //         case 8: // backspace
+            //         case 46: { // delete
+            //             if (selected_node) {
+            //                 nodesData.splice(nodesData.indexOf(selected_node), 1);
+            //                 spliceLinksForNode(selected_node);
+            //             }
+            //             else if (selected_link) {
+            //                 linksData.splice(linksData.indexOf(selected_link), 1);
+            //             }
+            //             selected_link = null;
+            //             selected_node = null;
+            //             _selfNew.d3Draw();
+            //             break;
+            //         }
+            //     }
+            // });
 
-            d3.json("../json_data/venation.json", function (error, json) {
+            d3.json("../json_data/Test2.json", function (error, json) {
                 if (error) throw error;
                 graphJson = json;
                 nodesData = graphJson.nodes;
@@ -241,15 +232,25 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
         d3Draw: function () {
             _selfNew = this;
 
+            /*
+             * d3.forceSimulation()：创建一个力模拟
+             * d3.forceSimulation().force(name[, force])：添加或移除力
+             * 描述：指定力的名称，并返回该力模拟
+             */
+            simulation = d3.forceSimulation()
+                .force("link", forceLink)
+                .force("charge", forceCharge)
+                .force("center", forceCenter);
+
             //清除之前的元素
             // svg.selectAll(".links-g").exit().remove();
             // svg.selectAll(".link-text-g").exit().remove();
             // svg.selectAll(".nodes-img-g").exit().remove();
             // svg.selectAll(".node-text-g").exit().remove();
-            svg.selectAll("line").exit().remove();
-            svg.selectAll("text").exit().remove();
-            svg.selectAll("image").exit().remove();
-            // svg.selectAll("g").remove();
+            // svg.selectAll("line").exit().remove();
+            // svg.selectAll("text").exit().remove();
+            // svg.selectAll("image").exit().remove();
+            svg.selectAll("g").remove();
 
             /*
              * simulation.nodes()：设置力模拟的节点
@@ -337,11 +338,10 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
                         _selfNew.d3Draw();
                     }
                 })
-                //点击节点
+                //双点击节点
                 .on('dblclick', function (d) {
                     nodesData.splice(nodesData.indexOf(d), 1);
                     spliceLinksForNode(d);
-
                     _selfNew.d3Draw();
                     // $(d3.event.target).attr("href","")
                 })
