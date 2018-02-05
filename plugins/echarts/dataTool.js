@@ -1,10 +1,10 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("echarts"));
+		module.exports = factory(require("plugins/echarts/echarts"));
 	else if(typeof define === 'function' && define.amd)
-		define(["echarts"], factory);
+		define(["plugins/echarts/echarts"], factory);
 	else if(typeof exports === 'object')
-		exports["dataTool"] = factory(require("echarts"));
+		exports["dataTool"] = factory(require("plugins/echarts/echarts"));
 	else
 		root["echarts"] = root["echarts"] || {}, root["echarts"]["dataTool"] = factory(root["echarts"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {

@@ -2143,16 +2143,3 @@ var requirejs, require, define;
     //Set up with config info.
     req(cfg);
 }(this, (typeof setTimeout === 'undefined' ? undefined : setTimeout)));
-
-require.config({
-    map: {
-        '*': {
-            'css': '/plugin/css.js'
-        }
-    },
-    paths: {
-        "text": "/plugin/text",
-        "underscore": "/plugin/underscore",
-        "echarts": "/plugin/echarts/echarts3110"
-    }
-});

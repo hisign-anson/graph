@@ -353,49 +353,9 @@ var menuByType = [
         ]
     }
 ];
+var imgUrl = '../images/graph/';
 
-function removeNode(index) {
-    console.log(index);
-    if (!node_imgSVG[0][index]){
-        return;
-    }
-    node_imgSVG[0][index].remove();
-    var node = node_imgSVG[0];
-    node_textSVG[0][index].remove();
-
-    var edgesArray = node[index].attributes["edges"];
-    if (!edgesArray) {
-        return;
-    }
-    var edgesStr = edgesArray.value;
-    var edges = edgesStr.split(",");
-    // console.log(edges);
-    for (var i = 0; i < edges.length; i++) {
-        var edgeIndex = edges[i];
-        if (edgeIndex != "") {
-            edges_lineSVG[0][edgeIndex].remove();
-            edges_textSVG[0][edgeIndex].remove();
-        }
-    }
-}
-
-function addNode(nodeArrays, linkArrays) {
-    var lenNodes = nodeArrays.length;
-    var lenLinks = linkArrays.length;
-    if (lenNodes > 0) {
-        for (var i = 0; i < lenNodes; i = i + 5000) {
-            jsonContext.nodes.push.apply(jsonContext.nodes, nodeArrays.slice(i, Math.max(i + 5000, lenNodes)));
-        }
-    }
-    if (lenLinks > 0) {
-        for (var i = 0; i < lenLinks; i = i + 5000) {
-            jsonContext.edges.push.apply(jsonContext.edges, linkArrays.slice(i, Math.max(i + 5000, lenNodes)));
-        }
-    }
-    updateGraphJSON(jsonContext);
-}
-
-define(['graphLayout'], function () {
+define([''], function () {
     function graphAction(layout) {
         //拖拽开始后设定被拖拽对象为固定
         var drag = layout.drag()
@@ -432,16 +392,16 @@ define(['graphLayout'], function () {
                 var image;
                 switch (d.type) {
                     case "groupid":
-                        image = "images/graph/type_group.png";
+                        image = imgUrl + "type_group.png";
                         break;
                     case "taskid":
-                        image = "images/graph/type_task.png";
+                        image = imgUrl + "type_task.png";
                         break;
                     case "fkid":
-                        image = "images/graph/type_feedback.png";
+                        image = imgUrl + "type_feedback.png";
                         break;
                     case "ajid":
-                        image = "images/graph/type_case.png";
+                        image = imgUrl + "type_case.png";
                         break;
                 }
                 return image;
@@ -580,7 +540,6 @@ define(['graphLayout'], function () {
             return name;
         });
     }
-
     return {
         graphAction: graphAction
     }

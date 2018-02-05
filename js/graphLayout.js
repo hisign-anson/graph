@@ -1,10 +1,10 @@
 var width = 1200,
-    height = 900;
+    height = 700;
 
 var img_w = 48,
     img_h = 48;
 var jsonContext, edges_line, edges_text, node_img, node_text;
-var groupid = $("#mapSvgFrame", parent.document).attr("groupid");
+// var groupid = $("#mapSvgFrame", parent.document).attr("groupid");
 // var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=groupid";
 
 var edges_lineSVG;
@@ -12,8 +12,7 @@ var edges_textSVG;
 var node_imgSVG;
 var node_textSVG;
 
-define(['d3.3.5.17','graphAction'], function (_,graphAction) {
-
+define(['d3V3', 'js/graphAction'], function ( d3, graphAction) {
     var tick = function () {
         //限制结点的边界
         jsonContext.nodes.forEach(function (d, i) {
@@ -26,37 +25,31 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
         //刷新连接线的位置
         edges_line.attr("x1", function (d) {
             return d.source.x;
-        })
-            .attr("y1", function (d) {
-                return d.source.y;
-            })
-            .attr("x2", function (d) {
-                return d.target.x;
-            })
-            .attr("y2", function (d) {
-                return d.target.y;
-            });
+        }).attr("y1", function (d) {
+            return d.source.y;
+        }).attr("x2", function (d) {
+            return d.target.x;
+        }).attr("y2", function (d) {
+            return d.target.y;
+        });
         //刷新连接线上的文字位置
         edges_text.attr("x", function (d) {
             return (d.source.x + d.target.x) / 2;
-        })
-            .attr("y", function (d) {
-                return (d.source.y + d.target.y) / 2;
-            });
+        }).attr("y", function (d) {
+            return (d.source.y + d.target.y) / 2;
+        });
         //刷新结点图片位置
         node_img.attr("x", function (d) {
             return d.x - img_w / 2;
-        })
-            .attr("y", function (d) {
-                return d.y - img_h / 2
-            });
+        }).attr("y", function (d) {
+            return d.y - img_h / 2
+        });
         //刷新结点文字位置
         node_text.attr("x", function (d) {
             return d.x
-        })
-            .attr("y", function (d) {
-                return d.y + img_h / 2.5
-            });
+        }).attr("y", function (d) {
+            return d.y + img_h / 2.5
+        });
     };
 
 //定义力学图的布局
@@ -84,23 +77,16 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
 //根据json更新
     function updateGraphJSON(json) {
         jsonContext = json;
-        layout
-            .nodes(json.nodes)
-            .links(json.edges)
-            .start();
+        layout.nodes(json.nodes).links(json.edges).start();
 
         svg.selectAll("line").remove();
-        edges_lineSVG = svg.selectAll("line")
-            .data(json.edges);
+        edges_lineSVG = svg.selectAll("line").data(json.edges);
         svg.selectAll(".linetext").remove();
-        edges_textSVG = svg.selectAll(".linetext")
-            .data(json.edges);
+        edges_textSVG = svg.selectAll(".linetext").data(json.edges);
         svg.selectAll("image").remove();
-        node_imgSVG = svg.selectAll("image")
-            .data(json.nodes);
+        node_imgSVG = svg.selectAll("image").data(json.nodes);
         svg.selectAll(".nodetext").remove();
-        node_textSVG = svg.selectAll(".nodetext")
-            .data(json.nodes);
+        node_textSVG = svg.selectAll(".nodetext").data(json.nodes);
 
         //绘制连接线
         edges_line = edges_lineSVG
@@ -139,18 +125,19 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
             .enter()
             .append("text")
             .attr("class", "nodetext")
+            // .html(html)
             .attr("dx", node_dx)
-            .attr("dy", node_dy)
-        // .html(html)
-        ;
+            .attr("dy", node_dy);
         node_textSVG.exit().remove();
     }
 
 //定义svg画板
     var svg = d3.select("body").append("svg")
-        .attr("preserveAspectRatio", "xMidYMid meet")
-        //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
-        .attr("viewBox", "0 0 1200 960");
+    // .attr("preserveAspectRatio", "xMidYMid meet")
+    // //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
+    // .attr("viewBox", "0 0 1200 960")
+        .attr("width", width)
+        .attr("height", height);
 
 //箭头
     var marker =
@@ -170,10 +157,100 @@ define(['d3.3.5.17','graphAction'], function (_,graphAction) {
             .attr("d", "M0,-5L10,0L0,5")//箭头的路径
             .attr('fill', '#808080');//箭头颜色
 
+
+    function addNodes(){
+        var nodeStr1 = "{\n" +
+            "      \"id\":\"011\",\n" +
+            "      \"name\": \"反馈线索ccccc\",\n" +
+            "      \"image\": \"images/xkdna.jpg\",\n" +
+            "      \"type\": \"3\",\n" +
+            "      \"depth\": 0\n" +
+            "    }";
+        var nodeStr2 =
+            "{\n" +
+            "      \"id\":\"011\",\n" +
+            "      \"name\": \"反馈线索sssss\",\n" +
+            "      \"image\": \"images/xkdna.jpg\",\n" +
+            "      \"type\": \"3\",\n" +
+            "      \"depth\": 0\n" +
+            "    }";
+        var linkStr1 = "\n" +
+            "    {\n" +
+            "      \"source\": 3,\n" +
+            "      \"target\": 16,\n" +
+            "      \"relation\": \"\"\n" +
+            "    }";
+        var linkStr2 = "\n" +
+            "    {\n" +
+            "      \"source\": 4,\n" +
+            "      \"target\": 15,\n" +
+            "      \"relation\": \"\"\n" +
+            "    }";
+        var node1 = JSON.parse(nodeStr1);
+        var node2 = JSON.parse(nodeStr2);
+        var link1 = JSON.parse(linkStr1);
+        var nodeArray = new Array();
+        nodeArray.push(node1);
+        nodeArray.push(node2);
+        var linkArray = new Array();
+        linkArray.push(link1);
+        addNode(nodeArray,linkArray);
+    }
+    function addNode(nodeArrays, linkArrays) {
+        var lenNodes = nodeArrays.length;
+        var lenLinks = linkArrays.length;
+        if (lenNodes > 0) {
+            for (var i = 0; i < lenNodes; i = i + 5000) {
+                jsonContext.nodes.push.apply(jsonContext.nodes, nodeArrays.slice(i, Math.max(i + 5000, lenNodes)));
+            }
+        }
+        if (lenLinks > 0) {
+            for (var i = 0; i < lenLinks; i = i + 5000) {
+                jsonContext.edges.push.apply(jsonContext.edges, linkArrays.slice(i, Math.max(i + 5000, lenNodes)));
+            }
+        }
+        updateGraphJSON(jsonContext);
+    }
+
+    function removeNode(index) {
+        console.log(index);
+        if (!node_imgSVG[0][index]) {
+            return;
+        }
+        node_imgSVG[0][index].remove();
+        var node = node_imgSVG[0];
+        node_textSVG[0][index].remove();
+
+        var edgesArray = node[index].attributes["edges"];
+        if (!edgesArray) {
+            return;
+        }
+        var edgesStr = edgesArray.value;
+        var edges = edgesStr.split(",");
+        // console.log(edges);
+        for (var i = 0; i < edges.length; i++) {
+            var edgeIndex = edges[i];
+            if (edgeIndex != "") {
+                edges_lineSVG[0][edgeIndex].remove();
+                edges_textSVG[0][edgeIndex].remove();
+            }
+        }
+    }
+    function clickEvent() {
+        $('#update').on('click',function () {
+            updateGraphURL('../Test2.json');
+        });
+        $('#add').on('click',function () {
+            addNodes()
+        });
+        $('#remove').on('click',function () {
+            var indexValue = $('#indexValue').val();
+            removeNode(indexValue);
+        });
+    }
     return {
         updateGraphURL: updateGraphURL,
-        layout:layout
+        clickEvent:clickEvent,
+        layout: layout
     };
 });
-// .attr("width", width)
-// .attr("height", height);

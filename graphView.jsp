@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <title>ECharts</title>
 
-    <script src="js/echarts.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/dataTool.js"></script>
+    <script src="plugins/echarts/echarts.js"></script>
+    <script src="plugins/jQuery/jquery_1.11.3.js"></script>
+    <script src="plugins/echarts/dataTool.js"></script>
 </head>
 <body>
 
