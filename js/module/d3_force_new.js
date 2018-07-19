@@ -1,4 +1,4 @@
-define(['jQuery', 'd3V4'], function (jQuery, d3) {
+define(['jQuery', 'd3V4','ztree'], function (jQuery, d3,zt) {
     var width = 960, height = 500;
     var svg, marker,forceLink,forceCharge,forceCenter,graphJson;
     var simulation;//力模拟器
@@ -9,6 +9,29 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
     //编辑标签
     var drag_line;
     var selected_node = null, selected_link = null, mousedown_link = null, mousedown_node = null, mouseup_node = null;
+
+    var zTreeObj;
+    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+    var setting = {
+        callback: {
+            //单击菜单节点之前的事件回调函数
+            beforeClick: function (treeId, treeNode, clickFlag) {
+                console.info("[ beforeClick ]:" + treeNode.name);
+                return (treeNode.click != false);
+            },
+            //菜单节点被点击的事件回调函数
+            onClick: function (event, treeId, treeNode, clickFlag) {
+                alert("[ onClick ]:" + treeNode.name);
+                return (treeNode.click != false);
+            }
+        }
+    };
+    //菜单数据
+    var menuDefault = [
+        {
+            name: "删除"
+        }
+    ];
 
     function dragstarted(d) {
         if (!d3.event.active) simulation.alphaTarget(0.3).restart();
@@ -64,15 +87,15 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
         });
 
         // 限定节点边界位置后节点一直弹
-        node.attr("cx", function (d) {
-            d.x = d.x - imgW / 2 < 0 ? imgW : d.x;
-            d.x = d.x + imgW / 2 > width ? width - imgW / 2 : d.x;
-            return d.x;
-        }).attr("cy", function (d) {
-            d.y = d.y - imgH / 2 < 0 ? imgH / 2 : d.y;
-            d.y = d.y + imgH > height ? height - imgH : d.y;
-            return d.y;
-        });
+        // node.attr("cx", function (d) {
+        //     d.x = d.x - imgW / 2 < 0 ? imgW : d.x;
+        //     d.x = d.x + imgW / 2 > width ? width - imgW / 2 : d.x;
+        //     return d.x;
+        // }).attr("cy", function (d) {
+        //     d.y = d.y - imgH / 2 < 0 ? imgH / 2 : d.y;
+        //     d.y = d.y + imgH > height ? height - imgH : d.y;
+        //     return d.y;
+        // });
         // 更新节点的位置
         node.attr("x", function (d) {
             return d.x - imgW / 2;
@@ -216,7 +239,7 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
             //     }
             // });
 
-            d3.json("../json_data/Test2.json", function (error, json) {
+            d3.json("../json_data/venation.json", function (error, json) {// Test2
                 if (error) throw error;
                 graphJson = json;
                 nodesData = graphJson.nodes;
@@ -295,50 +318,67 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
                 .attr("class", "nodes-img")
                 .attr("width", imgW)
                 .attr("height", imgH)
+                //去掉默认的contextmenu事件，否则会和右键事件同时出现。
+                .on("contextmenu", function () {
+                    //DOM事件对象——d3.event
+                    d3.event.preventDefault();
+                })
                 //节点之间画线
-                .on("mousedown", function (d) {
-                    mousedown_node = d;
-                    if (mousedown_node == selected_node) {
-                        selected_node = null;
-                    } else {
-                        selected_node = mousedown_node;
-                    }
-                    // selected_link = null;
-                    // 重新定位画出的线条
-                    drag_line
-                        .attr("class", "links-line-add")
-                        .attr("x1", mousedown_node.x)
-                        .attr("y1", mousedown_node.y)
-                        .attr("x2", mousedown_node.x)
-                        .attr("y2", mousedown_node.y);
-                    _selfNew.d3Draw();
-                })
-                .on("mousedrag", function (d) {
-
-                })
-                .on("mouseup", function (d) {
-                    if (mousedown_node) {
-                        mouseup_node = d;
-                        if (mouseup_node == mousedown_node) {
-                            resetMouseVars();
-                            return;
+                .on("mousedown", function (d,i) {
+                    var that = d3.event;
+                    //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
+                    if (that.button == 2) {
+                        _selfNew.rightClick(d,i);
+                    } else if(that.button == 0){
+                        mousedown_node = d;
+                        if (mousedown_node == selected_node) {
+                            selected_node = null;
+                        } else {
+                            selected_node = mousedown_node;
                         }
-
-                        // 添加力数据
-                        var link = {
-                            relation: "新增线" + linksData.length,
-                            source: mousedown_node,
-                            target: mouseup_node
-                        };
-                        linksData.push(link);
-                        console.info(linksData);
-                        // select new link
-                        // selected_link = link;
-                        selected_node = null;
+                        // selected_link = null;
+                        // 重新定位画出的线条
+                        drag_line
+                            .attr("class", "links-line-add")
+                            .attr("x1", mousedown_node.x)
+                            .attr("y1", mousedown_node.y)
+                            .attr("x2", mousedown_node.x)
+                            .attr("y2", mousedown_node.y);
                         _selfNew.d3Draw();
                     }
                 })
-                //双点击节点
+                .on("mouseup", function (d,i) {
+                    var that = d3.event;
+                    //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
+                    if (that.button == 2) {
+                        // _selfNew.rightClick(d,i);
+                    } else if(that.button == 0){
+                        if (mousedown_node) {
+                            mouseup_node = d;
+                            if (mouseup_node == mousedown_node) {
+                                resetMouseVars();
+                                return;
+                            }
+
+                            // 添加力数据
+                            var link = {
+                                relation: "新增线" + linksData.length,
+                                source: mousedown_node,
+                                target: mouseup_node
+                            };
+                            linksData.push(link);
+                            console.info(linksData);
+                            /*// select new link
+                             selected_link = link;*/
+                            selected_node = null;
+                            _selfNew.d3Draw();
+                        }
+                    }
+                })
+                .on("mousemove", function (d, i) {
+
+                })
+                //双击节点
                 .on('dblclick', function (d) {
                     nodesData.splice(nodesData.indexOf(d), 1);
                     spliceLinksForNode(d);
@@ -409,6 +449,63 @@ define(['jQuery', 'd3V4'], function (jQuery, d3) {
             //         console.info(d)
             //         return d.taskName;
             //     });
+        },
+        rightClick:function (d,i) {
+            _selfNew = this;
+            // console.info("right mousedown")
+            if ($("#tooltip" + i).length <= 0) {
+                var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
+                $("body").append(tooltipDiv);
+            }
+            // console.info(d);
+            // console.info(i);
+
+            //根据id和type显示不同的菜单
+            var zNodes = menuDefault;
+            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
+
+            var tooltipCurrent = $("#tooltip" + i);
+            var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
+            tooltipCurrent.css({
+                "position": "absolute",
+                "top": (d.y - (imgH / 2)) + "px",
+                "left": (d.x + 35) + "px"
+            }).show();
+
+            //start 判断当前节点的位置
+            var a = (d.x + 35) + tooltipCurrent.width();
+            var b = (d.y - (imgH / 2)) + tooltipCurrent.height();
+            if (a > $(window).width()) {
+                tooltipCurrent.css({
+                    "left": (d.x - tooltipCurrent.width() - 30) + "px"
+                })
+            }
+            if (b > $(window).height()) {
+                tooltipCurrent.css({
+                    "top": (d.y - tooltipCurrent.height()) + "px"
+                });
+            } else {
+                var winST = $(window).scrollTop();
+                if ((d.y - (imgH / 2)) <= winST) {
+                    tooltipCurrent.css({
+                        "top": (winST + 5) + "px"
+                    });
+                }
+            }
+            //end 判断当前节点的位置
+
+            //如果还有兄弟元素tooltip显示，则remove兄弟元素
+            if (tooltipSiblings.length > 0) {
+                tooltipSiblings.remove();
+            }
+            $(document).click(function (e) {
+                var target = e.target;
+                var isShowTooltip = $(target).parents(".tooltip-box").is(":visible");
+                //当点击的区域是菜单之外时
+                if (!isShowTooltip) {
+                    tooltipCurrent.remove();
+                }
+            });
         },
         addNode: function () {
             _selfNew = this;

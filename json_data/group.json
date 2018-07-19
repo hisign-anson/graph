@@ -1,0 +1,303 @@
+{
+  "nodes": [
+    {
+      "image": "groupid.jpg",
+      "outEdges": [
+        {
+          "index": 0
+        },
+        {
+          "index": 1
+        },
+        {
+          "index": 2
+        },
+        {
+          "index": 3
+        },
+        {
+          "index": 4
+        },
+        {
+          "index": 5
+        },
+        {
+          "index": 6
+        },
+        {
+          "index": 7
+        },
+        {
+          "index": 8
+        },
+        {
+          "index": 9
+        }
+      ],
+      "name": "0524专案组",
+      "id": "6bfa298ac8c04db982f23d01cf3fdc7d",
+      "INDEX": 0,
+      "type": "groupid"
+    },
+    {
+      "image": "taskid.jpg",
+      "taskContent": "大幅度",
+      "name": "大幅度@2018-07-13 15:07:03",
+      "id": "9bbcc9a5398449dc97c0ded0fa09f212",
+      "INDEX": 1,
+      "type": "taskid",
+      "inEdges": [
+        {
+          "index": 9
+        },
+        {
+          "index": 11
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "周新忠吸毒案",
+      "id": "8aaa01245ec27ad8015ec6fd8158108e",
+      "INDEX": 2,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 3
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "骆辉旺等人扰乱公共秩序案",
+      "id": "8aaa01e35ea71e72015ec15bd8167132",
+      "INDEX": 3,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 5
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "龚金山被诈骗案",
+      "id": "8aad021c5ea71032015ed0b462b7472a",
+      "INDEX": 4,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 1
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "梁学文吸毒案",
+      "id": "8aaa01245ec27ad8015ec6c939500fcc",
+      "INDEX": 5,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 2
+        }
+      ]
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "12222222",
+      "name": "12222222@2018-05-31 16:25:31",
+      "id": "ecfcd7efb4c54bebae8469cbc2e90647",
+      "INDEX": 6,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 10
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "杨永生被故意损毁财物案",
+      "id": "PCS4403201709270000000176049692",
+      "INDEX": 7,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 6
+        }
+      ]
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "大幅度",
+      "name": "大幅度@2018-07-13 15:46:37",
+      "id": "a31f68fb16694c3e83bb14aff0594739",
+      "INDEX": 8,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 7
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "钱忠海盗窃案",
+      "id": "PCS4403201709270000000175682737",
+      "INDEX": 9,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 0
+        }
+      ]
+    },
+    {
+      "image": "taskid.jpg",
+      "outEdges": [
+        {
+          "index": 10
+        },
+        {
+          "index": 11
+        }
+      ],
+      "taskContent": "dsafasdfasdf",
+      "name": "dsafasdfasdf@2018-05-31 14:53:40",
+      "id": "35ee07b5073d4e41a6596cdecd5dc291",
+      "INDEX": 10,
+      "type": "taskid",
+      "inEdges": [
+        {
+          "index": 8
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "陈俐俐迷路走失案",
+      "id": "PCS4406201710060000000864683721",
+      "INDEX": 11,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 4
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 0,
+      "target": 9,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 1,
+      "target": 4,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 2,
+      "target": 5,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 3,
+      "target": 2,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 4,
+      "target": 11,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 5,
+      "target": 3,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 0,
+      "INDEX": 6,
+      "target": 7,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2fk",
+      "name": "反馈",
+      "lineId": "29c22ae5671242509433c8412bd16919",
+      "canDelete": "1",
+      "source": 0,
+      "INDEX": 7,
+      "hiddenState": "0",
+      "target": 8,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "group2task",
+      "name": "新任务",
+      "lineId": "3c0a0f361ead4bf9b9a72001df64fc0a",
+      "canDelete": "0",
+      "source": 0,
+      "INDEX": 8,
+      "hiddenState": "0",
+      "target": 10,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "group2task",
+      "name": "新任务",
+      "lineId": "3d24dc7d44304f949eda99a142bc16a5",
+      "canDelete": "1",
+      "source": 0,
+      "INDEX": 9,
+      "hiddenState": "0",
+      "target": 1,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "6cf88feeb5b64e09a286e553bd8c47e9",
+      "canDelete": "0",
+      "source": 10,
+      "INDEX": 10,
+      "hiddenState": "0",
+      "target": 6,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2task",
+      "name": "任务",
+      "lineId": "b058ecdcc38c4509a58f026de73ecffc",
+      "canDelete": "1",
+      "source": 10,
+      "INDEX": 11,
+      "hiddenState": "0",
+      "target": 1,
+      "tableName": "T_FEEDBACK_TASK"
+    }
+  ]
+}

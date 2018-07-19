@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>d3graph-demo——连线（未完成）</title>
+    <link rel="stylesheet" href="../plugins/ztree/ztree.css">
+    <link rel="stylesheet" href="../css/clue_diagram.css">
+</head>
+<body>
+<div id="mapSvgFrame">
+    <div>
+        <button class="" id='intoDrag' data-key="2">连线</button>
+        <input type="text" class="common-input" id="searchCondition" placeholder="请输入关键字查询" data-groupid="" data-groupinfo=""/>
+        <button class="" id='toSearch'>查询</button>
+    </div>
+    <div class="" style="position:relative;" id="bodyagentDrag">
+        <div id="getforce" class="left-force">
+
+        </div>
+        <div id="forceDraw" class="force" style="margin-left:130px;">
+        </div>
+    </div>
+</div>
+<script src="../plugins/jQuery/jquery_1.12.4.js"></script>
+<script src="../plugins/ztree/ztree.js"></script>
+<script src="../plugins/d3/d3.v4.js"></script>
+<script src="../view/graph_edit.js"></script>
+<script>
+    window.d3drawPic.d3Init();
+    window.d3drawPic.regEvengetforce();//脉络图 左边事件
+</script>
+</body>
+</html>

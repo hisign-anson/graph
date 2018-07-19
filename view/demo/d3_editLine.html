@@ -216,7 +216,7 @@
             .attr("r", 5)
             .on("mousedown", function (d) {
                 // disable zoom
-//                vis.call(d3.behavior.zoom().on("zoom"), null);
+                vis.call(d3.behavior.zoom().on("zoom"), null);
 
                 mousedown_node = d;
                 if (mousedown_node == selected_node){

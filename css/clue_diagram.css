@@ -1,0 +1,303 @@
+@charset "utf-8";
+.left-force{
+    width:120px;
+    min-height:500px;
+    float:left;
+    margin: 10px;
+    margin-top:0px;
+    box-shadow:5px 6px 10px 1px #cccccc;
+}
+.force {
+    margin: 15px 10px;
+    background: #ffffff;
+    box-shadow: 5px 6px 10px 1px #cccccc;
+    overflow: auto;
+}
+.force-unConnection{
+    width: 120px;
+    min-height: 100px;
+    float: left;
+    margin: 10px;
+    margin-right: 0
+}
+.prepare-node{
+    position:absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+/*tooltip的样式 start*/
+.tooltip-box {
+    background-color: #dddddd;
+}
+/*最大化显示时，不加此样式会不显示右键菜单*/
+.full-mode-ovh .tooltip-box {
+    z-index: 9999;
+}
+.tooltip-box .ztree {
+    width: 200px;
+    overflow: auto;
+}
+
+.marker-field {
+    fill: #808080;
+    stroke-width: 2;
+}
+
+/*线的宽度*/
+.links-line,.drag_line,.links-line-add{
+    stroke-width: 1.5px;
+}
+.links-line {
+    stroke: #1783BF;
+    cursor: pointer;
+}
+
+.link-text, .node-text,.remove-line-text {
+    font-size: 10px;
+}
+
+.link-text {
+    fill: #ff3451;
+}
+
+.remove-line-text {
+    fill: #22A0E2;
+}
+
+.nodes-img {
+    cursor: pointer;
+}
+
+.node_selected {
+    fill: #ff7f0e;
+    stroke: #ff7f0e;
+}
+
+.link_selected {
+    stroke: #ff7f0e;
+}
+
+.drag_line {
+    stroke: #1783BF;
+    pointer-events: none;
+}
+
+.drag_line_hidden {
+    stroke-width: 0;
+    pointer-events: none;
+}
+
+.links-line-add {
+    stroke: #1783BF;
+}
+
+/*覆盖ztree的样式 start*/
+.ztree li a:hover {
+    text-decoration: none;
+}
+
+.ztree li,
+.ztree li a.curSelectedNode,
+.ztree li span {
+    line-height: 26px !important;
+}
+
+.ztree li a.curSelectedNode {
+    padding-top: 1px;
+}
+
+.ztree li a,
+.ztree li span.button,
+.ztree li a.curSelectedNode,
+.ztree li a.tmpTargetNode_inner {
+    height: 26px;
+}
+
+.ztree li span.button.ico_docu,
+.ztree li span.button.ico_close,
+.ztree li span.button.ico_open {
+    background-image: none;
+    vertical-align: top !important;
+    color: #FFB62C;
+}
+
+.ztree li span.button.ico_docu:before,
+.ztree li span.button.ico_close:before,
+.ztree li span.button.ico_open:before {
+    font-family: FontAwesome;
+}
+
+.ztree li span.button.ico_docu:before {
+    content: "\f15c";
+}
+
+.ztree li span.button.ico_close:before {
+    content: "\f07b";
+}
+
+.ztree li span.button.ico_open:before {
+    content: "\f07c";
+}
+
+.ztree a.curSelectedNode {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.ztree a.curSelectedNode > span[id$='_span'] {
+    padding: 1px 5px;
+    background-color: #FFB62C;
+    color: #ffffff;
+    border-radius: 3px;
+}
+
+.ztree.deploy span.button.ico_docu,
+.ztree.deploy span.button.ico_close,
+.ztree.deploy span.button.ico_open {
+    color: #22A0E2;
+}
+
+.ztree.deploy a.curSelectedNode > span[id$='_span'] {
+    background-color: #22A0E2;
+}
+
+.ztree li.already_drag > a span[id$='_ico'] {
+    color: #dddddd !important;
+}
+
+.ztree li.already_drag > a span[id$='_span'] {
+    color: #dddddd !important;
+}
+
+.ztree li.already_drag > a.curSelectedNode > span[id$='_span'] {
+    color: #ffffff !important;
+    background: #dddddd !important;
+}
+
+/*覆盖ztree的样式 end*/
+
+.role {
+    border-radius: 3px;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    text-align: center;
+}
+/*指挥*/
+.zhihui{
+    border: 1px solid #f4555a;
+    color: #f4555a;
+}
+/*参谋*/
+.canmou{
+    border: 1px solid #fe8501;
+    color: #fe8501;
+}
+/********************************工作台样式 start********************************/
+.body-page .main-workbench{
+    box-shadow: none;
+    border: 1px solid #4fa4c3;
+}
+.body-page .main-content{
+    box-shadow: none;
+    border: 1px solid #4fa4c3;
+}
+.body-page .force {
+    margin: 0;
+    padding: 10px;
+    background: transparent;
+    box-shadow: none;
+    overflow: auto;
+    height: calc(100vh - 60px);
+}
+.body-page .left-force {
+    box-shadow: 0 3px 5px 1px #4FA4C3;
+    border-left: 1px solid #4FA4C3;
+}
+.body-page .node-text,
+.body-page .link-text {
+    fill: #CEEAFF;
+}
+
+.body-page .capture-map .node-text {
+    font-weight: bold;
+}
+
+.body-page .links-line {
+    /*stroke: #66ffff;*/
+    stroke: #4fa4c3;
+}
+
+.body-page .marker-field {
+    fill: #66ffff;
+}
+
+.body-page .nodes-rect {
+    fill: #0c4561;
+}
+
+.body-page .nodes-rect-green {
+    fill: #82803f;
+}
+
+.body-page .nodes-rect-red {
+    fill: #821a26;
+}
+
+.body-page .nodes-rect-blue {
+    fill: #0366a5;
+}
+
+.body-page .nodes-rect-black {
+    fill: #2a3338;
+}
+
+.body-page .nodes-rect-white {
+    fill: #ffffff;
+}
+
+/********************************工作台样式 end********************************/
+
+/********************************大屏样式 start********************************/
+.big-screen .force {
+    margin:10px !important;
+    /*background: #0A4B79;*/
+    /*box-shadow: 5px 6px 10px 1px #0A4E7D;*/
+    background: transparent;
+    box-shadow: none;
+    overflow: auto;
+}
+.big-screen .link-text, .big-screen .node-text{
+    fill: #ceeaff;
+}
+.big-screen .role{
+    border-radius: 3px;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    line-height: 17px;
+    text-align: center;
+}
+/*指挥*/
+.big-screen .zhihui{
+    border: 1px solid #f4555a;
+    color: #f4555a;
+}
+/*参谋*/
+.big-screen .canmou{
+    border: 1px solid #fe8501;
+    color: #fe8501;
+}
+/********************************大屏样式 end********************************/
+/*全屏显示*/
+.full-mode-ovh .main-content-body{
+    margin:0;
+}
+.full-mode-ovh .work-head-bg{
+    background-color: #021F2F;
+}
+/*全屏显示end*/
