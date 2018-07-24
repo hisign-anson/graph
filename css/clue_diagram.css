@@ -1,27 +1,40 @@
 @charset "utf-8";
-.left-force{
-    width:120px;
-    min-height:500px;
-    float:left;
-    margin: 10px;
-    margin-top:0px;
-    box-shadow:5px 6px 10px 1px #cccccc;
+.user-select-none {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
+.links-line.inactive, .nodes-img.inactive, .link-text.inactive,.node-text.inactive {
+    opacity: .2;
+}
+.left-force {
+    width: 120px;
+    min-height: 500px;
+    float: left;
+    margin: 10px;
+    margin-top: 0px;
+    box-shadow: 5px 6px 10px 1px #cccccc;
+}
+
 .force {
     margin: 15px 10px;
     background: #ffffff;
     box-shadow: 5px 6px 10px 1px #cccccc;
     overflow: auto;
 }
-.force-unConnection{
+
+.force-unConnection {
     width: 120px;
     min-height: 100px;
     float: left;
     margin: 10px;
     margin-right: 0
 }
-.prepare-node{
-    position:absolute;
+
+.prepare-node {
+    position: absolute;
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -31,10 +44,12 @@
 .tooltip-box {
     background-color: #dddddd;
 }
+
 /*最大化显示时，不加此样式会不显示右键菜单*/
 .full-mode-ovh .tooltip-box {
     z-index: 9999;
 }
+
 .tooltip-box .ztree {
     width: 200px;
     overflow: auto;
@@ -46,15 +61,19 @@
 }
 
 /*线的宽度*/
-.links-line,.drag_line,.links-line-add{
+.links-line, .drag_line, .links-line-add {
     stroke-width: 1.5px;
 }
+
 .links-line {
     stroke: #1783BF;
     cursor: pointer;
+
+    stroke-linecap: round;
+    stroke-width: 3px;
 }
 
-.link-text, .node-text,.remove-line-text {
+.link-text, .node-text, .remove-line-text {
     font-size: 10px;
 }
 
@@ -187,25 +206,30 @@
     vertical-align: middle;
     text-align: center;
 }
+
 /*指挥*/
-.zhihui{
+.zhihui {
     border: 1px solid #f4555a;
     color: #f4555a;
 }
+
 /*参谋*/
-.canmou{
+.canmou {
     border: 1px solid #fe8501;
     color: #fe8501;
 }
+
 /********************************工作台样式 start********************************/
-.body-page .main-workbench{
+.body-page .main-workbench {
     box-shadow: none;
     border: 1px solid #4fa4c3;
 }
-.body-page .main-content{
+
+.body-page .main-content {
     box-shadow: none;
     border: 1px solid #4fa4c3;
 }
+
 .body-page .force {
     margin: 0;
     padding: 10px;
@@ -214,10 +238,12 @@
     overflow: auto;
     height: calc(100vh - 60px);
 }
+
 .body-page .left-force {
     box-shadow: 0 3px 5px 1px #4FA4C3;
     border-left: 1px solid #4FA4C3;
 }
+
 .body-page .node-text,
 .body-page .link-text {
     fill: #CEEAFF;
@@ -264,17 +290,19 @@
 
 /********************************大屏样式 start********************************/
 .big-screen .force {
-    margin:10px !important;
+    margin: 10px !important;
     /*background: #0A4B79;*/
     /*box-shadow: 5px 6px 10px 1px #0A4E7D;*/
     background: transparent;
     box-shadow: none;
     overflow: auto;
 }
-.big-screen .link-text, .big-screen .node-text{
+
+.big-screen .link-text, .big-screen .node-text {
     fill: #ceeaff;
 }
-.big-screen .role{
+
+.big-screen .role {
     border-radius: 3px;
     width: 17px;
     height: 17px;
@@ -282,22 +310,27 @@
     line-height: 17px;
     text-align: center;
 }
+
 /*指挥*/
-.big-screen .zhihui{
+.big-screen .zhihui {
     border: 1px solid #f4555a;
     color: #f4555a;
 }
+
 /*参谋*/
-.big-screen .canmou{
+.big-screen .canmou {
     border: 1px solid #fe8501;
     color: #fe8501;
 }
+
 /********************************大屏样式 end********************************/
 /*全屏显示*/
-.full-mode-ovh .main-content-body{
-    margin:0;
+.full-mode-ovh .main-content-body {
+    margin: 0;
 }
-.full-mode-ovh .work-head-bg{
+
+.full-mode-ovh .work-head-bg {
     background-color: #021F2F;
 }
+
 /*全屏显示end*/

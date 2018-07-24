@@ -40,6 +40,8 @@ window.d3drawPic = {
     selected_link: null,
     mousedown_node: null,
     mouseup_node: null,
+    selected: {},
+    highlighted: null,
 
     zTreeObj: "",
     // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
@@ -114,15 +116,16 @@ window.d3drawPic = {
             _this.svg.call(zoom);
         }
         else if (key == 2) {
-            _this.svg.on("mousemove", function () {
-                if (!_this.mousedown_node) return;
-                // 更新连接线
-                _this.drag_line
-                    .attr("x1", _this.mousedown_node.x)
-                    .attr("y1", _this.mousedown_node.y)
-                    .attr("x2", d3.mouse(this)[0])
-                    .attr("y2", d3.mouse(this)[1]);
-            })
+            _this.svg
+                .on("mousemove", function () {
+                    if (!_this.mousedown_node) return;
+                    // 更新连接线
+                    _this.drag_line
+                        .attr("x1", _this.mousedown_node.nodeFlag == 'new'?_this.mousedown_node.x + _this.imgW/2:_this.mousedown_node.x)
+                        .attr("y1", _this.mousedown_node.nodeFlag == 'new'?_this.mousedown_node.y + _this.imgH/2:_this.mousedown_node.y)
+                        .attr("x2", d3.mouse(this)[0])
+                        .attr("y2", d3.mouse(this)[1]);
+                })
                 .on("mousedown", function () {
                     if (!_this.mousedown_node) {
                         return;
@@ -146,10 +149,9 @@ window.d3drawPic = {
                             // _this.nodesData.push(node);
                             // // add link to mousedown node
                             // _this.linksData.push({source: _this.mousedown_node, target: node});
-
+                            ////此处不重画，从节点元素上抬起鼠标时重画
+                            // _this.d3Draw(key);
                         }
-                        _this.d3Draw(key);
-
                     }
                     // clear mouse event vars
                     _this.resetMouseVars();
@@ -277,6 +279,7 @@ window.d3drawPic = {
                         }
                     });
 
+                    toast("删除成功！", 600);
                     // todo 调用后台接口 /feedback-task/delete
                 } else {
                     toast("该连线不能删除！", 600);
@@ -300,7 +303,7 @@ window.d3drawPic = {
             .on("mouseout", function (d, i) {
                 //还原连接线上的文字
                 _this.linkTxt.text(function (edg) {
-                    $(this).removeAttr("class", "remove-line-text").attr("class", "link-text");
+                    $(this).removeAttr("class", "remove-line-text").attr("class", "link-text user-select-none");
                     return edg.name;
                 });
             });
@@ -312,6 +315,7 @@ window.d3drawPic = {
             .data(_this.linksData)
             .enter().append("text")
             .attr("class", "link-text")
+            .classed("user-select-none", true)
             .text(function (d) {
                 return d.name;
             });
@@ -329,34 +333,30 @@ window.d3drawPic = {
                 return d.id
             })
             .attr("xlink:href", function (d) {
-                var image;
-                switch (d.type) {
-                    case "groupid":
-                        image = _this.imgSrc + "type_group.png";
-                        break;
-                    case "taskid":
-                        image = _this.imgSrc + "type_task.png";
-                        break;
-                    case "fkid":
-                        image = _this.imgSrc + "type_feedback.png";
-                        break;
-                    case "ajid":
-                        image = _this.imgSrc + "type_case.png";
-                        break;
-                }
-                return image;
+                return _this.getImg(d.type);
             })
-            //去掉默认的contextmenu事件，否则会和右键事件同时出现。
-            .on("contextmenu", function () {
-                //DOM事件对象——d3.event
-                d3.event.preventDefault();
-            })
-            //双击节点
-            .on('dblclick', function (d) {
-                _this.nodesData.splice(_this.nodesData.indexOf(d), 1);
-                _this.spliceLinksForNode(d);
-                _this.d3Draw(key);
-            });
+        ////鼠标滑过节点高亮相关节点和连线
+        // .on('mouseover', function (d) {
+        //     if (!_this.selected.obj) {
+        //         if (_this.mouseoutTimeout) {
+        //             clearTimeout(_this.mouseoutTimeout);
+        //             _this.mouseoutTimeout = null;
+        //         }
+        //         _this.highlightObject(d);
+        //     }
+        // })
+        // .on('mouseout', function () {
+        //     if (!_this.selected.obj) {
+        //         if (_this.mouseoutTimeout) {
+        //             clearTimeout(_this.mouseoutTimeout);
+        //             _this.mouseoutTimeout = null;
+        //         }
+        //         _this.mouseoutTimeout = setTimeout(function () {
+        //             _this.highlightObject(null);
+        //         }, 100);
+        //     }
+        // });
+
         if (key == 1) {
             //节点拖拽
             _this.node.call(d3.drag()
@@ -379,6 +379,7 @@ window.d3drawPic = {
             .data(_this.nodesData)
             .enter().append("text")
             .attr("class", "node-text")
+            .classed("user-select-none", true)
             .attr("dx", node_dx)
             .attr("dy", node_dy)
             .text(function (d) {
@@ -395,7 +396,51 @@ window.d3drawPic = {
 
                 }
             });
-
+    },
+    //高亮
+    highlightObject: function (obj) {
+        var _this = this;
+        if (obj) {
+            if (obj !== _this.highlighted) {
+                //todo 高亮节点未完成
+                _this.node.classed('inactive', function (d, i) {
+                    return (obj !== d
+                    && (_this.getIndexArr(d.inEdges).indexOf(obj.index.toString()) == -1)
+                    && (_this.getIndexArr(d.outEdges).indexOf(obj.index.toString()) == -1));
+                });
+                //todo 高亮节点文字未完成
+                _this.nodeTxt.classed('inactive', function (d) {
+                    return (obj !== d
+                    && (_this.getIndexArr(d.inEdges).indexOf(obj.index.toString()) == -1)
+                    && (_this.getIndexArr(d.outEdges).indexOf(obj.index.toString()) == -1));
+                });
+                _this.link.classed('inactive', function (d) {
+                    return (obj !== d.source && obj !== d.target);
+                });
+                _this.linkTxt.classed('inactive', function (d) {
+                    return (obj !== d.source && obj !== d.target);
+                });
+            }
+            _this.highlighted = obj;
+        } else {
+            if (_this.highlighted) {
+                _this.node.classed('inactive', false);
+                _this.nodeTxt.classed('inactive', false);
+                _this.link.classed('inactive', false);
+                _this.linkTxt.classed('inactive', false);
+            }
+            _this.highlighted = null;
+        }
+    },
+    getIndexArr: function (obj) {
+        var _this = this;
+        var resultArr = [];
+        if (obj) {
+            for (var i = 0; i < obj.length; i++) {
+                resultArr.push(obj[i].index.toString())
+            }
+        }
+        return resultArr;
     },
     dragged: function (d) {
         d.fx = d3.event.x;
@@ -418,14 +463,14 @@ window.d3drawPic = {
         _this.mouseup_node = null;
     },
     spliceLinksForNode: function (node) {
-        var toSplice = this.linksData.filter(
-            function (l) {
-                return (l.source === node) || (l.target === node);
-            });
-        toSplice.map(
-            function (l) {
-                this.linksData.splice(this.linksData.indexOf(l), 1);
-            });
+        //删除线
+        var _this = this;
+        var toSplice = _this.linksData.filter(function (l) {
+            return (l.source === node) || (l.target === node);
+        });
+        toSplice.map(function (l) {
+            _this.linksData.splice(_this.linksData.indexOf(l), 1);
+        });
     },
     ticked: function () {
         var _this = this;
@@ -561,30 +606,23 @@ window.d3drawPic = {
                 var data = str2obj($target.attr("data-d"));
                 var className = $target.attr("class");
                 if (className == "hideclue") {//linksData 通过节点上的outedges连线获取真正连线上的id ，传给后台
-                    _this.link._groups[0].forEach(function (item, i) {//删除连线
-                        if (sourceF.id == item.__data__.source.id) {
+                    _this.linksData.forEach(function (item, i) {//删除连线
+                        if (sourceF.id == item.source.id) {
                             item.remove();
                             linksArr.push(item);
                         }
                     });
                     if (linksArr && linksArr.length >= 0) {
-                        linksArr.forEach(function (item, i) {//删除target节点
-                            _this.node._groups[0].forEach(function (on, i) {
-                                if (on.__data__.id == item.__data__.target.id) {
+                        linksArr.forEach(function (item, i) {//删除target节点和target 文字
+                            _this.nodesData.forEach(function (on, i) {
+                                if (on.id == item.target.id) {
                                     on.remove();
                                 }
                             });
                         });
                         linksArr.forEach(function (item, i) {//删除线上文字
-                            _this.linkTxt._groups[0].forEach(function (on, i) {
-                                if (on.__data__.source.id == item.__data__.source.id) {
-                                    on.remove();
-                                }
-                            });
-                        });
-                        linksArr.forEach(function (item, i) {//删除target 文字
-                            _this.nodeTxt._groups[0].forEach(function (on, i) {
-                                if (on.__data__.id == item.__data__.target.id) {
+                            _this.linksData.forEach(function (on, i) {
+                                if (on.source.id == item.source.id) {
                                     on.remove();
                                 }
                             });
@@ -610,15 +648,10 @@ window.d3drawPic = {
                     tooltipCurrent.remove();
                 } else if (className == "intodel") {
                     //删除节点和上面的文字
-                    _this.node._groups[0].forEach(function (on, i) {//删除节点
-                        if (on.__data__.id == sourceF.id) {
+                    _this.nodesData.forEach(function (on, i) {//删除节点和节点下的文字
+                        if (on.id == sourceF.id) {
                             on.remove();
                         }
-                        _this.nodeTxt._groups[0].forEach(function (on, i) {//删除节点下的文字
-                            if (on.__data__.id == sourceF.id) {
-                                on.remove();
-                            }
-                        });
                     });
                     if (data.inEdges) {
                         var inEdges = data.inEdges;
@@ -737,9 +770,16 @@ window.d3drawPic = {
     addLine: function (node, key) {
         var _this = this;
         node
-            .on("mousemove", function (d, i) {
-                _this.setPosition(d, i);
+        //去掉默认的contextmenu事件，否则会和右键事件同时出现。
+            .on("contextmenu", function () {
+                //DOM事件对象——d3.event
+                d3.event.preventDefault();
             })
+            // //双击节点删除与节点相连的所有连线
+            // .on('dblclick', function (d) {
+            //     _this.spliceLinksForNode(d);
+            //     _this.d3Draw(key);
+            // })
             .on("mousedown", function (d, i) {
                 var that = d3.event;
                 //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
@@ -775,6 +815,7 @@ window.d3drawPic = {
                     if (_this.mousedown_node) {
                         _this.mouseup_node = d;
                         var flag = _this.judgeCanLine(_this.mouseup_node, _this.mousedown_node);
+                        debugger
                         if (flag) {
                             // 添加力数据
                             var linkMake = {
@@ -783,19 +824,35 @@ window.d3drawPic = {
                                 source: _this.mousedown_node,
                                 target: _this.mouseup_node
                             };
-                            _this.link._groups[0].forEach(function (item, i) {//已经有连线不可再连
-                                if (linkMake.source.id == item.__data__.source.id && linkMake.target.id == item.__data__.target.id) {
+                            var repeat = false;
+                            $.each(_this.linksData, function (i, item) {
+                                if (_this.mousedown_node.id == item.source.id && _this.mouseup_node.id == item.target.id) {
                                     toast("不能重复连线", 600);
-                                    return;
+                                    repeat = false;
+                                    return false;
+                                } else {
+                                    repeat = true;
                                 }
                             });
-                            _this.linksData.push(linkMake);
+                            if (repeat) {
+                                _this.linksData.push(linkMake);
+                                if(_this.mousedown_node.nodeFlag){
+                                    _this.mousedown_node.nodeFlag = 'new_insert';
+                                    _this.nodesData.push(_this.mousedown_node);
+                                }
+                                _this.d3Draw(key);
+                                // todo 调后台接口 /feedback-task/add
 
-                            // todo 调后台接口 /feedback-task/add
-                            _this.d3Draw(key);
+                            }
+                        } else {
+                            // 删除画出的箭头
+                            _this.drag_line.style("marker-end", "");
                         }
                     }
                 }
+            })
+            .on("mousemove", function (d, i) {
+                _this.setPosition(d, i);
             });
         node.classed("node_selected", function (d) {
             return d === _this.selected_node;
@@ -832,7 +889,10 @@ window.d3drawPic = {
             } else if (mouseup_node.type == "ajid" && mousedown_node.type == "ajid") {
                 toast("案件不能指向案件！", 600);
                 return false;
-            } else {
+            } else if (mouseup_node.type == "ajid" && mousedown_node.type == "fkid") {
+                toast("反馈不能指向案件！", 600);
+                return false;
+            }else {
                 return true;
             }
         } else {
@@ -848,96 +908,19 @@ window.d3drawPic = {
     addD3Node: function (nodeArray, key, x, y) {
         var _this = this;
         var lenNodes = nodeArray.length;
-        if (lenNodes > 0) {
-            //数组合并
-            for (var i = 0; i < lenNodes; i = i + 5000) {
-                var nodeObj = nodeArray.slice(i, Math.max(i + 5000, lenNodes));
-                _this.nodesData.push.apply(_this.graphJson.nodes, nodeObj);
-            }
-        }
-        _this.d3Draw(key);
-// _this.restart(nodeArray, key, x, y);
+        // if (lenNodes > 0) {
+        //     //数组合并
+        //     for (var i = 0; i < lenNodes; i = i + 5000) {
+        //         var nodeObj = nodeArray.slice(i, Math.max(i + 5000, lenNodes));
+        //         _this.nodesData.push.apply(_this.graphJson.nodes, nodeObj);
+        //     }
+        // }
+        // _this.d3Draw(key);
 
-        // //todo 把新加进来的节点放入svg中，不重画svg，直接插入svg
-        // var newNode = _this.svgGroup.selectAll(".nodes-g")
-        //     .data(nodeArray)
-        //     .insert("image")
-        //     .attr("class", "nodes-img")
-        //     .attr("width", _this.imgW)
-        //     .attr("height", _this.imgH)
-        //     .attr('id', function (d) {
-        //         return d.id
-        //     })
-        //     .attr("xlink:href", function (d) {
-        //         var image;
-        //         switch (d.type) {
-        //             case "groupid":
-        //                 image = _this.imgSrc + "type_group.png";
-        //                 break;
-        //             case "taskid":
-        //                 image = _this.imgSrc + "type_task.png";
-        //                 break;
-        //             case "fkid":
-        //                 image = _this.imgSrc + "type_feedback.png";
-        //                 break;
-        //             case "ajid":
-        //                 image = _this.imgSrc + "type_case.png";
-        //                 break;
-        //         }
-        //         return image;
-        //     })
-        //     .attr("x", function (d) {
-        //         return x
-        //     })
-        //     .attr("y", function (d) {
-        //         return y
-        //     });
-        // var newNodeText = this.svgGroup.selectAll(".node-text-g")
-        //     .data(nodeArray)
-        //     .insert("text")
-        //     .attr("class", "node-text")
-        //     .text(function (d) {
-        //         var arr = [];
-        //         arr = d.name && d.name.split("@");
-        //         var name = arr[0];
-        //         var time = arr[1];
-        //         name = name ? name : "";
-        //         time = time ? time : "";
-        //         return name;
-        //     })
-        //     .attr("dx", function (d) {
-        //         return -20
-        //     })
-        //     .attr("dy", function (d) {
-        //         return 15
-        //     })
-        //     .attr("x", function (d) {
-        //         return x
-        //     })
-        //     .attr("y", function (d) {
-        //         return y + 20
-        //     });
-        // //节点之间画线
-        // _this.addLine(newNode, key);
-    },
-
-    hideclue: function (params) {
-        //todo 调用后台接口 /feedback-task/hidden
-
-    },
-    restart: function (nodeArray, key, x, y) {
-        var _this = this;
-        // _this.node.attr("x", function (d) {
-        //     return d.x - _this.imgW / 2;
-        // }).attr("y", function (d) {
-        //     return d.y - _this.imgH / 2
-        // });
-        // Apply the general update pattern to the nodes.
-        _this.node = _this.node.data(_this.nodesData, function (d) {
-            return d.id;
-        });
-        _this.node.exit().remove();
-        _this.node = _this.node.enter().append("image")
+        //todo 把新加进来的节点放入svg中，不重画svg，直接插入svg
+        var newNode = _this.svgGroup.selectAll(".nodes-g")
+            .data(nodeArray)
+            .insert("image")
             .attr("class", "nodes-img")
             .attr("width", _this.imgW)
             .attr("height", _this.imgH)
@@ -945,35 +928,46 @@ window.d3drawPic = {
                 return d.id
             })
             .attr("xlink:href", function (d) {
-                var image;
-                switch (d.type) {
-                    case "groupid":
-                        image = _this.imgSrc + "type_group.png";
-                        break;
-                    case "taskid":
-                        image = _this.imgSrc + "type_task.png";
-                        break;
-                    case "fkid":
-                        image = _this.imgSrc + "type_feedback.png";
-                        break;
-                    case "ajid":
-                        image = _this.imgSrc + "type_case.png";
-                        break;
-                }
-                return image;
-            }).merge(_this.node);
+                return _this.getImg(d.type);
+            })
+            .attr("x", function (d) {
+                return x
+            })
+            .attr("y", function (d) {
+                return y
+            });
+        var newNodeText = this.svgGroup.selectAll(".node-text-g")
+            .data(nodeArray)
+            .insert("text")
+            .attr("class", "node-text")
+            .text(function (d) {
+                var arr = [];
+                arr = d.name && d.name.split("@");
+                var name = arr[0];
+                var time = arr[1];
+                name = name ? name : "";
+                time = time ? time : "";
+                return name;
+            })
+            .attr("dx", function (d) {
+                return -20
+            })
+            .attr("dy", function (d) {
+                return 15
+            })
+            .attr("x", function (d) {
+                return x
+            })
+            .attr("y", function (d) {
+                return y + 20
+            });
+        // //节点之间画线
+        _this.addLine(newNode, key);
+    },
 
-        // Apply the general update pattern to the links.
-        _this.link = _this.link.data(_this.linksData, function (d) {
-            return d.source.id + "-" + d.target.id;
-        });
-        _this.link.exit().remove();
-        _this.link = _this.link.enter().append("line").merge(_this.link);
+    hideclue: function (params) {
+        //todo 调用后台接口 /feedback-task/hidden
 
-        // Update and restart the simulation.
-        _this.simulation.nodes(_this.nodesData);
-        _this.simulation.force("link").links(_this.linksData);
-        _this.simulation.alpha(1).restart();
     },
 
     getNodes: function (groupid) {
@@ -1200,12 +1194,7 @@ window.d3drawPic = {
     },
     regEvengetforce: function () {
         var _this = this;
-        var startX = 0;
-        var startY = 0;
-        var firstX, firstY;//获取当前元素的绝对定位left 和top值
         var $getforce = $("#getforce");//左边容器
-        var $forceDraw = $("#forceDraw");//右边容器
-        var $bodyagentDrag = $("#bodyagentDrag");//拖拽参照的父元素需要获取其top 和 left
         $getforce
             .on("dragstart", ".prepare-node", function (e) {
                 var key = $('#intoDrag').attr('data-key');
@@ -1222,53 +1211,6 @@ window.d3drawPic = {
                 var key = $('#intoDrag').attr('data-key');
                 if (key == 1) return;
                 _this.dragPosition(e, key);
-
-                // var x = e.pageX;
-                // var y = e.pageY;
-                // x -= startX;
-                // y -= startY;
-                // this.style.top = y + "px";
-                // this.style.left = x + "px";
-                // var info = str2obj($(this).attr("info"));
-                // var $forceDrawLeft = $forceDraw.offset().left;//容器位置最左边
-                // var $forceDrawTop = $forceDraw.offset().top;//容器位置最上边
-                // var $forceDrawRight = $forceDraw.offset().top + $forceDraw.width();//容器位置最右边
-                // var $forceDrawBottom = $forceDraw.offset().top + $forceDraw.height();//容器位置最下边
-                //
-                // if ((y >= $forceDrawTop && x >= $forceDrawLeft) && (y < $forceDrawBottom && x < $forceDrawRight)) {//脉络图范围内有效
-                //     var taskType = info.taskType;
-                //     var newNode;
-                //     if (taskType) {//任务
-                //         newNode = {
-                //             id: info.id,
-                //             image: "",
-                //             name: info.taskContent + '@' + info.createTime,
-                //             taskCreateTime: info.createTime,
-                //             taskCreatorUserId: info.createId,
-                //             taskStatus: info.taskState,
-                //             type: "taskid"
-                //         };
-                //     } else {//反馈
-                //         newNode = {
-                //             id: info.id,
-                //             image: "",
-                //             name: info.feedbackContent + '@' + info.createTime,
-                //             feedbackCreateTime: info.createTime,
-                //             feedbackCreatorUserId: info.createId,
-                //             feedbackState: info.feedbackState,
-                //             type: "fkid"
-                //         };
-                //     }
-                //     _this.addNode(newNode, key);
-                //     $(this).remove();
-                //     window.d3drawPic.d3Draw(key);
-                // } else {//如果不在线索脉络图的范围内，则不能移动位置
-                //     toast("不能移出脉络图范围！", 600);
-                //     this.style.top = firstY;
-                //     this.style.left = firstX;
-                //     return;
-                // }
-
             });
         $('#intoDrag').on('click', function () {//1是拖动2是连线
             var $this = $(this);
@@ -1286,64 +1228,61 @@ window.d3drawPic = {
             }
         });
         $("#toSearch").on("click", function () {//查询图标点击事件
+            var $this = $(this);
             var groupId = $('#mapSvgFrame').attr("groupid") ? $('#mapSvgFrame').attr("groupid") : $("#searchCondition").attr("data-groupid");
-            if (groupId) {
-                var $this = $(this);
+            if (1 == 1) {
                 var val = $.trim($("#searchCondition").val());
-                var graphJson = localStorage["graph"];
-                graphJson = str2obj(graphJson);
                 if (val) {
-                    $.each(graphJson.nodes, function (index, value) {
+                    $.each(_this.nodesData, function (index, value) {
                         var taskname = value.name;
-                        var type = value.type;
                         var id = value.id;
                         var isname = null;
                         var reg = new RegExp(val);
                         isname = taskname.match(reg);
-                        if (
-                            (taskname && isname != undefined)
-                        ) {
+                        if (taskname && isname != undefined) {
                             //符合条件的节点数据
-                            var a = _this.link._groups[0][index];
-                            var b = _this.linkTxt._groups[0][index];
-                            var c = _this.nodeTxt._groups[0][index];
-                            var d = _this.node._groups[0][index];
-                            var image;
-                            switch (type) {
-                                case "groupid":
-                                    image = _this.imgSrc + "type_group_c.png";
-                                    break;
-                                case "taskid":
-                                    image = _this.imgSrc + "type_task_c.png";
-                                    break;
-                                case "fkid":
-                                    image = _this.imgSrc + "type_feedback_c.png";
-                                    break;
-                                case "ajid":
-                                    image = _this.imgSrc + "type_case_c.png";
-                                    break;
-                            }
-                            _this.node._groups[0].forEach(function (item, i) {
-                                if (id == item.id) {
-                                    item.setAttribute("href", image);
-                                    item.setAttribute("class", "");
-                                }
-                            })
-
-                        } else {
-
+                            _this.node.classed('inactive', function (d, i) {
+                                return id != d.id
+                            });
+                            _this.nodeTxt.classed('inactive', function (d, i) {
+                                return id != d.id
+                            });
+                            _this.link.classed('inactive', true);
+                            _this.linkTxt.classed('inactive', true);
                         }
                     });
                 } else {
-                    _this.d3Draw($('#intoDrag').attr('data-key'));
+                    toast("请先输入关键字", 600);
+                    _this.node.classed('inactive', false);
+                    _this.nodeTxt.classed('inactive', false);
+                    _this.link.classed('inactive', false);
+                    _this.linkTxt.classed('inactive', false);
                 }
 
             } else {
                 toast("请先选择专案组", 600);
             }
-
         });
 
+    },
+    getImg: function (type) {
+        var _this = this;
+        var image;
+        switch (type) {
+            case "groupid":
+                image = _this.imgSrc + "type_group.png";
+                break;
+            case "taskid":
+                image = _this.imgSrc + "type_task.png";
+                break;
+            case "fkid":
+                image = _this.imgSrc + "type_feedback.png";
+                break;
+            case "ajid":
+                image = _this.imgSrc + "type_case.png";
+                break;
+        }
+        return image;
     },
     //获取节点移入脉络图区域的位置
     dragPosition: function (e, key) {
@@ -1380,7 +1319,10 @@ window.d3drawPic = {
                     taskCreateTime: info.createTime,
                     taskCreatorUserId: info.createId,
                     taskStatus: info.taskState,
-                    type: "taskid"
+                    type: "taskid",
+                    x:positionLeft,
+                    y:positionTop,
+                    nodeFlag:'new'
                 };
             } else {//反馈
                 newNode = {
@@ -1390,7 +1332,10 @@ window.d3drawPic = {
                     feedbackCreateTime: info.createTime,
                     feedbackCreatorUserId: info.createId,
                     feedbackState: info.feedbackState,
-                    type: "fkid"
+                    type: "fkid",
+                    x:positionLeft,
+                    y:positionTop,
+                    nodeFlag:'new'
                 };
             }
             $e.remove();
