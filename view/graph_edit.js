@@ -922,7 +922,7 @@ window.d3drawPic = {
         // }
         // _this.d3Draw(key);
 
-        //todo 把新加进来的节点放入svg中，不重画svg，直接插入svg
+        // 把新加进来的节点放入svg中，不重画svg，直接插入svg
         var newNode = _this.svgGroup.selectAll(".nodes-g")
             .data(nodeArray)
             .insert("image")
@@ -939,7 +939,7 @@ window.d3drawPic = {
                 //只能在移到空白处
                 $.each(_this.nodesData, function (i, item) {
                     if (item.x > x && item.x < x + _this.imgW) {
-                        x = x - _this.imgW*2;
+                        x = x - _this.imgW * 2;
                     } else {
                         x = x;
                     }
@@ -951,7 +951,7 @@ window.d3drawPic = {
                 //只能在移到空白处
                 $.each(_this.nodesData, function (i, item) {
                     if (item.y > y && item.y < y + _this.imgH) {
-                        y = y - _this.imgH*2;
+                        y = y - _this.imgH * 2;
                     } else {
                         y = y;
                     }
@@ -1436,12 +1436,38 @@ window.d3drawPic = {
                 }
                 $e.remove();
                 _this.addNode(newNode, key, positionLeft, positionTop);
-                //todo 左边节点位置重新计算
+                //左边节点位置重新计算
+                _this.setLeftForcePosition(e);
             } else {
                 toast("只能移入脉络图范围！", 600);
                 return;
             }
 
+        }
+    },
+    //左边节点位置重新计算
+    setLeftForcePosition: function (ele) {
+        var _this = this;
+        if ($(ele.target).hasClass("task-node")) {
+            $('.task-node').each(function (i, e) {
+                var top;
+                if ($(e)[0].offsetTop > ( 15 + i * $(e).height() + 5)) {
+                    top = $(e)[0].offsetTop - $(e).height() - 5
+                } else {
+                    top = $(e)[0].offsetTop
+                }
+                $(e).css('top', top)
+            });
+        } else if ($(ele.target).hasClass("feedback-node")) {
+            $('.feedback-node').each(function (i, e) {
+                var top;
+                if ($(e)[0].offsetTop > ( 15 + i * $(e).height() + 5)) {
+                    top = $(e)[0].offsetTop - $(e).height() - 5
+                } else {
+                    top = $(e)[0].offsetTop
+                }
+                $(e).css('top', top)
+            });
         }
     }
 };
