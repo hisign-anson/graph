@@ -23,8 +23,13 @@
     background: #ffffff;
     box-shadow: 5px 6px 10px 1px #cccccc;
     overflow: auto;
+    /*height: calc(100vh - 95px);*/
 }
-
+.force svg {
+    /*border: 2px dashed #c1c1c1;*/
+    /*width: calc(100% - 4px);*/
+    /*height: calc(100% - 8px);*/
+}
 .force-unConnection {
     width: 120px;
     min-height: 100px;

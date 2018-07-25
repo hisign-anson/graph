@@ -121,8 +121,8 @@ window.d3drawPic = {
                     if (!_this.mousedown_node) return;
                     // 更新连接线
                     _this.drag_line
-                        .attr("x1", _this.mousedown_node.nodeFlag == 'new'?_this.mousedown_node.x + _this.imgW/2:_this.mousedown_node.x)
-                        .attr("y1", _this.mousedown_node.nodeFlag == 'new'?_this.mousedown_node.y + _this.imgH/2:_this.mousedown_node.y)
+                        .attr("x1", _this.mousedown_node.nodeFlag == 'new' ? _this.mousedown_node.x + _this.imgW / 2 : _this.mousedown_node.x)
+                        .attr("y1", _this.mousedown_node.nodeFlag == 'new' ? _this.mousedown_node.y + _this.imgH / 2 : _this.mousedown_node.y)
                         .attr("x2", d3.mouse(this)[0])
                         .attr("y2", d3.mouse(this)[1]);
                 })
@@ -468,6 +468,7 @@ window.d3drawPic = {
         var toSplice = _this.linksData.filter(function (l) {
             return (l.source === node) || (l.target === node);
         });
+        debugger
         toSplice.map(function (l) {
             _this.linksData.splice(_this.linksData.indexOf(l), 1);
         });
@@ -776,10 +777,10 @@ window.d3drawPic = {
                 d3.event.preventDefault();
             })
             // //双击节点删除与节点相连的所有连线
-            // .on('dblclick', function (d) {
-            //     _this.spliceLinksForNode(d);
-            //     _this.d3Draw(key);
-            // })
+            .on('dblclick', function (d) {
+                _this.spliceLinksForNode(d);
+                _this.d3Draw(key);
+            })
             .on("mousedown", function (d, i) {
                 var that = d3.event;
                 //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
@@ -815,7 +816,6 @@ window.d3drawPic = {
                     if (_this.mousedown_node) {
                         _this.mouseup_node = d;
                         var flag = _this.judgeCanLine(_this.mouseup_node, _this.mousedown_node);
-                        debugger
                         if (flag) {
                             // 添加力数据
                             var linkMake = {
@@ -836,9 +836,13 @@ window.d3drawPic = {
                             });
                             if (repeat) {
                                 _this.linksData.push(linkMake);
-                                if(_this.mousedown_node.nodeFlag){
+                                if (_this.mousedown_node.nodeFlag) {
                                     _this.mousedown_node.nodeFlag = 'new_insert';
                                     _this.nodesData.push(_this.mousedown_node);
+                                }
+                                if (_this.mouseup_node.nodeFlag) {
+                                    _this.mouseup_node.nodeFlag = 'new_insert';
+                                    _this.nodesData.push(_this.mouseup_node);
                                 }
                                 _this.d3Draw(key);
                                 // todo 调后台接口 /feedback-task/add
@@ -892,7 +896,7 @@ window.d3drawPic = {
             } else if (mouseup_node.type == "ajid" && mousedown_node.type == "fkid") {
                 toast("反馈不能指向案件！", 600);
                 return false;
-            }else {
+            } else {
                 return true;
             }
         } else {
@@ -900,14 +904,15 @@ window.d3drawPic = {
         }
     },
     addNode: function (newNode, key, x, y) {
+        var _this = this;
         var nodeArray = [];
         nodeArray.push(newNode);
-        this.addD3Node(nodeArray, key, x, y);
+        _this.addD3Node(nodeArray, key, x, y);
     },
 
     addD3Node: function (nodeArray, key, x, y) {
         var _this = this;
-        var lenNodes = nodeArray.length;
+        // var lenNodes = nodeArray.length;
         // if (lenNodes > 0) {
         //     //数组合并
         //     for (var i = 0; i < lenNodes; i = i + 5000) {
@@ -931,9 +936,26 @@ window.d3drawPic = {
                 return _this.getImg(d.type);
             })
             .attr("x", function (d) {
+                //只能在移到空白处
+                $.each(_this.nodesData, function (i, item) {
+                    if (item.x > x && item.x < x + _this.imgW) {
+                        x = x - _this.imgW*2;
+                    } else {
+                        x = x;
+                    }
+
+                });
                 return x
             })
             .attr("y", function (d) {
+                //只能在移到空白处
+                $.each(_this.nodesData, function (i, item) {
+                    if (item.y > y && item.y < y + _this.imgH) {
+                        y = y - _this.imgH*2;
+                    } else {
+                        y = y;
+                    }
+                });
                 return y
             });
         var newNodeText = this.svgGroup.selectAll(".node-text-g")
@@ -950,7 +972,7 @@ window.d3drawPic = {
                 return name;
             })
             .attr("dx", function (d) {
-                return -20
+                return 0
             })
             .attr("dy", function (d) {
                 return 15
@@ -1263,7 +1285,65 @@ window.d3drawPic = {
                 toast("请先选择专案组", 600);
             }
         });
+        //模拟socket事件触发
+        $("#socket").on("click", function () {
+            var key = $('#intoDrag').attr('data-key');
+            var socketData = {
+                "nodes": [
+                    {
+                        "image": "ajid.jpg",
+                        "name": "马思钰被电信诈骗案",
+                        "id": "PCS4419201709270000000178408697",
+                        "type": "ajid"
+                    }
+                ],
+                "edges": [
+                    {
+                        "name": "关联案件",
+                        "canDelete": "0",
+                        "hiddenState": "0",
+                        "lineId": "6bfa298ac8c04db982f23d01cf3fdc7d#PCS4419201709270000000178408697"// "lineId": "target#source"
+                    }]
+            };
+            _this.nodesData.push(socketData.nodes[0]);
+            _this.linksData.push(socketData.edges[0]);
+            socketData.edges.forEach(function (item, i) {
+                //线数据：INDEX source target
+                item.INDEX = _this.linksData.length - 1;
+                item.source = _this.nodesData.filter(function (l) {
+                    return l.id === item.lineId.split("#")[0];
+                })[0];
+                item.target = _this.nodesData.filter(function (l) {
+                    return l.id === item.lineId.split("#")[1];
+                })[0];
 
+                //节点数据：INDEX inEdges:[{index:0}] outEdges:[{index:1}]
+                socketData.nodes[i].INDEX = _this.nodesData.length - 1;
+                socketData.nodes[i].x = 50;
+                socketData.nodes[i].y = 50;
+
+                var inEdgesArr = [], outEdgesArr = [];
+                _this.linksData.filter(function (l) {
+                    return l.source.id === item.lineId.split("#")[0];
+                }).map(function (l) {
+                    inEdgesArr.push({
+                        index: l.source.index
+                    });
+                });
+                _this.linksData.filter(function (l) {
+                    return l.target.id === item.lineId.split("#")[0];
+                }).map(function (l) {
+                    outEdgesArr.push({
+                        index: l.target.index
+                    });
+                });
+                socketData.nodes[i].inEdges = _this.unique(inEdgesArr);
+                socketData.nodes[i].outEdges = _this.unique(outEdgesArr);
+            })
+            console.info(_this.nodesData);
+            console.info(_this.linksData)
+            _this.d3Draw(key)
+        });
     },
     getImg: function (type) {
         var _this = this;
@@ -1284,68 +1364,85 @@ window.d3drawPic = {
         }
         return image;
     },
+    //去重
+    unique: function (arr) {
+        var _this = this;
+        var res = [], obj = {};
+        for (var i = 0; i < arr.length; i++) {
+            if (!obj[arr[i]]) {
+                obj[arr[i]] = 1;
+                res.push(arr[i]);
+            }
+        }
+        return res;
+    },
     //获取节点移入脉络图区域的位置
     dragPosition: function (e, key) {
         var _this = this;
         var $e = $(e.target);
         var eHeight = $e.outerHeight(true);
         var eWidth = $e.outerWidth(true);
-        var forceDrawHeight = $('#forceDraw').outerHeight(true);
-        var forceDrawWidth = $('#forceDraw').outerWidth(true);
         var getForceHeight = $('#getforce').outerHeight(true);
         var getForceWidth = $('#getforce').outerWidth(true);
+        var forceDrawHeight = $('#forceDraw svg').outerHeight(true);
+        var forceDrawWidth = $('#forceDraw svg').outerWidth(true);
 
-        var forceDrawOffsetTop = $('#forceDraw').offset().top;
-        var forceDrawOffsetLeft = $('#forceDraw').offset().left;
+        var forceDrawOffsetTop = $('#forceDraw svg').offset().top;
+        var forceDrawOffsetLeft = $('#forceDraw svg').offset().left;
         var positionTop = e.clientY - forceDrawOffsetTop - eHeight / 2;
-        var positionLeft = e.clientX - forceDrawOffsetLeft - eWidth / 2 //+ getForceWidth;
-        var svgRight = forceDrawOffsetTop + forceDrawWidth;//容器位置最右边
+        var positionLeft = e.clientX - forceDrawOffsetLeft - eWidth / 2;
+        var svgRight = forceDrawOffsetLeft + forceDrawWidth;//容器位置最右边
         var svgBottom = forceDrawOffsetTop + forceDrawHeight;//容器位置最下边
 
         //拖完后判断是否出界
         if ($e.is('.dragging')) {
             return;
         } else {
-            // if ((positionTop >= forceDrawOffsetTop && positionLeft >= forceDrawOffsetLeft) && (positionTop < svgBottom && positionLeft < svgRight)) {//脉络图范围内有效
-            $e.css({'top': positionTop, 'left': positionLeft});
-            var info = str2obj($e.attr("info"));
-            var taskType = info.taskType;
-            var newNode;
-            if (taskType) {//任务
-                newNode = {
-                    id: info.id,
-                    image: "",
-                    name: info.taskContent + '@' + info.createTime,
-                    taskCreateTime: info.createTime,
-                    taskCreatorUserId: info.createId,
-                    taskStatus: info.taskState,
-                    type: "taskid",
-                    x:positionLeft,
-                    y:positionTop,
-                    nodeFlag:'new'
-                };
-            } else {//反馈
-                newNode = {
-                    id: info.id,
-                    image: "",
-                    name: info.feedbackContent + '@' + info.createTime,
-                    feedbackCreateTime: info.createTime,
-                    feedbackCreatorUserId: info.createId,
-                    feedbackState: info.feedbackState,
-                    type: "fkid",
-                    x:positionLeft,
-                    y:positionTop,
-                    nodeFlag:'new'
-                };
+            var boundTop = forceDrawOffsetTop + eHeight / 2;
+            var boundLeft = forceDrawOffsetLeft + eWidth / 2;
+            var boundRight = svgRight - eWidth / 2;
+            var boundBottom = svgBottom - eHeight / 2;
+            if (e.clientY > boundTop && e.clientX > boundLeft && e.clientY < boundBottom && e.clientX < boundRight) {//移动元素全部在脉络图范围内才有效
+                // $e.css({'top': positionTop, 'left': positionLeft});
+                var info = str2obj($e.attr("info"));
+                var taskType = info.taskType;
+                var newNode;
+                if (taskType) {//任务
+                    newNode = {
+                        id: info.id,
+                        image: "",
+                        name: info.taskContent + '@' + info.createTime,
+                        taskCreateTime: info.createTime,
+                        taskCreatorUserId: info.createId,
+                        taskStatus: info.taskState,
+                        type: "taskid",
+                        x: positionLeft,
+                        y: positionTop,
+                        nodeFlag: 'new'
+                    };
+                } else {//反馈
+                    newNode = {
+                        id: info.id,
+                        image: "",
+                        name: info.feedbackContent + '@' + info.createTime,
+                        feedbackCreateTime: info.createTime,
+                        feedbackCreatorUserId: info.createId,
+                        feedbackState: info.feedbackState,
+                        type: "fkid",
+                        x: positionLeft,
+                        y: positionTop,
+                        nodeFlag: 'new'
+                    };
+                }
+                $e.remove();
+                _this.addNode(newNode, key, positionLeft, positionTop);
+                //todo 左边节点位置重新计算
+            } else {
+                toast("只能移入脉络图范围！", 600);
+                return;
             }
-            $e.remove();
-            _this.addNode(newNode, key, positionLeft, positionTop);
-            //todo 左边节点位置重新计算
-            // } else {
-            //     toast("不能移出脉络图范围！", 600);
-            //     return;
-            // }
 
         }
     }
 };
+
