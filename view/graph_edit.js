@@ -939,7 +939,7 @@ window.d3drawPic = {
                 //只能在移到空白处
                 $.each(_this.nodesData, function (i, item) {
                     if (item.x > x && item.x < x + _this.imgW) {
-                        x = x - _this.imgW * 2;
+                        x = x - _this.imgW + 15;
                     } else {
                         x = x;
                     }
@@ -951,7 +951,7 @@ window.d3drawPic = {
                 //只能在移到空白处
                 $.each(_this.nodesData, function (i, item) {
                     if (item.y > y && item.y < y + _this.imgH) {
-                        y = y - _this.imgH * 2;
+                        y = y - _this.imgH + 15;
                     } else {
                         y = y;
                     }
