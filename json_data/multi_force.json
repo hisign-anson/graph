@@ -1,0 +1,316 @@
+{
+  "nodes": [
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "002",
+      "name": "002@2018-07-27 16:05:25",
+      "id": "55d3e4cbd589402c96eebbe91d558e43",
+      "INDEX": 0,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 4
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "周新忠吸毒案",
+      "id": "8aaa01245ec27ad8015ec6fd8158108e",
+      "INDEX": 1,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 8
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "骆辉旺等人扰乱公共秩序案",
+      "id": "8aaa01e35ea71e72015ec15bd8167132",
+      "INDEX": 2,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 7
+        }
+      ]
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "005",
+      "name": "005@2018-07-27 16:05:46",
+      "id": "75abd4f48a944e8c985c8f2069f7febc",
+      "INDEX": 3,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 2
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "梁学文吸毒案",
+      "id": "8aaa01245ec27ad8015ec6c939500fcc",
+      "INDEX": 4,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 9
+        }
+      ]
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "001",
+      "name": "001@2018-07-27 16:05:18",
+      "id": "e5d0e17b5c0f48ba8f088735f903f6d2",
+      "INDEX": 5,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 5
+        }
+      ]
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "反馈请求",
+      "name": "反馈请求@2018-07-27 16:06:15",
+      "id": "48d5d895c0b54c1a95dbdb9c49c431c9",
+      "INDEX": 6,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 0
+        },
+        {
+          "index": 10
+        }
+      ]
+    },
+    {
+      "image": "ajid.jpg",
+      "name": "钱忠海盗窃案",
+      "id": "PCS4403201709270000000175682737",
+      "INDEX": 7,
+      "type": "ajid",
+      "inEdges": [
+        {
+          "index": 6
+        }
+      ]
+    },
+    {
+      "image": "taskid.jpg",
+      "outEdges": [
+        {
+          "index": 0
+        }
+      ],
+      "taskContent": "请求",
+      "name": "请求@2018-07-27 16:06:04",
+      "id": "695e31928f0942848b908cec4b3ffc55",
+      "INDEX": 8,
+      "type": "taskid"
+    },
+    {
+      "image": "taskid.jpg",
+      "outEdges": [
+        {
+          "index": 1
+        },
+        {
+          "index": 2
+        },
+        {
+          "index": 3
+        }
+      ],
+      "taskContent": "任务1",
+      "name": "任务1@2018-07-27 16:04:52",
+      "id": "999e0a1771ab4e8cb61cfa7056b773c5",
+      "INDEX": 9,
+      "type": "taskid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "004",
+      "name": "004@2018-07-27 16:05:37",
+      "id": "422c9c4ed8aa4c4c9c9910c994e8ab26",
+      "INDEX": 10,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 1
+        }
+      ]
+    },
+    {
+      "image": "taskid.jpg",
+      "outEdges": [
+        {
+          "index": 4
+        },
+        {
+          "index": 5
+        }
+      ],
+      "taskContent": "任务2",
+      "name": "任务2@2018-07-27 16:05:06",
+      "id": "b7e128e0d1ed4d5e875b997235e9c897",
+      "INDEX": 11,
+      "type": "taskid"
+    },
+    {
+      "image": "fkid.jpg",
+      "feedbackContent": "003",
+      "name": "003@2018-07-27 16:05:31",
+      "id": "1d58f8c71df241d789a60bc5dac65383",
+      "INDEX": 12,
+      "type": "fkid",
+      "inEdges": [
+        {
+          "index": 3
+        }
+      ]
+    },
+    {
+      "image": "groupid.jpg",
+      "outEdges": [
+        {
+          "index": 6
+        },
+        {
+          "index": 7
+        },
+        {
+          "index": 8
+        },
+        {
+          "index": 9
+        },
+        {
+          "index": 10
+        }
+      ],
+      "name": "专案组0727",
+      "id": "9316d94c78424666a93ae35884875531",
+      "INDEX": 13,
+      "type": "groupid"
+    }
+  ],
+  "edges": [
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "75041e41dd3048b28c644b61a640d3c7",
+      "canDelete": "0",
+      "source": 8,
+      "INDEX": 0,
+      "hiddenState": "0",
+      "target": 6,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "1641b694c4454d3eba5d22173492a047",
+      "canDelete": "0",
+      "source": 9,
+      "INDEX": 1,
+      "hiddenState": "0",
+      "target": 10,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "c3aac79e60e444ca8fb3bf9b7724251a",
+      "canDelete": "0",
+      "source": 9,
+      "INDEX": 2,
+      "hiddenState": "0",
+      "target": 3,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "fd580b2aa318411f9b09e4c2ee4f10ea",
+      "canDelete": "0",
+      "source": 9,
+      "INDEX": 3,
+      "hiddenState": "0",
+      "target": 12,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "136315f1263049e4966b54e5a0909ec9",
+      "canDelete": "0",
+      "source": 11,
+      "INDEX": 4,
+      "hiddenState": "0",
+      "target": 0,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "task2fk",
+      "name": "反馈",
+      "lineId": "b1faf826880049d58e919cfb51d93ff4",
+      "canDelete": "0",
+      "source": 11,
+      "INDEX": 5,
+      "hiddenState": "0",
+      "target": 5,
+      "tableName": "T_FEEDBACK_TASK"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 13,
+      "INDEX": 6,
+      "target": 7,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 13,
+      "INDEX": 7,
+      "target": 2,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 13,
+      "INDEX": 8,
+      "target": 1,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2aj",
+      "name": "涉及案件",
+      "source": 13,
+      "INDEX": 9,
+      "target": 4,
+      "tableName": "T_CASE_GROUP"
+    },
+    {
+      "code": "group2fk",
+      "name": "反馈",
+      "lineId": "3147c6c704e44581a069e03d7ea47f78",
+      "canDelete": "1",
+      "source": 13,
+      "INDEX": 10,
+      "hiddenState": "0",
+      "target": 6,
+      "tableName": "T_FEEDBACK_TASK"
+    }
+  ]
+}

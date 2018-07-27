@@ -22,6 +22,7 @@ window.d3drawPic = {
     forceLink: "",
     forceCharge: "",
     forceCenter: "",
+    forceCollide:"",
     graphJson: "",
     simulation: "",//力模拟器
     //图片节点属性
@@ -85,6 +86,7 @@ window.d3drawPic = {
             jsonInitUrl = jsonInitUrl.replace(new RegExp("///+", "gi"), "/");
         } else {
             jsonInitUrl = "../json_data/group.json"
+            // jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
         }
         d3.json(jsonInitUrl, function (error, json) {
             if (error) throw error;
@@ -169,7 +171,8 @@ window.d3drawPic = {
          * d3.forceManyBody()：创建多体力
          * d3.forceManyBody().strength()：设置力强度
          * */
-        _this.forceCharge = d3.forceManyBody().strength(-300);
+        _this.forceCharge = d3.forceManyBody().strength(-60);
+        _this.forceCollide = d3.forceCollide().radius(20).strength(1);
 
         /*
          * d3.forceCenter()：创建一个力中心
@@ -201,6 +204,7 @@ window.d3drawPic = {
             .alphaDecay(0.015) //设置α指数衰减率
             .force("link", _this.forceLink)
             .force("charge", _this.forceCharge)
+            .force("collide", _this.forceCollide)
             .force("center", _this.forceCenter);
 
         //清除之前的元素
@@ -1094,7 +1098,7 @@ window.d3drawPic = {
 
         //把拖过来的节点都放在图中
         debugger
-        _this.nodesData.push(nodeArray);
+        // _this.nodesData.push(nodeArray);
         // //节点之间画线
         _this.addLine(newNode, key);
     },
