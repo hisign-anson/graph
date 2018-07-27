@@ -42,7 +42,6 @@ window.d3drawPic = {
     mouseup_node: null,
     selected: {},
     highlighted: null,
-
     zTreeObj: "",
     // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
     setting: {
@@ -82,13 +81,13 @@ window.d3drawPic = {
 
         var groupid = $("#mapSvgFrame").attr("groupid");
         if (groupid && groupid != null) {
-            var jsonInitUrl = 'http://192.168.1.92:8038/api-graph/getGraph?startNodeValue=6bfa298ac8c04db982f23d01cf3fdc7d&startNodeType=group_id';
+            var jsonInitUrl = makeAct("getGraph", "/", "graph") + "?startNodeValue=" + groupid + "&startNodeType=" + "group_id";
+            jsonInitUrl = jsonInitUrl.replace(new RegExp("///+", "gi"), "/");
         } else {
             jsonInitUrl = "../json_data/group.json"
         }
         d3.json(jsonInitUrl, function (error, json) {
             if (error) throw error;
-            // localStorage['graph'] = obj2str(json);//存到浏览器
             _this.graphJson = json;
             _this.nodesData = _this.graphJson.nodes;
             _this.linksData = _this.graphJson.edges;
@@ -98,9 +97,8 @@ window.d3drawPic = {
         });
 
     },
-    //鼠标mousedown 事件和 drag 拖拽事件冲突不能共用，所以分开两个方法
     d3Draw: function (key) {
-        //key  1：可拖动 2：可连线
+        //鼠标mousedown 事件和 drag 拖拽事件冲突不能共用，所以分开,用key区别【 1：可拖动 2：可连线】
         var _this = this;
         //判断如果进行查询过滤，那么如果input框中有内容，则不执行下面绘制操作
         var inputSearchVal = $.trim($("#searchCondition").val());//管理台和工作台
@@ -165,7 +163,7 @@ window.d3drawPic = {
          * d3.forceLink().distance()：设置连接距离
          * d3.forceLink().iterations()：设置迭代次数
          * */
-        _this.forceLink = d3.forceLink().strength(0.3)//.distance(60);
+        _this.forceLink = d3.forceLink().strength(0.3).distance(100);
 
         /*
          * d3.forceManyBody()：创建多体力
@@ -293,9 +291,17 @@ window.d3drawPic = {
                             $(this).attr("class", "remove-line-text");
                             return "删除连线";
                         } else {
+                            //不是隐藏状态时
+                            if (!$(this).hasClass('opacity0')) {
+                                $(this).removeAttr("class", "remove-line-text").attr("class", "link-text user-select-none");
+                            }
                             return edg.name;
                         }
                     } else {
+                        //不是隐藏状态时
+                        if (!$(this).hasClass('opacity0')) {
+                            $(this).removeAttr("class", "remove-line-text").attr("class", "link-text user-select-none");
+                        }
                         return edg.name;
                     }
                 });
@@ -303,7 +309,10 @@ window.d3drawPic = {
             .on("mouseout", function (d, i) {
                 //还原连接线上的文字
                 _this.linkTxt.text(function (edg) {
-                    $(this).removeAttr("class", "remove-line-text").attr("class", "link-text user-select-none");
+                    //不是隐藏状态时
+                    if (!$(this).hasClass('opacity0')) {
+                        $(this).removeAttr("class", "remove-line-text").attr("class", "link-text user-select-none");
+                    }
                     return edg.name;
                 });
             });
@@ -463,12 +472,11 @@ window.d3drawPic = {
         _this.mouseup_node = null;
     },
     spliceLinksForNode: function (node) {
-        //删除线
+        //删除节点相关全部线
         var _this = this;
         var toSplice = _this.linksData.filter(function (l) {
             return (l.source === node) || (l.target === node);
         });
-        debugger
         toSplice.map(function (l) {
             _this.linksData.splice(_this.linksData.indexOf(l), 1);
         });
@@ -599,85 +607,181 @@ window.d3drawPic = {
         _this.setting.callback = {
             //菜单节点被点击的事件回调函数
             onClick: function (event, treeId, treeNode, clickFlag) {
-                //alert("[ onClick ]:" + treeNode.name);
                 var sourceStr = treeNode.name.match(/\{[\S\s]+\}/)[0];
                 var sourceF = str2obj(sourceStr);//当前节点信息
                 var linksArr = [];
                 var $target = $(event.currentTarget).find("#" + treeNode.tId).find("#" + treeNode.tId + "_span>span");
                 var data = str2obj($target.attr("data-d"));
                 var className = $target.attr("class");
-                if (className == "hideclue") {//linksData 通过节点上的outedges连线获取真正连线上的id ，传给后台
-                    _this.linksData.forEach(function (item, i) {//删除连线
-                        if (sourceF.id == item.source.id) {
-                            item.remove();
-                            linksArr.push(item);
+                //linksData 通过节点上的outedges连线获取真正连线上的id ，传给后台
+                if (className == "hideclue") {
+                    //删除连线
+                    _this.link.each(function (d, i) {
+                        if (sourceF.id == d.source.id && d.target.type == "fkid") {
+                            $(this).addClass('opacity0');
+                            _this.linksData.splice(i, 1);
+                            linksArr.push(d);
+                        }
+                    });
+                    //删除连线文字
+                    _this.linkTxt.each(function (d, i) {
+                        if (sourceF.id == d.source.id && d.target.type == "fkid") {
+                            // $(this).remove();
+                            $(this).addClass('opacity0');
                         }
                     });
                     if (linksArr && linksArr.length >= 0) {
-                        linksArr.forEach(function (item, i) {//删除target节点和target 文字
-                            _this.nodesData.forEach(function (on, i) {
-                                if (on.id == item.target.id) {
-                                    on.remove();
+                        linksArr.forEach(function (item, i) {
+                            //删除target节点
+                            _this.node.each(function (d, j) {
+                                if (d.id == item.target.id && d.type == "fkid") {
+                                    $(this).addClass('opacity0');
+                                    _this.nodesData.splice(j, 1);
+                                    //删除节点时，判断节点上是否有连线，有也一并删除
+                                    _this.link.each(function (dLink, iLink) {
+                                        if (dLink.source.id == d.id || dLink.target.id == d.id) {
+                                            $(this).addClass('opacity0');
+                                            // _this.linksData.splice(dLink, 1);//此处不需要删除线数据
+                                        }
+                                    });
+                                    _this.linkTxt.each(function (dLink, iLink) {
+                                        if (dLink.source.id == d.id || dLink.target.id == d.id) {
+                                            $(this).addClass('opacity0');
+                                        }
+                                    });
                                 }
                             });
-                        });
-                        linksArr.forEach(function (item, i) {//删除线上文字
-                            _this.linksData.forEach(function (on, i) {
-                                if (on.source.id == item.source.id) {
-                                    on.remove();
+                            //删除target文字
+                            _this.nodeTxt.each(function (d, j) {
+                                if (d.id == item.target.id && d.type == "fkid") {
+                                    $(this).addClass('opacity0');
                                 }
                             });
                         });
                     }
-
                     params = {
                         lineId: data.id,
                         type: 2,//任务
                         hiddenState: 1
-                    }
-
-                    _this.hideclue(params);//删除调用后台接口
+                    };
+                    _this.hideClue(params, className);//删除调用后台接口
                     tooltipCurrent.remove();
-                } else if (className == "nohideclue") {
+                }
+                else if (className == "nohideclue") {
+                    //显示连线
+                    _this.link.each(function (d, i) {
+                        if (sourceF.id == d.source.id && d.target.type == "fkid") {
+                            if ($(this).hasClass('opacity0')) {
+                                $(this).removeClass('opacity0');
+                                _this.linksData.push(d);
+                            }
+                        }
+                    });
+                    //显示连线文字
+                    _this.linkTxt.each(function (d, i) {
+                        if (sourceF.id == d.source.id && d.target.type == "fkid") {
+                            if ($(this).hasClass('opacity0')) {
+                                $(this).removeClass('opacity0');
+                            }
+                        }
+                    });
+                    _this.linksData.forEach(function (item, i) {
+                        //显示target节点
+                        _this.node.each(function (d, j) {
+                            if (item.source.id == d.id || item.target.id == d.id) {
+                                if ($(this).hasClass('opacity0')) {
+                                    $(this).removeClass('opacity0');
+                                    _this.nodesData.push(d);
+                                    //显示节点时，判断节点上是否有连线，有也一并显示
+                                    _this.link.each(function (dLink, iLink) {
+                                        if (dLink.source.id == d.id || dLink.target.id == d.id) {
+                                            if ($(this).hasClass('opacity0')) {
+                                                $(this).removeClass('opacity0');
+                                                _this.linksData.push(dLink);
+                                            }
+                                        }
+                                    });
+                                    _this.linkTxt.each(function (dLink, iLink) {
+                                        if (dLink.source.id == d.id || dLink.target.id == d.id) {
+                                            if ($(this).hasClass('opacity0')) {
+                                                $(this).removeClass('opacity0');
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                        //显示target文字
+                        _this.nodeTxt.each(function (d, j) {
+                            if (item.source.id == d.id || item.target.id == d.id) {
+                                if ($(this).hasClass('opacity0')) {
+                                    $(this).removeClass('opacity0');
+                                }
+                            }
+                        });
+                    });
+
                     params = {
                         lineId: data.id,
                         type: 2,//任务
                         hiddenState: "0"
                     };
-
-                    _this.hideclue(params);//删除调用后台接口
+                    _this.hideClue(params, className);//删除调用后台接口
                     tooltipCurrent.remove();
-                } else if (className == "intodel") {
-                    //删除节点和上面的文字
-                    _this.nodesData.forEach(function (on, i) {//删除节点和节点下的文字
-                        if (on.id == sourceF.id) {
-                            on.remove();
+                }
+                else if (className == "intodel") {
+                    //删除target节点
+                    var lineIds = [];
+                    _this.node.each(function (d, j) {
+                        if (d.id == sourceF.id) {
+                            $(this).addClass('opacity0');
+                            _this.nodesData.splice(j, 1);
+                            //删除节点时，判断节点上是否有连线，有也一并删除
+                            _this.link.each(function (dLink, iLink) {
+                                if (dLink.source.id == d.id || dLink.target.id == d.id) {
+                                    $(this).addClass('opacity0');
+                                    _this.linksData.splice(iLink, 1);
+                                    debugger
+                                    lineIds.push(dLink.lineId);
+                                }
+                            });
+                            _this.linkTxt.each(function (dLink, iLink) {
+                                if (dLink.source.id == d.id || dLink.target.id == d.id) {
+                                    $(this).addClass('opacity0');
+                                }
+                            });
                         }
                     });
-                    if (data.inEdges) {
-                        var inEdges = data.inEdges;
-                        var lineIds = [];
-                        var params;
-                        var linkData = _this.linksData;
-                        for (var i = 0; i < inEdges.length; i++) {
-                            var index = inEdges[i].index;
-                            for (var j = 0; j < linkData.length; j++) {
-                                if (index == linkData[j].index) {
-                                    lineIds.push(linkData[j].lineId);
-                                }
-                            }
+                    //删除target文字
+                    _this.nodeTxt.each(function (d, j) {
+                        if (d.id == sourceF.id) {
+                            $(this).addClass('opacity0');
                         }
-                        params = {
-                            lineId: lineIds,
-                            type: 3,//反馈
-                            hiddenState: 1
-                        };
+                    });
 
-                        _this.hideclue(params);//删除调用后台接口
-                        tooltipCurrent.remove();
-                    }
-
-                } else if (className == "nohide") {
+                    // if (data.inEdges) {
+                    //     var inEdges = data.inEdges;
+                    //     var params;
+                    //     var linkData = _this.linksData;
+                    //     for (var i = 0; i < inEdges.length; i++) {
+                    //         var index = inEdges[i].index;
+                    //         for (var j = 0; j < linkData.length; j++) {
+                    //             if (index == linkData[j].index) {
+                    //                 lineIds.push(linkData[j].lineId);
+                    //             }
+                    //         }
+                    //     }
+                    //     debugger
+                    //     params = {
+                    //         lineId: lineIds,
+                    //         type: 3,//反馈
+                    //         hiddenState: 1
+                    //     };
+                    //     _this.hideClue(params, className);//删除调用后台接口
+                    // }
+                    tooltipCurrent.remove();
+                }
+                else if (className == "nohide") {
                     if (data.inEdges) {
                         var inEdges = data.inEdges;
                         var lineIds = [];
@@ -697,10 +801,11 @@ window.d3drawPic = {
                             hiddenState: "0"
                         };
 
-                        _this.hideclue(params);//删除调用后台接口
+                        _this.hideClue(params, className);//删除调用后台接口
                         tooltipCurrent.remove();
                     }
-                } else if (className == "groupmember") {
+                }
+                else if (className == "groupmember") {
                     var groupId = data.id;
                     $open('#groupMembersPage', {
                         width: 800, height: 400, title: '成员列表', onOpen: function () {
@@ -711,7 +816,8 @@ window.d3drawPic = {
                     _this.groupMemberObj.$qrgroupMembers = $('#query-result-groupMembers');
                     // _this.groupMembersTableRender(groupId);
                     tooltipCurrent.remove();
-                } else if (className == "casedetail") {
+                }
+                else if (className == "casedetail") {
                     var id = data.id;
                     if (_this.type == 1) {//1是从工作台进来
                         $open('#caseInfoView', {
@@ -725,7 +831,8 @@ window.d3drawPic = {
                         $open(top.getViewPath('case_group_manage/caseInfo_view.html?id={0}'.format(id)), "查看案件");
                     }
                     tooltipCurrent.remove();
-                } else if (className == "taskdetail") {
+                }
+                else if (className == "taskdetail") {
                     var taskId = data.id;
                     if (_this.type == 1) {//1是从工作台进来
                         $open('#taskDetailView', {
@@ -738,7 +845,8 @@ window.d3drawPic = {
                         $open(top.getViewPath('investigation_manage/task_detail.html?id={0}&type=1'.format(taskId)), '任务详情');
                     }
                     tooltipCurrent.remove();
-                } else if (className == "cluedetail") {
+                }
+                else if (className == "cluedetail") {
                     var id = data.id;
                     _this.taskFeedbackObj.taskFeedbackDetailAct = ''//makeAct('taskFeedbackDetail', 'task-feedback', 'crime');//线索详情
                     _this.taskFeedbackObj.$clueDetailPage = $('#clueDetailPage');
@@ -777,10 +885,10 @@ window.d3drawPic = {
                 d3.event.preventDefault();
             })
             // //双击节点删除与节点相连的所有连线
-            .on('dblclick', function (d) {
-                _this.spliceLinksForNode(d);
-                _this.d3Draw(key);
-            })
+            // .on('dblclick', function (d) {
+            //     _this.spliceLinksForNode(d);
+            //     _this.d3Draw(key);
+            // })
             .on("mousedown", function (d, i) {
                 var that = d3.event;
                 //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
@@ -983,13 +1091,17 @@ window.d3drawPic = {
             .attr("y", function (d) {
                 return y + 20
             });
+
+        //把拖过来的节点都放在图中
+        debugger
+        _this.nodesData.push(nodeArray);
         // //节点之间画线
         _this.addLine(newNode, key);
     },
 
-    hideclue: function (params) {
+    hideClue: function (params) {
+        var _this = this;
         //todo 调用后台接口 /feedback-task/hidden
-
     },
 
     getNodes: function (groupid) {
@@ -1020,237 +1132,6 @@ window.d3drawPic = {
                     "id": "4e8f305a944a4ace81e75f2f8dfeb70b",
                     "updateId": "6B99611542E9AB2DE050007F01003834",
                     "updateTime": "2018-07-18 09:13:19"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6B99611542E9AB2DE050007F01003834",
-                    "createName": "浦韩瑶",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createTime": "2018-07-13 16:00:10",
-                    "deleteState": "0",
-                    "desc": false,
-                    "end": 0,
-                    "feedbackContent": "未读数",
-                    "feedbackState": "0",
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "c457089a8c844467821790b595054be1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-18 09:13:17"
                 },
                 {
                     "begin": 0,
@@ -1368,479 +1249,6 @@ window.d3drawPic = {
                     "taskType": "1",
                     "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
                     "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:53:42",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "abf56d546b204777878c7606bb77d99b",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40",
-                    "receiveGroupName": "0524专案组-特警小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "测试试试",
-                    "taskNo": "RW440000190000201800023",
-                    "taskSerialNo": "011",
-                    "taskState": "0",
-                    "taskType": "1",
-                    "updateId": "6AB7C67C5F5F93A8E050007F0100285B",
-                    "updateTime": "2018-07-13 16:10:03"
-                },
-                {
-                    "begin": 0,
-                    "createGroupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "createGroupName": "0524专案组",
-                    "createId": "6AB8CF0ED8A3FCA2E050007F01002859",
-                    "createName": "余乐",
-                    "createOrgCode": "440000190000",
-                    "createOrgName": "广东省公安厅刑侦局",
-                    "createPhone": "46545135748",
-                    "createRole": "1",
-                    "createTime": "2018-07-13 14:51:55",
-                    "deleteState": "0",
-                    "desc": false,
-                    "emergencyState": "1",
-                    "end": 0,
-                    "flagState": "1",
-                    "groupId": "6bfa298ac8c04db982f23d01cf3fdc7d",
-                    "groupName": "0524专案组",
-                    "id": "9e40a6f0cdf54d0d87fc6d2233de3dfa",
-                    "lastFeedbackTime": "2018-07-13 15:42:52",
-                    "receiveGroupId": "ef0072242ca94a8cbeca463b3363ff40,b8c548d538794d21983b8af00ad70c3d",
-                    "receiveGroupName": "0524专案组-特警小组,0524专案组-立案单位小组",
-                    "receiveState": "1",
-                    "reminderState": "0",
-                    "taskContent": "爱三点半",
-                    "taskNo": "RW440000190000201800022",
-                    "taskSerialNo": "010",
-                    "taskState": "1",
-                    "taskType": "1",
-                    "updateId": "6B99611542E9AB2DE050007F01003834",
-                    "updateTime": "2018-07-17 10:32:50"
                 }
             ]
         };
@@ -1962,24 +1370,15 @@ window.d3drawPic = {
             if (1 == 1) {
                 var val = $.trim($("#searchCondition").val());
                 if (val) {
-                    $.each(_this.nodesData, function (index, value) {
-                        var taskname = value.name;
-                        var id = value.id;
-                        var isname = null;
-                        var reg = new RegExp(val);
-                        isname = taskname.match(reg);
-                        if (taskname && isname != undefined) {
-                            //符合条件的节点数据
-                            _this.node.classed('inactive', function (d, i) {
-                                return id != d.id
-                            });
-                            _this.nodeTxt.classed('inactive', function (d, i) {
-                                return id != d.id
-                            });
-                            _this.link.classed('inactive', true);
-                            _this.linkTxt.classed('inactive', true);
-                        }
+                    //符合条件的节点数据
+                    _this.node.classed('inactive', function (d, i) {
+                        return (d.name.indexOf(val) == -1)
                     });
+                    _this.nodeTxt.classed('inactive', function (d, i) {
+                        return (d.name.indexOf(val) == -1)
+                    });
+                    _this.link.classed('inactive', true);
+                    _this.linkTxt.classed('inactive', true);
                 } else {
                     toast("请先输入关键字", 600);
                     _this.node.classed('inactive', false);
@@ -1993,7 +1392,7 @@ window.d3drawPic = {
             }
         });
         //模拟socket事件触发
-        $("#socket").on("click", function () {
+        $("#socketAdd").on("click", function () {
             var key = $('#intoDrag').attr('data-key');
             var socketData = {
                 "nodes": [
@@ -2010,47 +1409,35 @@ window.d3drawPic = {
                         "canDelete": "0",
                         "hiddenState": "0",
                         "lineId": "6bfa298ac8c04db982f23d01cf3fdc7d#PCS4419201709270000000178408697"// "lineId": "target#source"
-                    }]
+                    }
+                ]
             };
-            _this.nodesData.push(socketData.nodes[0]);
-            _this.linksData.push(socketData.edges[0]);
-            socketData.edges.forEach(function (item, i) {
-                //线数据：INDEX source target
-                item.INDEX = _this.linksData.length - 1;
-                item.source = _this.nodesData.filter(function (l) {
-                    return l.id === item.lineId.split("#")[0];
-                })[0];
-                item.target = _this.nodesData.filter(function (l) {
-                    return l.id === item.lineId.split("#")[1];
-                })[0];
-
-                //节点数据：INDEX inEdges:[{index:0}] outEdges:[{index:1}]
-                socketData.nodes[i].INDEX = _this.nodesData.length - 1;
-                socketData.nodes[i].x = 50;
-                socketData.nodes[i].y = 50;
-
-                var inEdgesArr = [], outEdgesArr = [];
-                _this.linksData.filter(function (l) {
-                    return l.source.id === item.lineId.split("#")[0];
-                }).map(function (l) {
-                    inEdgesArr.push({
-                        index: l.source.index
-                    });
-                });
-                _this.linksData.filter(function (l) {
-                    return l.target.id === item.lineId.split("#")[0];
-                }).map(function (l) {
-                    outEdgesArr.push({
-                        index: l.target.index
-                    });
-                });
-                socketData.nodes[i].inEdges = _this.unique(inEdgesArr);
-                socketData.nodes[i].outEdges = _this.unique(outEdgesArr);
-            })
-            console.info(_this.nodesData);
-            console.info(_this.linksData)
-            _this.d3Draw(key)
+            var eventType = "mltAdd";
+            _this.socketEvent(key,socketData, eventType);
         });
+        $("#socketDel").on("click", function () {
+            var key = $('#intoDrag').attr('data-key');
+            var socketData = {
+                "nodes": [
+                    {
+                        "image": "ajid.jpg",
+                        "name": "骆辉旺等人扰乱公共秩序案",
+                        "id": "8aaa01e35ea71e72015ec15bd8167132",
+                        "type": "ajid"
+                    }
+                ],
+                "edges": [
+                    {
+                        "name": "关联案件",
+                        "canDelete": "0",
+                        "hiddenState": "0",
+                        "lineId": "6bfa298ac8c04db982f23d01cf3fdc7d#8aaa01e35ea71e72015ec15bd8167132"// "lineId": "target#source"
+                    }
+                ]
+            };
+            var eventType = "mltDelete";
+            _this.socketEvent(key,socketData, eventType);
+        })
     },
     getImg: function (type) {
         var _this = this;
@@ -2172,6 +1559,76 @@ window.d3drawPic = {
         } else if ($(ele.target).hasClass("feedback-node")) {
             $('.feedback-node').each(function (i, item) {
                 $(item).css('top', setTop(i, item));
+            });
+        }
+    },
+    socketEvent: function (key,socketData, eventType) {
+        var _this = this;
+        if (eventType == "mltAdd") {
+            //添加数据
+            _this.nodesData.push(socketData.nodes[0]);
+            _this.linksData.push(socketData.edges[0]);
+            socketData.edges.forEach(function (item, i) {
+                //线数据：INDEX source target
+                item.INDEX = _this.linksData.length - 1;
+                item.source = _this.nodesData.filter(function (l) {
+                    return l.id === item.lineId.split("#")[0];
+                })[0];
+                item.target = _this.nodesData.filter(function (l) {
+                    return l.id === item.lineId.split("#")[1];
+                })[0];
+
+                //节点数据：INDEX inEdges:[{index:0}] outEdges:[{index:1}]
+                socketData.nodes[i].INDEX = _this.nodesData.length - 1;
+                socketData.nodes[i].x = 50;
+                socketData.nodes[i].y = 50;
+
+                var inEdgesArr = [], outEdgesArr = [];
+                _this.linksData.filter(function (l) {
+                    return l.source.id === item.lineId.split("#")[0];
+                }).map(function (l) {
+                    inEdgesArr.push({
+                        index: l.source.index
+                    });
+                });
+                _this.linksData.filter(function (l) {
+                    return l.target.id === item.lineId.split("#")[0];
+                }).map(function (l) {
+                    outEdgesArr.push({
+                        index: l.target.index
+                    });
+                });
+                socketData.nodes[i].inEdges = _this.unique(inEdgesArr);
+                socketData.nodes[i].outEdges = _this.unique(outEdgesArr);
+            });
+            console.info(_this.nodesData);
+            console.info(_this.linksData)
+            _this.d3Draw(key);
+        } else if (eventType == "mltDelete") {
+            var lineId = socketData.edges[0].lineId.split("#");
+            _this.node.classed('opacity0', function (d, i) {
+                return (d.id == socketData.nodes[0].id)
+            });
+            _this.nodeTxt.classed('opacity0', function (d, i) {
+                return (d.id == socketData.nodes[0].id)
+            });
+            _this.link.classed('opacity0', function (d, i) {
+                return (d.source.id == lineId[0] && d.target.id == lineId[1]);
+            });
+            _this.linkTxt.classed('opacity0', function (d, i) {
+                return (d.source.id == lineId[0] && d.target.id == lineId[1]);
+            });
+
+            //删除数据
+            _this.nodesData.forEach(function (item, i) {
+                if (item.id == socketData.nodes[0].id) {
+                    _this.nodesData.splice(i, 1)
+                }
+            });
+            _this.linksData.forEach(function (item, i) {
+                if (item.source.id == lineId[0] && item.target.id == lineId[1]) {
+                    _this.linksData.splice(i, 1)
+                }
             });
         }
     }

@@ -5,5 +5,8 @@
 # IntelliJ project files
 .idea
 *.iml
+/view/demo
+/view/d3graphView.html
+/view/d3graphView.js
 out
 gen

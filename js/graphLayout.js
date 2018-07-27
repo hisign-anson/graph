@@ -238,7 +238,7 @@ define(['d3V3', 'js/graphAction'], function ( d3, graphAction) {
     }
     function clickEvent() {
         $('#update').on('click',function () {
-            updateGraphURL('../Test2.json');
+            updateGraphURL('../json_data/Test2.json');
         });
         $('#add').on('click',function () {
             addNodes()
