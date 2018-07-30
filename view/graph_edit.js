@@ -85,8 +85,8 @@ window.d3drawPic = {
             var jsonInitUrl = makeAct("getGraph", "/", "graph") + "?startNodeValue=" + groupid + "&startNodeType=" + "group_id";
             jsonInitUrl = jsonInitUrl.replace(new RegExp("///+", "gi"), "/");
         } else {
-            jsonInitUrl = "../json_data/group.json"
-            // jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
+            // jsonInitUrl = "../json_data/group.json"
+            jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
         }
         d3.json(jsonInitUrl, function (error, json) {
             if (error) throw error;
@@ -165,13 +165,13 @@ window.d3drawPic = {
          * d3.forceLink().distance()：设置连接距离
          * d3.forceLink().iterations()：设置迭代次数
          * */
-        _this.forceLink = d3.forceLink().strength(0.3).distance(100);
+        _this.forceLink = d3.forceLink().strength(0.1).distance(130);
 
         /*
          * d3.forceManyBody()：创建多体力
          * d3.forceManyBody().strength()：设置力强度
          * */
-        _this.forceCharge = d3.forceManyBody().strength(-60);
+        _this.forceCharge = d3.forceManyBody().strength(-50);
         _this.forceCollide = d3.forceCollide().radius(20).strength(1);
 
         /*
