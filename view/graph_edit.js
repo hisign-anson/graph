@@ -35,6 +35,7 @@ window.d3drawPic = {
     nodeTxt: "",
     linksData: "",
     nodesData: "",
+    newAddNodesData: [],//从左边拖进来的节点数组
     //编辑标签
     drag_line: "",
     selected_node: null,
@@ -85,8 +86,8 @@ window.d3drawPic = {
             var jsonInitUrl = makeAct("getGraph", "/", "graph") + "?startNodeValue=" + groupid + "&startNodeType=" + "group_id";
             jsonInitUrl = jsonInitUrl.replace(new RegExp("///+", "gi"), "/");
         } else {
-            // jsonInitUrl = "../json_data/group.json"
-            jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
+            jsonInitUrl = "../json_data/group.json"
+            // jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
         }
         d3.json(jsonInitUrl, function (error, json) {
             if (error) throw error;
@@ -99,7 +100,7 @@ window.d3drawPic = {
         });
 
     },
-    d3Draw: function (key) {
+    d3Draw: function (key,node,newNode) {
         //鼠标mousedown 事件和 drag 拖拽事件冲突不能共用，所以分开,用key区别【 1：可拖动 2：可连线】
         var _this = this;
         //判断如果进行查询过滤，那么如果input框中有内容，则不执行下面绘制操作
@@ -204,7 +205,7 @@ window.d3drawPic = {
             .alphaDecay(0.015) //设置α指数衰减率
             .force("link", _this.forceLink)
             .force("charge", _this.forceCharge)
-            .force("collide", _this.forceCollide)
+            // .force("collide", _this.forceCollide)
             .force("center", _this.forceCenter);
 
         //清除之前的元素
@@ -919,7 +920,7 @@ window.d3drawPic = {
                     // _this.d3Draw(key); //此处重画会导致箭头位置不准确
                 }
             })
-            .on("mouseup", function (d, i) {
+            .on("mouseup", function (d, i,dd) {
                 var that = d3.event;
                 //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
                 if (that.button == 2) {
@@ -936,26 +937,33 @@ window.d3drawPic = {
                                 source: _this.mousedown_node,
                                 target: _this.mouseup_node
                             };
-                            var repeat = false;
+                            var noRepeat = false;
                             $.each(_this.linksData, function (i, item) {
                                 if (_this.mousedown_node.id == item.source.id && _this.mouseup_node.id == item.target.id) {
                                     toast("不能重复连线", 600);
-                                    repeat = false;
+                                    noRepeat = false;
                                     return false;
                                 } else {
-                                    repeat = true;
+                                    noRepeat = true;
                                 }
                             });
-                            if (repeat) {
+                            if (noRepeat) {
                                 _this.linksData.push(linkMake);
-                                if (_this.mousedown_node.nodeFlag) {
-                                    _this.mousedown_node.nodeFlag = 'new_insert';
-                                    _this.nodesData.push(_this.mousedown_node);
-                                }
-                                if (_this.mouseup_node.nodeFlag) {
-                                    _this.mouseup_node.nodeFlag = 'new_insert';
-                                    _this.nodesData.push(_this.mouseup_node);
-                                }
+                                ////连完线后，其他被拖进来的节点会被删除
+                                // if (_this.mousedown_node.nodeFlag) {
+                                //     _this.mousedown_node.nodeFlag = 'new_insert';
+                                //     // _this.nodesData.push(_this.mousedown_node);
+                                // }
+                                // if (_this.mouseup_node.nodeFlag) {
+                                //     _this.mouseup_node.nodeFlag = 'new_insert';
+                                //     // _this.nodesData.push(_this.mouseup_node);
+                                // }
+                                $.each(_this.newAddNodesData, function (i, item){
+                                    if (item[0].nodeFlag) {
+                                        item[0].nodeFlag = 'new_insert';
+                                        _this.nodesData.push(item[0]);
+                                    }
+                                });
                                 _this.d3Draw(key);
                                 // todo 调后台接口 /feedback-task/add
 
@@ -1097,8 +1105,7 @@ window.d3drawPic = {
             });
 
         //把拖过来的节点都放在图中
-        debugger
-        // _this.nodesData.push(nodeArray);
+        _this.newAddNodesData.push(nodeArray);
         // //节点之间画线
         _this.addLine(newNode, key);
     },
