@@ -10,7 +10,7 @@ function toast(msg, speed) {
 }
 window.d3drawPic = {
     type: '',//判断是从工作台还是管理平台还是大屏进来，工作台和大屏是1
-    isHiderightClick: '',//判断右键隐藏 取消隐藏和隐藏反馈按钮，isHiderightClick=1则隐藏
+    isHideRightClick: '',//判断右键隐藏 取消隐藏和隐藏反馈按钮，isHideRightClick=1则隐藏
     scope: '',
     groupMemberObj: {},
     taskFeedbackObj: {},
@@ -53,10 +53,12 @@ window.d3drawPic = {
         }
     },
 
-    d3Init: function () {//可以连线，缩放和连线冲突，所以分开两个方法
+    d3Init: function () {
         var _this = this;
         //清除画布
         d3.select("#forceDraw").html("");
+        _this.newAddNodesData = [];//清空临时数组
+
         _this.width = $('#forceDraw').outerWidth();//动态获取容器宽度
         _this.height = $('#forceDraw').outerHeight();//动态获取容器宽度
         if (!_this.width) {
@@ -65,7 +67,6 @@ window.d3drawPic = {
         if (!_this.height) {
             _this.height = 500;
         }
-
 
         // 定义svg画板
         _this.svg = d3.select("#forceDraw")
@@ -86,10 +87,10 @@ window.d3drawPic = {
             var jsonInitUrl = makeAct("getGraph", "/", "graph") + "?startNodeValue=" + groupid + "&startNodeType=" + "group_id";
             jsonInitUrl = jsonInitUrl.replace(new RegExp("///+", "gi"), "/");
         } else {
-            jsonInitUrl = "../json_data/group.json"
-            // jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
+            // jsonInitUrl = "../json_data/group.json"
+            jsonInitUrl = "../json_data/multi_force.json";//分散的几个图
         }
-        d3.json(jsonInitUrl, function (error, json) {
+        jsonInitUrl && d3.json(jsonInitUrl, function (error, json) {
             if (error) throw error;
             _this.graphJson = json;
             _this.nodesData = _this.graphJson.nodes;
@@ -98,9 +99,8 @@ window.d3drawPic = {
             _this.d3Draw(key);
             _this.getNodes(groupid);//获取左边节点
         });
-
     },
-    d3Draw: function (key,node,newNode) {
+    d3Draw: function (key) {
         //鼠标mousedown 事件和 drag 拖拽事件冲突不能共用，所以分开,用key区别【 1：可拖动 2：可连线】
         var _this = this;
         //判断如果进行查询过滤，那么如果input框中有内容，则不执行下面绘制操作
@@ -113,6 +113,7 @@ window.d3drawPic = {
             .on("zoom", function () {
                 _this.svgGroup.attr("transform", d3.event.transform);
             });
+
         if (key == 1) {
             _this.svg.call(zoom);
         }
@@ -195,7 +196,6 @@ window.d3drawPic = {
             .attr("d", "M0,-5L10,0L0,5")//箭头的路径
             .attr('fill', '#1783BF');//箭头颜色
 
-
         /*
          * d3.forceDrawSimulation()：创建一个力模拟
          * d3.forceDrawSimulation().forceDraw(name[, forceDraw])：添加或移除力
@@ -205,7 +205,7 @@ window.d3drawPic = {
             .alphaDecay(0.015) //设置α指数衰减率
             .force("link", _this.forceLink)
             .force("charge", _this.forceCharge)
-            // .force("collide", _this.forceCollide)
+            .force("collide", _this.forceCollide)
             .force("center", _this.forceCenter);
 
         //清除之前的元素
@@ -230,7 +230,6 @@ window.d3drawPic = {
         _this.simulation.force("link")
             .links(_this.linksData);
 
-
         var isshow = $('#showAllGraph').hasClass('mark');//设置隐藏的则不显示
         if (isshow != true) {
             //线的部分，过滤要隐藏的
@@ -239,6 +238,10 @@ window.d3drawPic = {
             //节点的部分，过滤要隐藏的
             //var nodesDataNew = [];
             var nodesData = _this.nodesData;
+
+            ////使用干净的数据
+            //var nodesData = _this.graphJson.nodes;
+            //var linksData = _this.graphJson.edges;
 
             for (var i = 0; i < linksData.length; i++) {
                 if (linksData[i].hiddenState && linksData[i].hiddenState == "0") {//不隐藏的
@@ -374,9 +377,9 @@ window.d3drawPic = {
         if (key == 1) {
             //节点拖拽
             _this.node.call(d3.drag()
-                .on("start", _this.dragstarted)
-                .on("drag", _this.dragged)
-                .on("end", _this.dragended)
+                .on("start", _this.dragstarted.bind(this))
+                .on("drag", _this.dragged.bind(this))
+                .on("end", _this.dragended.bind(this))
             );
         }
         else if (key == 2) {
@@ -457,17 +460,20 @@ window.d3drawPic = {
         return resultArr;
     },
     dragged: function (d) {
+        var _this = this;
         d.fx = d3.event.x;
         d.fy = d3.event.y;
     },
     dragstarted: function (d) {
+        var _this = this;
         //设置alphaTarget让节点动起来
-        if (!d3.event.active) window.d3drawPic.simulation.alphaTarget(0.4).restart();
+        if (!d3.event.active) _this.simulation.alphaTarget(0.4).restart();
         d.fx = d.x;
         d.fy = d.y;
     },
     dragended: function (d) {
-        if (!d3.event.active) window.d3drawPic.simulation.alphaTarget(0);
+        var _this = this;
+        if (!d3.event.active) _this.simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
     },
@@ -527,7 +533,6 @@ window.d3drawPic = {
             return d.y + _this.imgH / 2.5
         });
     },
-
     //设置右键菜单的位置
     setPosition: function (d, i) {
         var _this = this;
@@ -568,11 +573,9 @@ window.d3drawPic = {
             var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
             $("body").append(tooltipDiv);
         }
-
-        //根据id和type显示不同的菜单
-        //菜单数据
         var type = d.type;
-        var menuDefault;
+        var menuDefault;//菜单数据
+        //根据id和type显示不同的菜单
         switch (type) {
             case "groupid":
                 menuDefault = [
@@ -580,7 +583,7 @@ window.d3drawPic = {
                 ];
                 break;
             case "taskid":
-                _this.isHiderightClick == 1 ?//1表示首页成果展示或者大屏进来
+                _this.isHideRightClick == 1 ?//1表示首页成果展示或者大屏进来
                     menuDefault = [
                         {name: "<span class='taskdetail' data-d='" + obj2str(d) + "' val='1'>任务详情</span>"}
                     ] :
@@ -592,7 +595,7 @@ window.d3drawPic = {
                     ];
                 break;
             case "fkid":
-                _this.isHiderightClick == 1 ?//1表示首页成果展示或者大屏进来
+                _this.isHideRightClick == 1 ?//1表示首页成果展示或者大屏进来
                     menuDefault = [
                         {name: "<span class='cluedetail' data-d='" + obj2str(d) + "' val='1'>详细信息</span>"}
                     ] :
@@ -614,7 +617,7 @@ window.d3drawPic = {
             onClick: function (event, treeId, treeNode, clickFlag) {
                 var sourceStr = treeNode.name.match(/\{[\S\s]+\}/)[0];
                 var sourceF = str2obj(sourceStr);//当前节点信息
-                var linksArr = [];
+                var linksArr = [],nodesArr = [];//暂存被隐藏的数据
                 var $target = $(event.currentTarget).find("#" + treeNode.tId).find("#" + treeNode.tId + "_span>span");
                 var data = str2obj($target.attr("data-d"));
                 var className = $target.attr("class");
@@ -624,7 +627,6 @@ window.d3drawPic = {
                     _this.link.each(function (d, i) {
                         if (sourceF.id == d.source.id && d.target.type == "fkid") {
                             $(this).addClass('opacity0');
-                            _this.linksData.splice(i, 1);
                             linksArr.push(d);
                         }
                     });
@@ -635,33 +637,53 @@ window.d3drawPic = {
                             $(this).addClass('opacity0');
                         }
                     });
-                    if (linksArr && linksArr.length >= 0) {
-                        linksArr.forEach(function (item, i) {
-                            //删除target节点
-                            _this.node.each(function (d, j) {
+                    //删除target节点
+                    _this.node.each(function (d, j) {
+                        var $node = $(this);
+                        if (linksArr && linksArr.length >= 0) {
+                            linksArr.forEach(function (item, i) {
                                 if (d.id == item.target.id && d.type == "fkid") {
-                                    $(this).addClass('opacity0');
-                                    _this.nodesData.splice(j, 1);
+                                    $node.addClass('opacity0');
+                                    nodesArr.push(d);
                                     //删除节点时，判断节点上是否有连线，有也一并删除
                                     _this.link.each(function (dLink, iLink) {
+                                        var $link = $(this);
                                         if (dLink.source.id == d.id || dLink.target.id == d.id) {
-                                            $(this).addClass('opacity0');
+                                            $link.addClass('opacity0');
                                             // _this.linksData.splice(dLink, 1);//此处不需要删除线数据
                                         }
                                     });
                                     _this.linkTxt.each(function (dLink, iLink) {
+                                        var $linkTxt = $(this);
                                         if (dLink.source.id == d.id || dLink.target.id == d.id) {
-                                            $(this).addClass('opacity0');
+                                            $linkTxt.addClass('opacity0');
                                         }
                                     });
                                 }
                             });
-                            //删除target文字
-                            _this.nodeTxt.each(function (d, j) {
+                        }
+                    });
+                    //删除target文字
+                    _this.nodeTxt.each(function (d, j) {
+                        var $node = $(this);
+                        if (linksArr && linksArr.length >= 0) {
+                            linksArr.forEach(function (item, i) {
                                 if (d.id == item.target.id && d.type == "fkid") {
-                                    $(this).addClass('opacity0');
+                                    $node.addClass('opacity0');
                                 }
                             });
+                        }
+                    });
+
+                    //删除数据
+                    if (linksArr && linksArr.length >= 0) {
+                        linksArr.map(function (l) {
+                            _this.linksData.splice(_this.linksData.indexOf(l), 1);
+                        });
+                    }
+                    if (nodesArr && nodesArr.length > 0) {
+                        nodesArr.map(function (l) {
+                            _this.nodesData.splice(_this.nodesData.indexOf(l), 1);
                         });
                     }
                     params = {
@@ -746,7 +768,6 @@ window.d3drawPic = {
                                 if (dLink.source.id == d.id || dLink.target.id == d.id) {
                                     $(this).addClass('opacity0');
                                     _this.linksData.splice(iLink, 1);
-                                    debugger
                                     lineIds.push(dLink.lineId);
                                 }
                             });
@@ -764,26 +785,25 @@ window.d3drawPic = {
                         }
                     });
 
-                    // if (data.inEdges) {
-                    //     var inEdges = data.inEdges;
-                    //     var params;
-                    //     var linkData = _this.linksData;
-                    //     for (var i = 0; i < inEdges.length; i++) {
-                    //         var index = inEdges[i].index;
-                    //         for (var j = 0; j < linkData.length; j++) {
-                    //             if (index == linkData[j].index) {
-                    //                 lineIds.push(linkData[j].lineId);
-                    //             }
-                    //         }
-                    //     }
-                    //     debugger
-                    //     params = {
-                    //         lineId: lineIds,
-                    //         type: 3,//反馈
-                    //         hiddenState: 1
-                    //     };
-                    //     _this.hideClue(params, className);//删除调用后台接口
-                    // }
+                    if (data.inEdges) {
+                        // var inEdges = data.inEdges;
+                        // var params;
+                        // var linkData = _this.linksData;
+                        // for (var i = 0; i < inEdges.length; i++) {
+                        //     var index = inEdges[i].index;
+                        //     for (var j = 0; j < linkData.length; j++) {
+                        //         if (index == linkData[j].index) {
+                        //             lineIds.push(linkData[j].lineId);
+                        //         }
+                        //     }
+                        // }
+                        params = {
+                            lineId: lineIds,
+                            type: 3,//反馈
+                            hiddenState: 1
+                        };
+                        _this.hideClue(params, className);//删除调用后台接口
+                    }
                     tooltipCurrent.remove();
                 }
                 else if (className == "nohide") {
@@ -864,8 +884,7 @@ window.d3drawPic = {
 
         var tooltipCurrent = $("#tooltip" + i);
         var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
-        _this.setPosition(d, i)
-
+        _this.setPosition(d, i);
 
         //如果还有兄弟元素tooltip显示，则remove兄弟元素
         if (tooltipSiblings.length > 0) {
@@ -952,11 +971,11 @@ window.d3drawPic = {
                                 ////连完线后，其他被拖进来的节点会被删除
                                 // if (_this.mousedown_node.nodeFlag) {
                                 //     _this.mousedown_node.nodeFlag = 'new_insert';
-                                //     // _this.nodesData.push(_this.mousedown_node);
+                                //     _this.nodesData.push(_this.mousedown_node);
                                 // }
                                 // if (_this.mouseup_node.nodeFlag) {
                                 //     _this.mouseup_node.nodeFlag = 'new_insert';
-                                //     // _this.nodesData.push(_this.mouseup_node);
+                                //     _this.nodesData.push(_this.mouseup_node);
                                 // }
                                 $.each(_this.newAddNodesData, function (i, item){
                                     if (item[0].nodeFlag) {
@@ -964,6 +983,7 @@ window.d3drawPic = {
                                         _this.nodesData.push(item[0]);
                                     }
                                 });
+                                debugger
                                 _this.d3Draw(key);
                                 // todo 调后台接口 /feedback-task/add
 
@@ -1029,7 +1049,6 @@ window.d3drawPic = {
         nodeArray.push(newNode);
         _this.addD3Node(nodeArray, key, x, y);
     },
-
     addD3Node: function (nodeArray, key, x, y) {
         var _this = this;
         // var lenNodes = nodeArray.length;
@@ -1109,12 +1128,10 @@ window.d3drawPic = {
         // //节点之间画线
         _this.addLine(newNode, key);
     },
-
-    hideClue: function (params) {
+    hideClue: function (params,className) {
         var _this = this;
         //todo 调用后台接口 /feedback-task/hidden
     },
-
     getNodes: function (groupid) {
         var _this = this;
         var groupid = groupid ? groupid : $("#mapSvgFrame").attr("groupid");
@@ -1263,76 +1280,76 @@ window.d3drawPic = {
                 }
             ]
         };
-        var feedbacklist = data.feedback;
-        var tasklist = data.task;
+        var feedbackList = data.feedback;
+        var taskList = data.task;
         var $getforce = $("#getforce");//左边容器
         var eHeight = 35, eWidth = 35;
         var getForceOffsetTop = $getforce.position().top;
         var getForceOffsetLeft = $getforce.position().left;
-        if ((feedbacklist && feedbacklist.length > 0) || (tasklist && tasklist.length > 0)) {
+        if ((feedbackList && feedbackList.length > 0) || (taskList && taskList.length > 0)) {
             var html = "";
-            if (feedbacklist) {
-                for (var i = 0, len = feedbacklist.length; i < len; i++) {
-                    if (feedbacklist[i].feedbackContent) {//去除空格，将空格替换为-
-                        var feedbackContent = feedbacklist[i].feedbackContent;
+            if (feedbackList) {
+                for (var i = 0, len = feedbackList.length; i < len; i++) {
+                    if (feedbackList[i].feedbackContent) {//去除空格，将空格替换为-
+                        var feedbackContent = feedbackList[i].feedbackContent;
                         feedbackContent = feedbackContent.replace(/\s/g, '-');
-                        feedbacklist[i] = $.extend(feedbacklist[i], {
+                        feedbackList[i] = $.extend(feedbackList[i], {
                             feedbackContent: feedbackContent
                         })
                     }
-                    if (feedbacklist[i].createTime) {
-                        var createTime = feedbacklist[i].createTime.substr(0, 10);
-                        feedbacklist[i] = $.extend(feedbacklist[i], {
+                    if (feedbackList[i].createTime) {
+                        var createTime = feedbackList[i].createTime.substr(0, 10);
+                        feedbackList[i] = $.extend(feedbackList[i], {
                             createTime: createTime ? createTime : ""
                         })
                     }
-                    if (feedbacklist[i].updateTime) {
-                        var updateTime = feedbacklist[i].updateTime.substr(0, 10);
-                        feedbacklist[i] = $.extend(feedbacklist[i], {
+                    if (feedbackList[i].updateTime) {
+                        var updateTime = feedbackList[i].updateTime.substr(0, 10);
+                        feedbackList[i] = $.extend(feedbackList[i], {
                             updateTime: updateTime ? updateTime : ""
                         })
                     }
                     var top = getForceOffsetTop + (i * eHeight) + 5;
                     var left = getForceOffsetLeft + eWidth / 2;
-                    html += '<img src="' + _this.imgSrc + "type_feedback.png" + '" id="drag' + i + '" info=' + $.trim(obj2str(feedbacklist[i])) + ' title="' + feedbacklist[i].feedbackContent + '" class="prepare-node feedback-node" style="top:' + top + 'px;left:' + left + 'px">'
+                    html += '<img src="' + _this.imgSrc + "type_feedback.png" + '" id="drag' + i + '" info=' + $.trim(obj2str(feedbackList[i])) + ' title="' + feedbackList[i].feedbackContent + '" class="prepare-node feedback-node" style="top:' + top + 'px;left:' + left + 'px">'
                 }
             }
 
-            if (tasklist) {
-                for (var i = 0, len = tasklist.length; i < len; i++) {
-                    if (tasklist[i].createTime) {
-                        var createTime = tasklist[i].createTime.substr(0, 10);
-                        tasklist[i] = $.extend(tasklist[i], {
+            if (taskList) {
+                for (var i = 0, len = taskList.length; i < len; i++) {
+                    if (taskList[i].createTime) {
+                        var createTime = taskList[i].createTime.substr(0, 10);
+                        taskList[i] = $.extend(taskList[i], {
                             createTime: createTime ? createTime : ""
                         })
                     }
-                    if (tasklist[i].updateTime) {
-                        var updateTime = tasklist[i].updateTime.substr(0, 10);
-                        tasklist[i] = $.extend(tasklist[i], {
+                    if (taskList[i].updateTime) {
+                        var updateTime = taskList[i].updateTime.substr(0, 10);
+                        taskList[i] = $.extend(taskList[i], {
                             updateTime: updateTime ? updateTime : ""
                         })
                     }
-                    if (tasklist[i].lastFeedbackTime) {
-                        var lastFeedbackTime = tasklist[i].lastFeedbackTime.substr(0, 10);
-                        tasklist[i] = $.extend(tasklist[i], {
+                    if (taskList[i].lastFeedbackTime) {
+                        var lastFeedbackTime = taskList[i].lastFeedbackTime.substr(0, 10);
+                        taskList[i] = $.extend(taskList[i], {
                             lastFeedbackTime: lastFeedbackTime ? lastFeedbackTime : ""
                         })
                     }
-                    if (tasklist[i].lastReminderTime) {
-                        var lastReminderTime = tasklist[i].lastReminderTime.substr(0, 10);
-                        tasklist[i] = $.extend(tasklist[i], {
+                    if (taskList[i].lastReminderTime) {
+                        var lastReminderTime = taskList[i].lastReminderTime.substr(0, 10);
+                        taskList[i] = $.extend(taskList[i], {
                             lastReminderTime: lastReminderTime ? lastReminderTime : ""
                         })
                     }
                     var n;
-                    if (feedbacklist) {
-                        n = feedbacklist.length + i;
+                    if (feedbackList) {
+                        n = feedbackList.length + i;
                     } else {
                         n = +i;
                     }
                     var top = getForceOffsetTop + (i * eHeight) + 5;
                     var left = getForceOffsetLeft + eWidth * 2;
-                    html += '<img src="' + _this.imgSrc + "type_task.png" + '" id="drag' + n + '" info=' + $.trim(obj2str(tasklist[i])) + ' title="' + tasklist[i].taskContent + '" class="prepare-node task-node" style="top:' + top + 'px;left:' + left + 'px">'
+                    html += '<img src="' + _this.imgSrc + "type_task.png" + '" id="drag' + n + '" info=' + $.trim(obj2str(taskList[i])) + ' title="' + taskList[i].taskContent + '" class="prepare-node task-node" style="top:' + top + 'px;left:' + left + 'px">'
                 }
             }
             $getforce.html(html);
@@ -1397,7 +1414,6 @@ window.d3drawPic = {
                     _this.link.classed('inactive', false);
                     _this.linkTxt.classed('inactive', false);
                 }
-
             } else {
                 toast("请先选择专案组", 600);
             }
@@ -1508,7 +1524,6 @@ window.d3drawPic = {
             var boundRight = svgRight - eWidth / 2;
             var boundBottom = svgBottom - eHeight / 2;
             if (e.clientY > boundTop && e.clientX > boundLeft && e.clientY < boundBottom && e.clientX < boundRight) {//移动元素全部在脉络图范围内才有效
-                // $e.css({'top': positionTop, 'left': positionLeft});
                 var info = str2obj($e.attr("info"));
                 var taskType = info.taskType;
                 var newNode;
