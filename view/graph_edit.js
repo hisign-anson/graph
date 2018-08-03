@@ -230,38 +230,38 @@ window.d3drawPic = {
         _this.simulation.force("link")
             .links(_this.linksData);
 
-        var isshow = $('#showAllGraph').hasClass('mark');//设置隐藏的则不显示
-        if (isshow != true) {
-            //线的部分，过滤要隐藏的
-            var linksDataNew = [];
-            var linksData = _this.linksData;
-            //节点的部分，过滤要隐藏的
-            //var nodesDataNew = [];
-            var nodesData = _this.nodesData;
-
-            ////使用干净的数据
-            //var nodesData = _this.graphJson.nodes;
-            //var linksData = _this.graphJson.edges;
-
-            for (var i = 0; i < linksData.length; i++) {
-                if (linksData[i].hiddenState && linksData[i].hiddenState == "0") {//不隐藏的
-                    linksDataNew.push(linksData[i]);
-                } else if (linksData[i].hiddenState && linksData[i].hiddenState == "1") {//获取要隐藏的
-                    if (linksData[i].target) {
-                        for (var n = 0; n < nodesData.length; n++) {
-                            if (linksData[i].target.index == nodesData[n].INDEX) {
-                                _this.nodesData.splice(n, 1)
-                            }
-                        }
-                    }
-                } else {
-                    linksDataNew.push(linksData[i]);
-                }
-            }
-            _this.linksData = linksDataNew;
-            _this.nodesData = nodesData;
-
-        }
+        // var isshow = $('#showAllGraph').hasClass('mark');//设置隐藏的则不显示
+        // if (isshow != true) {
+        //     //线的部分，过滤要隐藏的
+        //     var linksDataNew = [];
+        //     var linksData = _this.linksData;
+        //     //节点的部分，过滤要隐藏的
+        //     //var nodesDataNew = [];
+        //     var nodesData = _this.nodesData;
+        //
+        //     ////使用干净的数据
+        //     //var nodesData = _this.graphJson.nodes;
+        //     //var linksData = _this.graphJson.edges;
+        //
+        //     for (var i = 0; i < linksData.length; i++) {
+        //         if (linksData[i].hiddenState && linksData[i].hiddenState == "0") {//不隐藏的
+        //             linksDataNew.push(linksData[i]);
+        //         } else if (linksData[i].hiddenState && linksData[i].hiddenState == "1") {//获取要隐藏的
+        //             if (linksData[i].target) {
+        //                 for (var n = 0; n < nodesData.length; n++) {
+        //                     if (linksData[i].target.index == nodesData[n].INDEX) {
+        //                         _this.nodesData.splice(n, 1)
+        //                     }
+        //                 }
+        //             }
+        //         } else {
+        //             linksDataNew.push(linksData[i]);
+        //         }
+        //     }
+        //     _this.linksData = linksDataNew;
+        //     _this.nodesData = nodesData;
+        //
+        // }
 
         //绘制连接力
         _this.link = _this.svgGroup.append("g")
@@ -589,8 +589,8 @@ window.d3drawPic = {
                     ] :
                     menuDefault = [
                         //{name: "<span class='intodel' data-d='"+obj2str(d)+"' val='1'>隐藏反馈</span>"},
-                        {name: "<span class='nohideclue' data-d='" + obj2str(d) + "' val='1'>取消隐藏</span>"},
-                        {name: "<span class='hideclue' data-d='" + obj2str(d) + "' val='1'>隐藏反馈线索</span>"},
+                        // {name: "<span class='nohideclue' data-d='" + obj2str(d) + "' val='1'>取消隐藏</span>"},
+                        // {name: "<span class='hideclue' data-d='" + obj2str(d) + "' val='1'>隐藏反馈线索</span>"},
                         {name: "<span class='taskdetail' data-d='" + obj2str(d) + "' val='1'>任务详情</span>"}
                     ];
                 break;
@@ -600,8 +600,8 @@ window.d3drawPic = {
                         {name: "<span class='cluedetail' data-d='" + obj2str(d) + "' val='1'>详细信息</span>"}
                     ] :
                     menuDefault = [
-                        {name: "<span class='nohide' data-d='" + obj2str(d) + "' val='1'>取消隐藏</span>"},
-                        {name: "<span class='intodel' data-d='" + obj2str(d) + "' val='1'>隐藏反馈</span>"},
+                        // {name: "<span class='nohide' data-d='" + obj2str(d) + "' val='1'>取消隐藏</span>"},
+                        // {name: "<span class='intodel' data-d='" + obj2str(d) + "' val='1'>隐藏反馈</span>"},
                         {name: "<span class='cluedetail' data-d='" + obj2str(d) + "' val='1'>详细信息</span>"}
                     ];
                 break;
