@@ -230,38 +230,38 @@ window.d3drawPic = {
         _this.simulation.force("link")
             .links(_this.linksData);
 
-        // var isshow = $('#showAllGraph').hasClass('mark');//设置隐藏的则不显示
-        // if (isshow != true) {
-        //     //线的部分，过滤要隐藏的
-        //     var linksDataNew = [];
-        //     var linksData = _this.linksData;
-        //     //节点的部分，过滤要隐藏的
-        //     //var nodesDataNew = [];
-        //     var nodesData = _this.nodesData;
-        //
-        //     ////使用干净的数据
-        //     //var nodesData = _this.graphJson.nodes;
-        //     //var linksData = _this.graphJson.edges;
-        //
-        //     for (var i = 0; i < linksData.length; i++) {
-        //         if (linksData[i].hiddenState && linksData[i].hiddenState == "0") {//不隐藏的
-        //             linksDataNew.push(linksData[i]);
-        //         } else if (linksData[i].hiddenState && linksData[i].hiddenState == "1") {//获取要隐藏的
-        //             if (linksData[i].target) {
-        //                 for (var n = 0; n < nodesData.length; n++) {
-        //                     if (linksData[i].target.index == nodesData[n].INDEX) {
-        //                         _this.nodesData.splice(n, 1)
-        //                     }
-        //                 }
-        //             }
-        //         } else {
-        //             linksDataNew.push(linksData[i]);
-        //         }
-        //     }
-        //     _this.linksData = linksDataNew;
-        //     _this.nodesData = nodesData;
-        //
-        // }
+        var isshow = $('#showAllGraph').hasClass('mark');//设置隐藏的则不显示
+        if (isshow != true) {
+            //线的部分，过滤要隐藏的
+            var linksDataNew = [];
+            var linksData = _this.linksData;
+            //节点的部分，过滤要隐藏的
+            //var nodesDataNew = [];
+            var nodesData = _this.nodesData;
+
+            ////使用干净的数据
+            //var nodesData = _this.graphJson.nodes;
+            //var linksData = _this.graphJson.edges;
+
+            for (var i = 0; i < linksData.length; i++) {
+                if (linksData[i].hiddenState && linksData[i].hiddenState == "0") {//不隐藏的
+                    linksDataNew.push(linksData[i]);
+                } else if (linksData[i].hiddenState && linksData[i].hiddenState == "1") {//获取要隐藏的
+                    if (linksData[i].target) {
+                        for (var n = 0; n < nodesData.length; n++) {
+                            if (linksData[i].target.index == nodesData[n].INDEX) {
+                                _this.nodesData.splice(n, 1)
+                            }
+                        }
+                    }
+                } else {
+                    linksDataNew.push(linksData[i]);
+                }
+            }
+            _this.linksData = linksDataNew;
+            _this.nodesData = nodesData;
+
+        }
 
         //绘制连接力
         _this.link = _this.svgGroup.append("g")
@@ -968,7 +968,7 @@ window.d3drawPic = {
                             });
                             if (noRepeat) {
                                 _this.linksData.push(linkMake);
-                                ////连完线后，其他被拖进来的节点会被删除
+                                // //连完线后，其他被拖进来的节点会被删除
                                 // if (_this.mousedown_node.nodeFlag) {
                                 //     _this.mousedown_node.nodeFlag = 'new_insert';
                                 //     _this.nodesData.push(_this.mousedown_node);
